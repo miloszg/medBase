@@ -10,9 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ScanActivity"
+            android:label="@string/title_activity_scan"/>
+        <activity android:name=".BrowseMedsActivity" />
+        <activity android:name=".AlertsActivity" />
+        <activity
             android:name=".MedsActivity"
             android:label="@string/title_activity_meds"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NotesActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".CalendarActivity" />

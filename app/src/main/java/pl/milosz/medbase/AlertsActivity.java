@@ -2,14 +2,12 @@ package pl.milosz.medbase;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
-public class NotesActivity extends AppCompatActivity {
+public class AlertsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes);
-
+        setContentView(R.layout.activity_alerts);
     }
 }

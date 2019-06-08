@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,7 +35,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
-
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.button_med:
+                Intent intent_med = new Intent(this, MedsActivity.class);
+                startActivity(intent_med);
+                break;
+            case R.id.button_browse_meds:
+                Intent intent_browse = new Intent(this, BrowseMedsActivity.class);
+                startActivity(intent_browse);
+                break;
+            case R.id.button_scan_qr:
+                Intent intent_scan = new Intent(this, ScanActivity.class);
+                startActivity(intent_scan);
+                break;
+            case R.id.button_alerts:
+                Intent intent_alerts = new Intent(this, AlertsActivity.class);
+                startActivity(intent_alerts);
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

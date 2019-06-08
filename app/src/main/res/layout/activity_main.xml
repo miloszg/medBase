@@ -31,23 +31,27 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:text="Moje leki"/>
+                android:id="@+id/button_med"
+                android:text="Moje leki"
+                android:onClick="onClick"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:text="Przeglądaj leki"/>
+                android:id="@+id/button_browse_meds"
+                android:text="Przeglądaj leki"
+                android:onClick="onClick"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
-                android:text="Skanuj kod QR"/>
+                android:id="@+id/button_scan_qr"
+                android:text="Skanuj kod QR"
+                android:onClick="onClick"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button4"
-                android:text="Przypomnienia"/>
+                android:id="@+id/button_alerts"
+                android:text="Przypomnienia"
+                android:onClick="onClick"/>
         </LinearLayout>
     </LinearLayout>
 
