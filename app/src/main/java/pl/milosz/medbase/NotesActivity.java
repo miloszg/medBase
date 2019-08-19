@@ -39,6 +39,7 @@ public class NotesActivity extends AppCompatActivity {
             notes = new ArrayList(set);
         }
 
+
         arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,notes);
         list.setAdapter(arrayAdapter);
 
