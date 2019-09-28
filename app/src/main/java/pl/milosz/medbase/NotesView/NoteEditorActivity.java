@@ -1,15 +1,17 @@
-package pl.milosz.medbase;
+package pl.milosz.medbase.NotesView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
 import java.util.HashSet;
+
+import pl.milosz.medbase.R;
 
 public class NoteEditorActivity extends AppCompatActivity {
     int noteId;

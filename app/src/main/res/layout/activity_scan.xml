@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ScanActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:background="@color/cardview_dark_background"

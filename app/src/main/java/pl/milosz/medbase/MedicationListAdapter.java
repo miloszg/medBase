@@ -1,8 +1,8 @@
 package pl.milosz.medbase;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class MedicationListAdapter extends ArrayAdapter<Medication> {
     private static final String TAG = "MedicationListAdapter";
