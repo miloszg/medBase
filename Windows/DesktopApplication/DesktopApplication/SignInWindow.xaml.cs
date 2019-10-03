@@ -22,6 +22,7 @@ namespace DesktopApplication
         public SignInWindow()
         {
             InitializeComponent();
+            this.DataContext = new ViewModelConnector();
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
