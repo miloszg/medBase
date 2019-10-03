@@ -1,14 +1,13 @@
 package pl.milosz.medbase.Alerts;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -39,8 +38,5 @@ public class PickDateActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDate= DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-
-        TextView textView=findViewById(R.id.textView);
-        textView.setText(currentDate);
     }
 }

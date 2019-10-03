@@ -4,4 +4,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_meds">MedsActivity</string>
     <string name="title_activity_scan">Skanuj</string>
+    <string name="title_activity_alerts">Powiadomienia</string>
+    <string name="calendar_label">Kalendarz</string>
+    <string name="notes_label">Notatki</string>
 </resources>

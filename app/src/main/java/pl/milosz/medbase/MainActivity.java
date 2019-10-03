@@ -16,7 +16,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import pl.milosz.medbase.Alerts.AlertsActivity;
-import pl.milosz.medbase.Alerts.TimePickerDialog;
 import pl.milosz.medbase.CalendarView.CalendarActivity;
 import pl.milosz.medbase.NotesView.NotesActivity;
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_browse);
                 break;
             case R.id.button_scan_qr:
-                Intent intent_scan = new Intent(this, TimePickerDialog.class);
+                Intent intent_scan = new Intent(this, ScanActivity.class);
                 startActivity(intent_scan);
                 break;
             case R.id.button_alerts:

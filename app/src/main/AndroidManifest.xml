@@ -17,14 +17,20 @@
             android:name=".ScanActivity"
             android:label="@string/title_activity_scan" />
         <activity android:name=".BrowseMedsActivity" />
-        <activity android:name=".Alerts.AlertsActivity" />
+        <activity
+            android:name=".Alerts.AlertsActivity"
+            android:label="@string/title_activity_alerts"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MedsActivity"
             android:label="@string/title_activity_meds"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NotesView.NotesActivity" />
+        <activity
+            android:name=".NotesView.NotesActivity"
+            android:label="@string/notes_label"/>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".CalendarView.CalendarActivity" />
+        <activity android:name=".CalendarView.CalendarActivity"
+            android:label="@string/calendar_label"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
