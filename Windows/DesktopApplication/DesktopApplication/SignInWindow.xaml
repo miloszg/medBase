@@ -24,9 +24,7 @@
             <TextBox x:Name="RepeatPasswordBox"></TextBox>
             <Label FontWeight="Black"> E-mail</Label>   
             <TextBox x:Name="MailBox"></TextBox>
-            <Button Name="AcceptButton" Click="AcceptButton_Click" Margin="0 10 0 0" Width="100" Height="50" Background="Beige">Accept</Button>
-            <Label FontWeight="Black" > Output</Label>
-            <Label Content="{Binding Test}"/>
+            <Button Name="AcceptButton" Command="{Binding ExpandCommand}" Margin="0 10 0 0" Width="100" Height="50" Background="Beige">Accept</Button>
         </StackPanel>
     </Grid>
 </Window>

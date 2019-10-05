@@ -67,6 +67,7 @@
     <Compile Include="ViewModelConnector.cs" />
     <Compile Include="UserFolder\IUser.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\SignInViewModel.cs" />
     <Compile Include="UserFolder\User.cs" />
     <Page Include="MainWindow.xaml">

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DesktopApplication.ViewModel
 {
-    [ImplementedPropertyChanged]
+    
     class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => {};

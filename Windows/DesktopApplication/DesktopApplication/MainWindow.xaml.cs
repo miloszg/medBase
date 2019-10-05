@@ -21,7 +21,7 @@ namespace DesktopApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        SignInWindow signInWindow= new SignInWindow();
+        SignInWindow signInWindow = new SignInWindow();
 
         public MainWindow()
         {
