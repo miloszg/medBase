@@ -11,6 +11,8 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+import pl.milosz.medbase.R;
+
 public class TimePickerFragment extends DialogFragment {
     @NonNull
     @Override
@@ -18,6 +20,6 @@ public class TimePickerFragment extends DialogFragment {
         Calendar c=Calendar.getInstance();
         int hour=c.get(Calendar.HOUR_OF_DAY);
         int minute=c.get(Calendar.MINUTE);
-        return new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener) getActivity(),hour,minute, DateFormat.is24HourFormat(getActivity()));
+        return new TimePickerDialog(getActivity(), R.style.DialogTheme, (TimePickerDialog.OnTimeSetListener) getActivity(),hour,minute, DateFormat.is24HourFormat(getActivity()));
     }
 }

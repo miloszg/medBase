@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -39,8 +38,8 @@ import java.util.Calendar;
 import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
 
-import static pl.milosz.medbase.Alerts.CreateChannels.CHANNEL_1_ID;
-import static pl.milosz.medbase.Alerts.CreateChannels.CHANNEL_2_ID;
+import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_1_ID;
+import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_2_ID;
 
 public class AlertsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -48,8 +47,6 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
     LinearLayout linearLayout;
     SwitchCompat sw, sw1, sw2, sw3, sw4, sw5;
     int index = 0;
-    private TextView timePickerText;
-    private TextView datePickerText;
     private Calendar c;
     AlarmManager alarmManager, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
 
@@ -61,6 +58,8 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         notificationManager = NotificationManagerCompat.from(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        Resources res = getResources();
+//        Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.customshape, null);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +72,7 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
 
     public void sendOnTime(View view) {
         DialogFragment timePicker = new TimePickerFragment();
+
         timePicker.show(getSupportFragmentManager(), "time picker");
     }
 
@@ -193,17 +193,18 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
             case 2:
                 dodajSwitch(sw2, alarmManager2);
                 break;
-//            case 3:
-//                dodajSwitch(sw3);
-//                break;
-//            case 4:
-//                dodajSwitch(sw4);
-//                break;
+            case 3:
+                dodajSwitch(sw3, alarmManager3);
+                break;
+            case 4:
+                dodajSwitch(sw4, alarmManager4);
+                break;
+            case 5:
+                dodajSwitch(sw5, alarmManager5);
+                break;
             default:
                 break;
         }
-
-
     }
 
     @Override
@@ -221,14 +222,18 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, index, intent, 0);
         insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
-        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime()) + " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + " WEŹ TABLETKE PROSZEEEEEEEE";
+        String currentDate = "WEŹ TABLETKE PROSZEEEEEEEE \n" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " + DateFormat.getDateInstance().format(c.getTime());
+
         sw = new SwitchCompat(this);
         sw.setId(index);
         sw.setChecked(true);
+        sw.setBackground(getDrawable(R.drawable.customshape));
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(30, 30, 30, 30);
+        layoutParams.setMargins(30, 30, 10, 30);
         sw.setLayoutParams(layoutParams);
-        sw.setTextSize(20);
+        sw.setTextColor(Color.GRAY);
+        sw.setPadding(10,10,10,10);
+        sw.setTextSize(19);
         sw.setText(currentDate);
         final SwitchCompat finalSw = sw;
         final AlarmManager finalInsideManager = insideManager;

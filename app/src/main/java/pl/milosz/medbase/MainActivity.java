@@ -42,19 +42,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.button_med:
+            case R.id.cardMeds:
                 Intent intent_med = new Intent(this, MedsActivity.class);
                 startActivity(intent_med);
                 break;
-            case R.id.button_browse_meds:
+            case R.id.cardBrowse:
                 Intent intent_browse = new Intent(this, BrowseMedsActivity.class);
                 startActivity(intent_browse);
                 break;
-            case R.id.button_scan_qr:
+            case R.id.cardQR:
                 Intent intent_scan = new Intent(this, ScanActivity.class);
                 startActivity(intent_scan);
                 break;
-            case R.id.button_alerts:
+            case R.id.cardAlerts:
                 Intent intent_alerts = new Intent(this, AlertsActivity.class);
                 startActivity(intent_alerts);
                 break;

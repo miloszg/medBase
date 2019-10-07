@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,32 @@
     android:id="@+id/linearScanLayout"
     tools:context=".ScanActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:background="@color/cardview_dark_background"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <Button
+
+    <me.dm7.barcodescanner.zxing.ZXingScannerView
+        android:id="@+id/ZXscan"
+        android:layout_above="@id/textLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:id="@+id/kupaButton"
-        android:text="dodaj switcha"/>
-</LinearLayout>
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:id="@+id/textLayout"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_alignParentBottom="true"
+        android:background="#05ca7e"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/resultTextView"
+            android:text="cos tam"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

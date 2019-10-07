@@ -4,36 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#05ca7e"
     tools:context=".NotesView.NotesActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/cardview_dark_background"
+            android:background="#555555"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     </com.google.android.material.appbar.AppBarLayout>
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ListView
+            android:background="@drawable/customshape"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="#05ca7e"
+            android:dividerHeight="2dp"
+            android:id="@+id/notesListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="56dp" />
+    </RelativeLayout>
 
-    <ListView
-        android:id="@+id/notesListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="56dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        app:backgroundTint="#05ca7e"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

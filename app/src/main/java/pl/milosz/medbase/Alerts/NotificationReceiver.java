@@ -16,7 +16,7 @@ import androidx.core.app.NotificationManagerCompat;
 import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
 
-import static pl.milosz.medbase.Alerts.CreateChannels.CHANNEL_1_ID;
+import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_1_ID;
 
 public class NotificationReceiver extends BroadcastReceiver {
     @Override
