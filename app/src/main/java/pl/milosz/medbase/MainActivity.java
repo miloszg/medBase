@@ -1,7 +1,9 @@
 package pl.milosz.medbase;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,15 +78,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent_cal = new Intent(this, CalendarActivity.class);
                 startActivity(intent_cal);
                 return true;
-            case R.id.nav_settings:
-                Log.d(TAG, "onNavigationItemSelected: clicked on settings");
-                Intent intent_set = new Intent(this, SettingsActivity.class);
-                startActivity(intent_set);
-                return true;
             case R.id.nav_notes:
                 Log.d(TAG, "onNavigationItemSelected: clicked on notes");
                 Intent intent_note = new Intent(this, NotesActivity.class);
                 startActivity(intent_note);
+                return true;
+            case R.id.nav_settings:
+                Log.d(TAG, "onNavigationItemSelected: clicked on settings");
+                Intent intent_settings = new Intent();
+                intent_settings.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent_settings.setData(uri);
+                startActivity(intent_settings);
                 return true;
             default:
                 return false;
