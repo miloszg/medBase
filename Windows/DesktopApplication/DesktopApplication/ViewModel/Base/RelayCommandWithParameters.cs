@@ -3,12 +3,11 @@ using System.Windows.Input;
 
 namespace DesktopApplication
 {
-    class RelayCommand : ICommand
+    public class RelayCommandWithParameters : ICommand
     {
-        private Action action;
-        private Func<bool> canExecute;
+        private readonly Action<object> action;
 
-        public RelayCommand(Action action)
+        public RelayCommandWithParameters(Action<object> action)
         {
             this.action = action;
         }
@@ -22,7 +21,7 @@ namespace DesktopApplication
 
         public void Execute(object parameter)
         {
-            this.action();
+            this.action(parameter);
         }
     }
 }

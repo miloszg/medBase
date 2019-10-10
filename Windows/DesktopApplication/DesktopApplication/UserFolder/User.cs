@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-namespace DesktopApplication.ViewModel
+namespace DesktopApplication
 {
-    class User : IUser
+    public class User : IUser
     {
         public string username { get; set; }
         public string password { get; set; }
@@ -19,6 +19,11 @@ namespace DesktopApplication.ViewModel
         {
             //MessageBox.Show("Username: " + username + " password: " + password + " mail: " + mail);
             MessageBox.Show($"Username: {this.username} password: {this.password}  mail: {this.mail}");
+        }
+
+        public override string ToString()
+        {
+            return $"Username: {this.username} password: {this.password}  mail: {this.mail}";
         }
     }
 }

@@ -5,37 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="CadetBlue">
+        Title="MainWindow" Height="600" Width="800" Background="CadetBlue" Closing="Window_Closing">
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" Grid.RowSpan="5">
-            <Label Height="100" TextBlock.TextAlignment="Center"  Background="MediumSpringGreen" BorderThickness="3" BorderBrush="DarkSlateGray">
-                <TextBlock Grid.Column="1" Margin="300 15 0 0" FontFamily="Arial" FontSize="50" Foreground="Cornsilk" FontWeight="Bold" Grid.ColumnSpan="2">MedApp</TextBlock>
-            </Label>
-            <Label FontWeight="Black">Username:</Label>
-            <TextBox BorderThickness="2" BorderBrush="Black" Grid.Row="2"/>
-            <Label FontWeight="Black" Grid.Row="2">Password:</Label>
-            <TextBox BorderThickness="2" BorderBrush="Black"/>
-            
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Height="50" Width="100" Margin="5" Grid.Column="1">Log In</Button>
-                <Button Height="50" Width="100" Margin="5" Grid.Column="2" Click="Button_Click">Sign Up</Button>
-            </Grid>
 
-            <ContentControl Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Content="{Binding}"/>
-        </StackPanel>
+        <Label Grid.Row="0" Padding="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="MediumSpringGreen">
+            <Label  FontFamily="Arial" FontSize="50" Foreground="Cornsilk" FontWeight="Bold" Grid.ColumnSpan="2">MedApp</Label>
+        </Label>
+
+        <Frame x:Name="MainFrame" Grid.Row="1" Grid.RowSpan="3" NavigationUIVisibility="Hidden" 
+               Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
     </Grid>
 </Window>

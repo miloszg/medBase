@@ -1,4 +1,4 @@
-﻿namespace DesktopApplication.ViewModel
+﻿namespace DesktopApplication
 {
     interface IUser
     {

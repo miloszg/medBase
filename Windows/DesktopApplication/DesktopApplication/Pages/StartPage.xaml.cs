@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DesktopApplication
 {
     /// <summary>
-    /// Interaction logic for SignInWindow.xaml
+    /// Interaction logic for StartPage.xaml
     /// </summary>
-    public partial class SignInWindow : Window
+    public partial class StartPage : Page
     {
-        public SignInWindow()
+        public StartPage()
         {
             InitializeComponent();
-            this.DataContext = new ViewModelConnector();
         }
     }
 }

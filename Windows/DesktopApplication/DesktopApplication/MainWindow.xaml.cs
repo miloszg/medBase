@@ -21,18 +21,21 @@ namespace DesktopApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        SignInWindow signInWindow = new SignInWindow();
+        public static ViewModelConnector viewModelConnector = new ViewModelConnector();
 
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = viewModelConnector;
+        }
 
+        public void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            signInWindow.Show();
         }
     }
 }
