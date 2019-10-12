@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -27,14 +28,14 @@ import java.util.Calendar;
 
 import pl.milosz.medbase.R;
 
-public class AlertsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class AlertsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, NotificationTextFragment.NotificationTextListener {
     LinearLayout linearLayout;
     SwitchCompat sw, sw1, sw2, sw3, sw4, sw5;
     int index = switchArray.size();
     private Calendar c;
     AlarmManager alarmManager, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
     public static ArrayList<SwitchCompat> switchArray = new ArrayList<>();
-
+    public static String notificationStringText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,11 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         super.onPause();
     }
 
+    public void sendOnText(){
+        NotificationTextFragment textFragment= new NotificationTextFragment();
+        textFragment.show(getSupportFragmentManager(), "notification text");
+    }
+
     public void sendOnTime(View view) {
         DialogFragment timePicker = new TimePickerFragment();
         timePicker.show(getSupportFragmentManager(), "time picker");
@@ -71,31 +77,10 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        sendOnText();
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
-        switch (index) {
-            case 0:
-                dodajSwitch(sw, alarmManager);
-                break;
-            case 1:
-                dodajSwitch(sw1, alarmManager1);
-                break;
-            case 2:
-                dodajSwitch(sw2, alarmManager2);
-                break;
-            case 3:
-                dodajSwitch(sw3, alarmManager3);
-                break;
-            case 4:
-                dodajSwitch(sw4, alarmManager4);
-                break;
-            case 5:
-                dodajSwitch(sw5, alarmManager5);
-                break;
-            default:
-                break;
-        }
     }
 
     @Override
@@ -113,7 +98,7 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, index, intent, 0);
         insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
-        String currentDate = "WEŹ TABLETKE PROSZEEEEEEEE \n" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " + DateFormat.getDateInstance().format(c.getTime());
+        String notificationFullText = notificationStringText+"\n" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " + DateFormat.getDateInstance().format(c.getTime());
 
         sw = new SwitchCompat(this);
         sw.setId(index);
@@ -125,7 +110,7 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         sw.setTextColor(Color.GRAY);
         sw.setPadding(10,10,10,10);
         sw.setTextSize(19);
-        sw.setText(currentDate);
+        sw.setText(notificationFullText);
         final SwitchCompat finalSw = sw;
         switchArray.add(finalSw);
         final AlarmManager finalInsideManager = insideManager;
@@ -151,6 +136,34 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
             for(SwitchCompat switchCompat:switchArray) {
                 linearLayout.addView(switchCompat);
             }
+        }
+    }
+
+    @Override
+    public void getText(String notificationText) {
+        notificationStringText=notificationText;
+        Log.i("guwno", notificationText);
+        switch (index) {
+            case 0:
+                dodajSwitch(sw, alarmManager);
+                break;
+            case 1:
+                dodajSwitch(sw1, alarmManager1);
+                break;
+            case 2:
+                dodajSwitch(sw2, alarmManager2);
+                break;
+            case 3:
+                dodajSwitch(sw3, alarmManager3);
+                break;
+            case 4:
+                dodajSwitch(sw4, alarmManager4);
+                break;
+            case 5:
+                dodajSwitch(sw5, alarmManager5);
+                break;
+            default:
+                break;
         }
     }
 }
