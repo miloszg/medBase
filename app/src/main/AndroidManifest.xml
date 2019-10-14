@@ -18,13 +18,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CalendarView.EventActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".DB.DB" />
+        <activity
+            android:name="calendar_sample.SampleTimesSquareActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="calendarguwno" />
         <activity android:name=".Alerts.PickDateActivity" />
         <activity android:name=".NotesView.NoteEditorActivity" />
         <activity
@@ -46,7 +52,7 @@
         <activity
             android:name=".CalendarView.CalendarActivity"
             android:label="@string/calendar_label" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
 
         <receiver android:name=".Alerts.NotificationReceiver" />
     </application>

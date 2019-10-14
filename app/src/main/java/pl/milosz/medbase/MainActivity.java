@@ -1,9 +1,7 @@
 package pl.milosz.medbase;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import calendar_sample.SampleTimesSquareActivity;
 import pl.milosz.medbase.Alerts.AlertsActivity;
 import pl.milosz.medbase.CalendarView.CalendarActivity;
 import pl.milosz.medbase.NotesView.NotesActivity;
@@ -84,12 +83,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_note);
                 return true;
             case R.id.nav_settings:
-                Log.d(TAG, "onNavigationItemSelected: clicked on settings");
-                Intent intent_settings = new Intent();
-                intent_settings.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent_settings.setData(uri);
-                startActivity(intent_settings);
+//                Log.d(TAG, "onNavigationItemSelected: clicked on settings");
+//                Intent intent_settings = new Intent();
+//                intent_settings.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent_settings.setData(uri);
+//                startActivity(intent_settings);
+                Intent intenttest=new Intent(this, SampleTimesSquareActivity.class);
+                startActivity(intenttest);
                 return true;
             default:
                 return false;

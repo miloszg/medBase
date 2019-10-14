@@ -1,53 +1,46 @@
 package pl.milosz.medbase.CalendarView;
 
 public class Events {
-    String EVENT,TIME,DATE,MONTH,YEAR;
-
-    public Events(String EVENT, String TIME, String DATE, String MONTH, String YEAR) {
-        this.EVENT = EVENT;
-        this.TIME = TIME;
-        this.DATE = DATE;
-        this.MONTH = MONTH;
-        this.YEAR = YEAR;
+    String date;
+    String time;
+    String desription;
+    int index;
+    public Events(int index, String date, String time, String desription) {
+        this.index = index;
+        this.date = date;
+        this.time = time;
+        this.desription = desription;
     }
 
-    public String getEVENT() {
-        return EVENT;
+    public int getIndex() {
+        return index;
     }
 
-    public void setEVENT(String EVENT) {
-        this.EVENT = EVENT;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    public String getTIME() {
-        return TIME;
+    public String getDate() {
+        return date;
     }
 
-    public void setTIME(String TIME) {
-        this.TIME = TIME;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getDATE() {
-        return DATE;
+    public String getTime() {
+        return time;
     }
 
-    public void setDATE(String DATE) {
-        this.DATE = DATE;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getMONTH() {
-        return MONTH;
+    public String getDesription() {
+        return desription;
     }
 
-    public void setMONTH(String MONTH) {
-        this.MONTH = MONTH;
-    }
-
-    public String getYEAR() {
-        return YEAR;
-    }
-
-    public void setYEAR(String YEAR) {
-        this.YEAR = YEAR;
+    public void setDesription(String desription) {
+        this.desription = desription;
     }
 }

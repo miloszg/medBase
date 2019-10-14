@@ -35,7 +35,7 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
     private Calendar c;
     AlarmManager alarmManager, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
     public static ArrayList<SwitchCompat> switchArray = new ArrayList<>();
-    public static String notificationStringText;
+    public static String notificationStringText; //mozna string array
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
