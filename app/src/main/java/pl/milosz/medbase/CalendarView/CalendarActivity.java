@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,7 +27,9 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
     View view;
     Calendar c;
     String selectedDate;
+    Date eventTargetDate;
     int index=0;
+    CalendarPickerView datePicker;
     public static ArrayList<Events> events=new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,10 +39,11 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
         setSupportActionBar(toolbar);
         dates=new ArrayList<>();
         Date today=new Date();
+
         Calendar nextYear = Calendar.getInstance();
         nextYear.add(Calendar.YEAR,1);
         c = Calendar.getInstance();
-        final CalendarPickerView datePicker = findViewById(R.id.calendar);
+        datePicker = findViewById(R.id.calendar);
         datePicker.init(today,nextYear.getTime())
                 .inMode(CalendarPickerView.SelectionMode.SINGLE)
                 .withSelectedDate(today);
@@ -49,7 +53,7 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
         datePicker.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date targetDate) {
-
+                eventTargetDate=targetDate;
                 selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(targetDate);
 
                 if (dates.contains(targetDate)) {
@@ -58,9 +62,7 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
                     datePicker.clearHighlightedDates();
                     datePicker.highlightDates(dates);
                     Intent calIntent=new Intent(getApplicationContext(),EventActivity.class);
-                    Log.i("gu selected",selectedDate);
                     for(Events e : events){
-                        Log.i("gu w petli",e.date);
                         if(e.date.equals(selectedDate)){
                             calIntent.putExtra("index",e.getIndex());
                             startActivity(calIntent);
@@ -68,9 +70,7 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
                     }
 
                 } else {
-                    dates.add(targetDate);
-                    datePicker.clearHighlightedDates();
-                    datePicker.highlightDates(dates);
+                    Toast.makeText(CalendarActivity.this, "Dodawanie wydarzenia...", Toast.LENGTH_SHORT).show();
                     Calendar calSelected = Calendar.getInstance();
                     calSelected.setTime(targetDate);
                     Log.i("guwno array:", dates.toString());
@@ -78,14 +78,10 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
                     // Toast.makeText(CalendarActivity.this, selectedDate, Toast.LENGTH_SHORT).show();
                     sendOnTime(view);
                 }
-
-
             }
 
             @Override
             public void onDateUnselected(Date date) {
-
-
             }
         });
     }
@@ -113,8 +109,11 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
     @Override
     public void getText(String eventDescription) {
 
+        dates.add(eventTargetDate);
+        datePicker.clearHighlightedDates();
+        datePicker.highlightDates(dates);
         String eventTime =  + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
-        Events event=new Events(index,selectedDate,eventTime,eventDescription);
+        Events event=new Events(index,selectedDate,eventTime,eventDescription,c.getTimeInMillis());
         events.add(event);
         Intent calIntent=new Intent(this,EventActivity.class);
         calIntent.putExtra("index",index);

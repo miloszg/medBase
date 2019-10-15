@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:text="Godzina wydarzenia"
         android:textAlignment="gravity"
         android:textColor="@android:color/white"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:layout_below="@id/timeText"
         android:background="@drawable/customshape"
         android:padding="16dp">
@@ -57,7 +57,6 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="1dp"
             android:background="@android:color/transparent"
-
             android:padding="5dp" />
     </RelativeLayout>
 
@@ -68,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="180dp"
         android:text="Opis wydarzenia"
         android:textAlignment="gravity"
         android:textColor="@android:color/white"
@@ -80,8 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-
+        android:layout_marginTop="220dp"
         android:background="@drawable/customshape"
         android:padding="16dp">
 
@@ -94,7 +92,16 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="1dp"
             android:background="@android:color/transparent"
-
             android:padding="5dp" />
     </RelativeLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:text="Włącz powiadomienie"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:id="@+id/eventSwitch"
+        android:layout_marginTop="120dp"
+        android:layout_below="@id/descriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

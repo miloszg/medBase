@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -35,7 +36,7 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
     private Calendar c;
     AlarmManager alarmManager, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
     public static ArrayList<SwitchCompat> switchArray = new ArrayList<>();
-    public static String notificationStringText; //mozna string array
+    public static String notificationStringText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,23 +94,26 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
     }
 
     public void dodajSwitch(SwitchCompat sw, AlarmManager insideManager) {
+        String notificationFullText = notificationStringText+"\n" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " + DateFormat.getDateInstance().format(c.getTime());
         insideManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, NotificationReceiver.class);
+        intent.putExtra("text",notificationFullText);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, index, intent, 0);
         insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
-        String notificationFullText = notificationStringText+"\n" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " + DateFormat.getDateInstance().format(c.getTime());
+
 
         sw = new SwitchCompat(this);
         sw.setId(index);
         sw.setChecked(true);
         sw.setBackground(getDrawable(R.drawable.customshape));
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(30, 30, 10, 30);
         sw.setLayoutParams(layoutParams);
         sw.setTextColor(Color.GRAY);
         sw.setPadding(10,10,10,10);
         sw.setTextSize(19);
+        sw.setGravity(Gravity.LEFT);
         sw.setText(notificationFullText);
         final SwitchCompat finalSw = sw;
         switchArray.add(finalSw);

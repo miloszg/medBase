@@ -4,12 +4,22 @@ public class Events {
     String date;
     String time;
     String desription;
+    Long timeInMillis;
     int index;
-    public Events(int index, String date, String time, String desription) {
+    public Events(int index, String date, String time, String desription, Long timeInMillis) {
         this.index = index;
         this.date = date;
         this.time = time;
         this.desription = desription;
+        this.timeInMillis = timeInMillis;
+    }
+
+    public Long getTimeInMillis() {
+        return timeInMillis;
+    }
+
+    public void setTimeInMillis(Long timeInMillis) {
+        this.timeInMillis = timeInMillis;
     }
 
     public int getIndex() {

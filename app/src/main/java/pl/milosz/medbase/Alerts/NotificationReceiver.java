@@ -19,9 +19,12 @@ import pl.milosz.medbase.R;
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_1_ID;
 
 public class NotificationReceiver extends BroadcastReceiver {
+
+    String notText;
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "alert", Toast.LENGTH_SHORT).show();
+        notText=intent.getExtras().getString("text"," powiadomienie");
         sendNotification(context);
     }
     private void sendNotification(Context context) {
@@ -31,11 +34,12 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent activityIntent = new Intent(context, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, activityIntent, 0);
+        //String notText=
 
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_meds)
                 .setContentTitle("Twoje Powiadomienie")
-                .setContentText(AlertsActivity.notificationStringText)
+                .setContentText(notText)
                 .setColor(Color.GREEN)
                 .setSound(defaultSound)
                 .setGroup("example")
