@@ -8,7 +8,56 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainMenu">
 
-    <Grid>
-        <Button Content="MAINMENU" FontSize="50"/>
+    <Grid Background ="{StaticResource MedGrayBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Background="White" Margin="50 50 50 50" Grid.Column="0" 
+                Grid.ColumnSpan="2" Grid.Row="0" Foreground="MediumSpringGreen"
+                FontSize="20" FontWeight="ExtraBold" Content="Moje Leki"
+                Command="{Binding myMedsCommand}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="100"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Background="White" Margin="50 50 50 50" Grid.Column="2" 
+                Grid.ColumnSpan="2" Grid.Row="0" Foreground="MediumSpringGreen"
+                FontSize="20" FontWeight="ExtraBold" Content="Przegladaj Leki"
+                Command="{Binding searchForMedsCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="100"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Background="White" Margin="50 50 50 50" Grid.Column="0" 
+                Grid.ColumnSpan="2" Grid.Row="1" Foreground="MediumSpringGreen"
+                FontSize="20" FontWeight="ExtraBold" Content="Wygeneruj Kod QR"
+                Command="{Binding generateQRCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="100"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Background="White" Margin="50 50 50 50" Grid.Column="2" 
+                Grid.ColumnSpan="2" Grid.Row="1" Foreground="MediumSpringGreen"
+                FontSize="20" FontWeight="ExtraBold" Content="Powiadomienia"
+                Command="{Binding notificationCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="100"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>

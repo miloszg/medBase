@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Ninject;
+using System.Collections.Generic;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +22,7 @@ namespace DesktopApplication
 
         public void changePage()
         {
-            MainWindow.viewModelConnector.CurrentPage = ApplicationPage.SignUp;
+            IoC.Kernel.Get<MainWindowViewModel>().CurrentPage = ApplicationPage.SignUp;
         }
         public void Login(object parameter)
         {
@@ -41,8 +43,17 @@ namespace DesktopApplication
                 }, 
                 $"WHERE first_name=\"{this.username}\" AND password=\"{password}\"").Count != 0)
             {
+
                 /* TODO: Send log of this user */
-                MainWindow.viewModelConnector.CurrentPage = ApplicationPage.MainMenu;
+                var currentWindow = (Application.Current.MainWindow as MainWindow);
+                if (currentWindow != null)
+                {
+                    currentWindow.Hide();
+                }
+                User user = new User(username);
+                Application.Current.MainWindow = new ApplicationWindow();
+                Application.Current.MainWindow.Show();
+                IoC.Kernel.Get<ApplicationWindowViewModel>().SetUser(user);
             }
             else
             {

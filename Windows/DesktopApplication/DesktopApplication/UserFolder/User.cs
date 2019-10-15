@@ -5,25 +5,23 @@ namespace DesktopApplication
     public class User : IUser
     {
         public string username { get; set; }
-        public string password { get; set; }
         public string mail { get; set; }
 
-        public User(string username, string password, string mail)
+        public User(string username, string mail="")
         {
             this.username = username;
-            this.password = password;
-            this.mail = mail;
+            this.mail = $"{this.username}@gmail.com";
         }
 
         public void ShowInfo()
         {
             //MessageBox.Show("Username: " + username + " password: " + password + " mail: " + mail);
-            MessageBox.Show($"Username: {this.username} password: {this.password}  mail: {this.mail}");
+            MessageBox.Show($"Username: {this.username} mail: {this.mail}");
         }
 
         public override string ToString()
         {
-            return $"Username: {this.username} password: {this.password}  mail: {this.mail}";
+            return $"Username: {this.username} mail: {this.mail}";
         }
     }
 }

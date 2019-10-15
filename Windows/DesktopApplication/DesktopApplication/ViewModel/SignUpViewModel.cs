@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Ninject;
+using System.Collections.Generic;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +11,14 @@ namespace DesktopApplication
     {
         public string username { get; set; }
         public string mail { get; set; }
-        public ICommand connectToDatabaseCommand { get; set; }
         public ICommand registerCommand { get; set; }
+        public ICommand goBackCommand { get; set; }
 
+        public SignUpViewModel()
+        {
+            this.registerCommand = new RelayCommandWithParameters((parameter) => Register(parameter));
+            this.goBackCommand = new RelayCommand(() => GoBackCommand());
+        }
         public void Register(object parameter)
         {
             string password = "";
@@ -53,16 +59,10 @@ namespace DesktopApplication
                 MessageBox.Show("Insert Succeded!");
             }
         }
-        public SignUpViewModel()
-        {
-            this.connectToDatabaseCommand = new RelayCommand(() => connectToDatabaseTest());
-            this.registerCommand = new RelayCommandWithParameters((parameter) => Register(parameter));
-        }
 
-        private void connectToDatabaseTest()
+        public void GoBackCommand()
         {
-            DatabaseManager databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
-            DatabaseEditor databaseEditor = new DatabaseEditor(databaseManager);
+            IoC.Kernel.Get<MainWindowViewModel>().CurrentPage = ApplicationPage.Login;
         }
     }
 }

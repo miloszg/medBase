@@ -11,6 +11,7 @@ namespace DesktopApplication
         public SignUpPage()
         {
             InitializeComponent();
+            this.UsernameTextBox.Focus();
             this.DataContext = new SignUpViewModel();
         }
 

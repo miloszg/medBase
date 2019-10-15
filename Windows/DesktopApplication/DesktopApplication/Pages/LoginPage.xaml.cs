@@ -11,6 +11,7 @@ namespace DesktopApplication
         public LoginPage()
         {
             InitializeComponent();
+            this.UsernameTextBox.Focus();
             this.DataContext = new LoginViewModel();
         }
 

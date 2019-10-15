@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using Ninject;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace DesktopApplication
 {
@@ -10,6 +12,7 @@ namespace DesktopApplication
         public MainMenuPage()
         {
             InitializeComponent();
+            this.DataContext = IoC.Kernel.Get<ApplicationWindowViewModel>();
         }
     }
 }

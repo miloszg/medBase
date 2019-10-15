@@ -18,6 +18,14 @@ namespace DesktopApplication
                     return new StartPage();
                 case ApplicationPage.MainMenu:
                     return new MainMenuPage();
+                case ApplicationPage.MyMeds:
+                    return new MyMedsPage();
+                case ApplicationPage.SearchForMeds:
+                    return new SearchForMedsPage();
+                case ApplicationPage.GenerateQRCode:
+                    return new GenerateQRCodePage();
+                case ApplicationPage.Notification:
+                    return new NotificationPage();
                 default:
                     Debugger.Break();
                     break;
