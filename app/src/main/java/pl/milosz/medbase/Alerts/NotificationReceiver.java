@@ -1,6 +1,8 @@
 package pl.milosz.medbase.Alerts;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,8 +10,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -17,33 +22,54 @@ import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
 
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_1_ID;
+import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_2_ID;
 
 public class NotificationReceiver extends BroadcastReceiver {
-
+    Context contextGlobal;
     String notText;
     @Override
     public void onReceive(Context context, Intent intent) {
+        contextGlobal=context;
         Toast.makeText(context, "alert", Toast.LENGTH_SHORT).show();
         notText=intent.getExtras().getString("text"," powiadomienie");
-        sendNotification(context);
+        int channel=intent.getExtras().getInt("channel",1);
+        if(channel==1) {
+            sendNotification1(context);
+        }
+        else if(channel==2){
+            sendNotification2(context);
+        }
+
     }
-    private void sendNotification(Context context) {
+
+    private void sendNotification1(Context context) {
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        if (!notificationManager.areNotificationsEnabled()) {
+            openNotificationsSettings();
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && isChannelBlocked(CHANNEL_1_ID)) {
+            openChannelSettings(CHANNEL_1_ID);
+            return;
+        }
         Intent activityIntent = new Intent(context, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, activityIntent, 0);
-        //String notText=
 
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_meds)
-                .setContentTitle("Twoje Powiadomienie")
+                .setContentTitle("Twoje Powiadomienie - Przpomnienie")
                 .setContentText(notText)
                 .setColor(Color.GREEN)
                 .setSound(defaultSound)
                 .setGroup("example")
                 .setSubText("MedBase")
+                .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("Przypomnienie polega na: ")
+                        .addLine("dodatkowa linia na rzeczy"))
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -52,25 +78,58 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         notificationManager.notify(1, notification);
     }
-}
 
+    private void sendNotification2(Context context) {
+        Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-/*
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        if (!notificationManager.areNotificationsEnabled()) {
+            openNotificationsSettings();
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && isChannelBlocked(CHANNEL_2_ID)) {
+            openChannelSettings(CHANNEL_2_ID);
+            return;
+        }
+        Intent activityIntent = new Intent(context, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context,
+                0, activityIntent, 0);
+
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_2_ID)
+                .setSmallIcon(R.drawable.ic_calendar)
+                .setContentTitle("Twoje Powiadomienie - Kalendarz")
+                .setContentText(notText)
+                .setColor(Color.GREEN)
+                .setSound(defaultSound)
+                .setGroup("example")
+                .setSubText("MedBase")
+                .setStyle(new NotificationCompat.InboxStyle()
+                       .addLine("Wydarzenie")
+                       .addLine("dodatkowa linia na rzeczy"))
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        notificationManager.notify(2, notification);
+    }
     private void openNotificationsSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
-            intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
-            startActivity(intent);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, contextGlobal.getPackageName());
+            contextGlobal.startActivity(intent);
         } else {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.setData(Uri.parse("package:" + getPackageName()));
-            startActivity(intent);
+            intent.setData(Uri.parse("package:" + contextGlobal.getPackageName()));
+            contextGlobal.startActivity(intent);
         }
     }
 
     @RequiresApi(26)
     private boolean isChannelBlocked(String channelId) {
-        NotificationManager manager = getSystemService(NotificationManager.class);
+        NotificationManager manager = contextGlobal.getSystemService(NotificationManager.class);
         NotificationChannel channel = manager.getNotificationChannel(channelId);
 
         return channel != null && channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
@@ -79,11 +138,17 @@ public class NotificationReceiver extends BroadcastReceiver {
     @RequiresApi(26)
     private void openChannelSettings(String channelId) {
         Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
-        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, contextGlobal.getPackageName());
         intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
-        startActivity(intent);
+        contextGlobal.startActivity(intent);
     }
+}
 
+
+
+
+
+    /*
     --------------------------------------------------------------
         public void sendOnChannel1(View view) {
         if (!notificationManager.areNotificationsEnabled()) {

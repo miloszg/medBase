@@ -98,10 +98,9 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         insideManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, NotificationReceiver.class);
         intent.putExtra("text",notificationFullText);
+        intent.putExtra("channel",1);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, index, intent, 0);
         insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-
-
 
         sw = new SwitchCompat(this);
         sw.setId(index);

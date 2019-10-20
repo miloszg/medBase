@@ -36,6 +36,7 @@ public class EventActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
                 intent.putExtra("text",events.get(index).getDesription());
+                intent.putExtra("channel",2);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), index, intent, 0);
                 if(isChecked){
                     Toast.makeText(EventActivity.this, "Alarm włączono", Toast.LENGTH_SHORT).show();
