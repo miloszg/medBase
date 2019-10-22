@@ -1,18 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DesktopApplication
 {
@@ -24,7 +11,7 @@ namespace DesktopApplication
         public ApplicationWindow()
         {
             InitializeComponent();
-            this.DataContext = IoC.Kernel.Get<ApplicationWindowViewModel>();
+            this.DataContext = IoC.Get<ApplicationWindowViewModel>();
         }
 
         protected override void OnClosed(EventArgs e)

@@ -1,5 +1,4 @@
-﻿using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,14 @@ using System.Windows.Shapes;
 namespace DesktopApplication
 {
     /// <summary>
-    /// Interaction logic for MyMedsPage.xaml
+    /// Interaction logic for GenerateReceiptPage.xaml
     /// </summary>
-    public partial class MyMedsPage : Page
+    public partial class GenerateReceiptPage : Page
     {
-        public MyMedsPage()
+        public GenerateReceiptPage()
         {
             InitializeComponent();
-            this.DataContext = IoC.Kernel.Get<ApplicationWindowViewModel>();
+            this.DataContext = new GenerateReceiptViewModel();
         }
     }
 }

@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DesktopApplication
 {
     /// <summary>
-    /// Interaction logic for StartPage.xaml
+    /// Interaction logic for AddNoteWindow.xaml
     /// </summary>
-    public partial class StartPage : Page
+    public partial class AddNoteWindow : Window
     {
-        public StartPage()
+        public AddNoteWindow(BaseViewModel submitPatientPageViewModel)
         {
             InitializeComponent();
+            this.DataContext = submitPatientPageViewModel;
         }
     }
 }

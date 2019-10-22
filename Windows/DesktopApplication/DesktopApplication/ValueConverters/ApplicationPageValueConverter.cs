@@ -14,23 +14,21 @@ namespace DesktopApplication
                     return new LoginPage();
                 case ApplicationPage.SignUp:
                     return new SignUpPage();
-                case ApplicationPage.Start:
-                    return new StartPage();
                 case ApplicationPage.MainMenu:
                     return new MainMenuPage();
-                case ApplicationPage.MyMeds:
-                    return new MyMedsPage();
-                case ApplicationPage.SearchForMeds:
-                    return new SearchForMedsPage();
-                case ApplicationPage.GenerateQRCode:
-                    return new GenerateQRCodePage();
-                case ApplicationPage.Notification:
-                    return new NotificationPage();
+                case ApplicationPage.Meds:
+                    return new MedsPage();
+                case ApplicationPage.Patient:
+                    return new PatientPage();
+                case ApplicationPage.GenerateReceipt:
+                    return new GenerateReceiptPage();
+                case ApplicationPage.SubmitPatient:
+                    return new SubmitPatientPage();
                 default:
                     Debugger.Break();
                     break;
             }
-            return new StartPage();
+            return new SignUpPage();
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

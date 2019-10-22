@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         WindowState="Normal"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Title="MainWindow" Height="600" Width="800" Background="CadetBlue">
     <Grid>
         <Grid.RowDefinitions>

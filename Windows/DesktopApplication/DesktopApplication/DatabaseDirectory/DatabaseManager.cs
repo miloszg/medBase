@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace DesktopApplication
 {
-    public class DatabaseManager : IDatabaseManager
+    public class DatabaseManager
     {
         public MySqlConnection connection { get; set; }
         private string server;
@@ -84,12 +84,15 @@ namespace DesktopApplication
             return columnString.ToString();
         }
 
-        public List<string> GetRowsFromTable(MySqlDataReader dataReader, int rowsToGet=1)
+        public List<string> GetRowsFromTable(MySqlDataReader dataReader, int rowsToGet=1000)
         {
             List<string> tableString = new List<string>();
             for (int row = 0; row < rowsToGet; row++)
             {
-                dataReader.Read();
+                if (!dataReader.Read())
+                {
+                    break;
+                }
                 if(!dataReader.HasRows)
                 {
                     return tableString;
@@ -106,21 +109,26 @@ namespace DesktopApplication
             return tableString;
         }
 
-        public string ParametersListToString(List<string> parameters, bool columns=false)
+        public string MySqlListToStringConverter(List<string> parameters, SqlCommandsEnum listType = SqlCommandsEnum.NormalValues)
         {
             StringBuilder parametersString = new StringBuilder();
 
             for (int i = 0; i < parameters.Count; i++)
             {
-                if(columns)
+                switch (listType)
                 {
-                    parametersString.Append($"{parameters[i]}");
+                    case SqlCommandsEnum.NormalValues:
+                        parametersString.Append($"\"{parameters[i]}\"");
+                        break;
+                    case SqlCommandsEnum.ColumnsOrTables:
+                        parametersString.Append($"{parameters[i]}");
+                        break;
+                    case SqlCommandsEnum.ColunsWithTables:
+                        parametersString.Append($"leki.{parameters[i]}");
+                        break;
+                    default:
+                        break;
                 }
-                else
-                {
-                    parametersString.Append($"\"{parameters[i]}\"");
-                }
-
                 if (i < parameters.Count - 1)
                 {
                     parametersString.Append(",");

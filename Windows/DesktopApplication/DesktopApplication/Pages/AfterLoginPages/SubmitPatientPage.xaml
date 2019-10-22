@@ -1,0 +1,130 @@
+﻿<Page x:Class="DesktopApplication.SubmitPatientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DesktopApplication"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SubmitPatientPage">
+
+    <Grid Background="Azure">
+
+        <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
+                FontSize="30" Command="{Binding goBackCommand}"
+                BorderThickness="0"/>
+        
+        <Grid Margin="20 30 20 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Border Background="Azure" Grid.Column="0" Grid.Row="0"
+                    Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkCyan">
+                <StackPanel>
+                    <Label BorderBrush="DarkCyan" BorderThickness="2">
+                        <TextBlock Text="Leki zazywane przez pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
+                                   Foreground="DarkCyan" />
+                    </Label>
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding patientMedsList}"
+                                      ScrollViewer.CanContentScroll="True" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" 
+                                                Height="30" Background="LightSeaGreen">
+                                        </Border>
+                                        <Label Grid.Column="0" Content="{Binding Name}" FontSize="15" FontWeight="Bold"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+        
+            <Border Background="Azure" Grid.Column="1" Grid.Row="0"
+                    Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkCyan">
+                <DockPanel>
+                    <Label BorderBrush="DarkCyan" BorderThickness="2" DockPanel.Dock="Top">
+                        <TextBlock Text="Historia pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
+                                   Foreground="DarkCyan" />
+                    </Label>
+                    <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
+                    Content="Dodaj notatke" FontSize="15" FontWeight="DemiBold" Padding="30"
+                    Command="{Binding openNoteWindowCommand}"/>
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding patientStoryList}"
+                                      ScrollViewer.CanContentScroll="True" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" 
+                                                Height="30" Background="LightSeaGreen">
+                                        </Border>
+                                        <Label Grid.Column="0" Content="{Binding Name}" FontSize="15" FontWeight="Bold"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    
+
+                </DockPanel>
+            </Border>
+
+           
+            <Border Grid.Column="2" Grid.RowSpan="3" Background="Wheat" BorderThickness="1" BorderBrush="Black">
+                <StackPanel>
+                    <Label BorderBrush="Black" BorderThickness="2" HorizontalContentAlignment="Center">
+                        <TextBlock Text="Pacjent" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
+                                   Foreground="Black" HorizontalAlignment="Center"/>
+                    </Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Label HorizontalAlignment="Left" Content="Wiek"/>
+                        <Label HorizontalAlignment="Left" Content="{Binding patientAgeLabel}" Foreground="DarkCyan"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label HorizontalAlignment="Left" Content="Plec"/>
+                        <Label HorizontalAlignment="Left" Content="{Binding patientSexLabel}" Foreground="DarkCyan"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom"
+                    Content="Wygeneruj Recepte" FontSize="15" FontWeight="DemiBold" Padding="30"
+                    Command="{Binding generateReceiptCommand}"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -13,28 +13,31 @@ namespace DesktopApplication
 {
     public class ApplicationWindowViewModel : BaseViewModel
     {
-        public ICommand myMedsCommand { get; set; }
-        public ICommand searchForMedsCommand { get; set; }
-        public ICommand generateQRCommand { get; set; }
-        public ICommand notificationCommand { get; set; }
+        public ICommand medsCommand { get; set; }
+        public ICommand patientCommand { get; set; }
         public ICommand goBackCommand { get; set; }
+        public ICommand generateQRCommand { get; set; }
         public ApplicationPage currentPage { get; set; }
+
+        public MedsViewModel medsViewModel;
+
+        private DatabaseManager databaseManager;
 
         private User user = null;
         public ApplicationWindowViewModel()
         {
             currentPage = ApplicationPage.MainMenu;
             Messenger.Default.Register<User>(this, (user) => this.user = user);
-            this.myMedsCommand = new RelayCommand(() => MyMedsCommand());
-            this.searchForMedsCommand = new RelayCommand(() => SearchForMedsCommand());
-            this.generateQRCommand= new RelayCommand(() => GenerateQRCommand());
-            this.notificationCommand = new RelayCommand(() => NotificationCommand());
+            this.medsCommand = new RelayCommand(() => MedsCommand());
+            this.patientCommand = new RelayCommand(() => PatientCommand());
+            this.generateQRCommand = new RelayCommand(() => GenerateQRCommand());
             this.goBackCommand = new RelayCommand(() => GoBackCommand());
         }
 
         private void GoBackCommand()
         {
             this.currentPage = ApplicationPage.MainMenu;
+            databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
         }
 
         public void SetUser(User user)
@@ -42,29 +45,20 @@ namespace DesktopApplication
             this.user = user;
         }
 
-        public void MyMedsCommand()
+        public void MedsCommand()
         {
-            this.currentPage = ApplicationPage.MyMeds;
+            this.currentPage = ApplicationPage.Meds;
         }
 
-        public void SearchForMedsCommand()
+        public void PatientCommand()
         {
-            this.currentPage = ApplicationPage.SearchForMeds;
+            this.currentPage = ApplicationPage.Patient;
         }
 
         public void GenerateQRCommand()
         {
-            this.currentPage = ApplicationPage.GenerateQRCode;
+            this.currentPage = ApplicationPage.GenerateReceipt;
         }
 
-        public void NotificationCommand()
-        {
-            this.currentPage = ApplicationPage.Notification;
-        }
-
-        private void Logout()
-        {
-            /* All things to safely logout user */
-        }
     }
 }

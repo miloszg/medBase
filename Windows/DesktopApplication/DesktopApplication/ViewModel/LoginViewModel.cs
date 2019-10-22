@@ -1,9 +1,7 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using Ninject;
+﻿using Ninject;
 using System.Collections.Generic;
 using System.Security;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DesktopApplication
@@ -53,7 +51,7 @@ namespace DesktopApplication
                 User user = new User(username);
                 Application.Current.MainWindow = new ApplicationWindow();
                 Application.Current.MainWindow.Show();
-                IoC.Kernel.Get<ApplicationWindowViewModel>().SetUser(user);
+                IoC.Get<ApplicationWindowViewModel>().SetUser(user);
             }
             else
             {

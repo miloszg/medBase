@@ -1,5 +1,4 @@
-﻿using System;
-using Ninject;
+﻿using Ninject;
 
 namespace DesktopApplication
 {
@@ -10,6 +9,11 @@ namespace DesktopApplication
         public static void Setup()
         {
             BindViewModels();
+        }
+
+        public static T Get<T>()
+        {
+            return Kernel.Get<T>();
         }
 
         private static void BindViewModels()

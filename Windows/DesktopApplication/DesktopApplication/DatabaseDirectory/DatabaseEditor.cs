@@ -9,26 +9,26 @@ namespace DesktopApplication
 {
     public class DatabaseEditor
     {
-        private readonly IDatabaseManager databaseConnector;
+        private readonly DatabaseManager databaseManager;
 
-        public DatabaseEditor(IDatabaseManager _databaseConnector)
+        public DatabaseEditor(DatabaseManager databaseManager)
         {
-            this.databaseConnector = _databaseConnector;
+            this.databaseManager = databaseManager;
         }
 
         public bool InsertIntoDatabase(string tableName,List<string> columns, List<string> parameters)
         {
-            if (!databaseConnector.OpenConnection())
+            if (!databaseManager.OpenConnection())
             {
                 return false;
             }
-            string columnsOfTable = this.databaseConnector.ParametersListToString(columns,true);
-            string values = this.databaseConnector.ParametersListToString(parameters);
+            string columnsOfTable = this.databaseManager.MySqlListToStringConverter(columns,SqlCommandsEnum.ColumnsOrTables);
+            string values = this.databaseManager.MySqlListToStringConverter(parameters);
             
             string command = $"INSERT INTO leki.{tableName} ({columnsOfTable}) VALUE ({values});";
             try
             {
-                MySqlCommand sqlCommand = new MySqlCommand(command, this.databaseConnector.GetConnection());
+                MySqlCommand sqlCommand = new MySqlCommand(command, this.databaseManager.GetConnection());
                 MySqlDataReader dataReader = sqlCommand.ExecuteReader();
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)

@@ -1,5 +1,4 @@
-﻿using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,14 @@ using System.Windows.Shapes;
 namespace DesktopApplication
 {
     /// <summary>
-    /// Interaction logic for NotificationPage.xaml
+    /// Interaction logic for SubmitPatientPage.xaml
     /// </summary>
-    public partial class NotificationPage : Page
+    public partial class SubmitPatientPage : Page
     {
-        public NotificationPage()
+        public SubmitPatientPage()
         {
             InitializeComponent();
-            this.DataContext = IoC.Kernel.Get<ApplicationWindowViewModel>();
+            this.DataContext = new SubmitPatientViewModel();
         }
     }
 }
