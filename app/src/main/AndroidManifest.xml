@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CalendarView.EventActivity"></activity>
+        <activity android:name=".Meds.MedDetailsActivity"></activity>
+        <activity android:name=".CodeActivity" />
+        <activity android:name=".CalendarView.EventActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".DB.DB" />
-        <activity
-            android:name="calendar_sample.SampleTimesSquareActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="calendarguwno" />
         <activity android:name=".Alerts.PickDateActivity" />
         <activity android:name=".NotesView.NoteEditorActivity" />
         <activity
@@ -42,7 +40,7 @@
             android:label="@string/title_activity_alerts"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MedsActivity"
+            android:name=".Meds.MedsActivity"
             android:label="@string/title_activity_meds"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

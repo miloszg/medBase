@@ -1,17 +1,19 @@
-package pl.milosz.medbase;
+package pl.milosz.medbase.Meds;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
-class MedicationListAdapter extends ArrayAdapter<Medication> {
+import pl.milosz.medbase.R;
+
+public class MedicationListAdapter extends ArrayAdapter<Medication> {
     private static final String TAG = "MedicationListAdapter";
     private Context mContext;
     private int mResource;

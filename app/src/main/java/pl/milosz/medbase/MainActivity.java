@@ -19,6 +19,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import pl.milosz.medbase.Alerts.AlertsActivity;
 import pl.milosz.medbase.CalendarView.CalendarActivity;
+import pl.milosz.medbase.DB.DB;
+import pl.milosz.medbase.Meds.MedsActivity;
 import pl.milosz.medbase.NotesView.NotesActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_med);
                 break;
             case R.id.cardBrowse:
-                Intent intent_browse = new Intent(this, BrowseMedsActivity.class);
+                Intent intent_browse = new Intent(this, CodeActivity.class);
                 startActivity(intent_browse);
                 break;
             case R.id.cardQR:
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.nav_meds:
                 Log.d(TAG, "onNavigationItemSelected: clicked on meds");
-                Intent intent_med = new Intent(this, MedsActivity.class);
+                Intent intent_med = new Intent(this, DB.class);
                 startActivity(intent_med);
                 break;
             case R.id.nav_calendar:

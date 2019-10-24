@@ -101,12 +101,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@drawable/ic_search"
+                        android:src="@drawable/ic_code"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:text="Przeglądaj Leki"
+                        android:text="Wygeneruj kod"
                         android:textAlignment="center"
                         android:textColor="#05ca7e"
                         android:textSize="14sp"

@@ -6,6 +6,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import pl.milosz.medbase.Meds.Medication;
+import pl.milosz.medbase.Meds.MedicationListAdapter;
+
 public class BrowseMedsActivity extends AppCompatActivity {
 
     @Override

@@ -17,8 +17,8 @@ import pl.milosz.medbase.R;
 import static pl.milosz.medbase.CalendarView.CalendarActivity.events;
 
 public class EventActivity extends AppCompatActivity {
-    AlarmManager alarmManager;
-
+    AlarmManager alarmManagerCalendar;
+    PendingIntent pendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,21 +29,21 @@ public class EventActivity extends AppCompatActivity {
         timeTextView.setText(events.get(index).time);
         descriptionTextView.setText(events.get(index).desription);
 
-        alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManagerCalendar=(AlarmManager) getSystemService(ALARM_SERVICE);
         SwitchCompat switchCompat=findViewById(R.id.eventSwitch);
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-                intent.putExtra("text",events.get(index).getDesription());
-                intent.putExtra("channel",2);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), index, intent, 0);
                 if(isChecked){
+                    Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+                    intent.putExtra("text",events.get(index).getDesription());
+                    intent.putExtra("channel","two");
+                    pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), index, intent, 0);
                     Toast.makeText(EventActivity.this, "Alarm włączono", Toast.LENGTH_SHORT).show();
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, events.get(index).getTimeInMillis(), pendingIntent);
+                    alarmManagerCalendar.setExact(AlarmManager.RTC_WAKEUP, events.get(index).getTimeInMillis(), pendingIntent);
                 } else {
                     Toast.makeText(EventActivity.this, "Alarm wyłączono", Toast.LENGTH_SHORT).show();
-                    alarmManager.cancel(pendingIntent);
+                    alarmManagerCalendar.cancel(pendingIntent);
                 }
             }
         });

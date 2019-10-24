@@ -1,4 +1,4 @@
-package pl.milosz.medbase;
+package pl.milosz.medbase.Meds;
 
 public class Medication {
     private String name;

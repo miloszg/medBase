@@ -5,55 +5,71 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.mysql.jdbc.ResultSetMetaData;
 
-import static pl.milosz.medbase.DB.DB.pass;
-import static pl.milosz.medbase.DB.DB.user;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import pl.milosz.medbase.Meds.Medication;
+
+import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
 
 public class Download extends AsyncTask<Void, Void, String> {
     Context context;
-    private String url;
+    String result;
+    public static String twoj_stary = " ";
+    public static Connection con;
 
-    public Download(Context context, String url) {
+    public Download(Context context) {
         this.context = context;
-        this.url = url;
+
     }
 
     protected void onPreExecute() {
         Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show();
     }
 
-    protected String doInBackground(Void... params) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            java.sql.Connection con = DriverManager.getConnection(url, user, pass);
-            Log.i("guwno",con.toString());
-            if(con!=null)
-            {
-                Log.i("guwno","cos tam sie udalo");
-            }
-            java.sql.Statement st = con.createStatement();
-           // java.sql.ResultSet student = st.executeQuery("SELECT * FROM `hb-01-one-to-one-uni`.instructor");
-            java.sql.ResultSet rs = st.executeQuery("select * "+
-                    "FROM `MyET9xK68t`.`leki`\n" +
-                   "LIMIT 10;");
 
-            while (rs.next()) {
-                String field= rs.getString("first_name");
-                DB.lista.add(field);
+    protected String doInBackground(Void... params) {
+        String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
+        String user = "admin";
+        String pass = "admin";
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.out.println("JAVA: Class.forName() error");
+            e.printStackTrace();
+        }
+        try {
+            Connection con = DriverManager.getConnection(url, user, pass);
+            if (con != null) {
+                twoj_stary = "AAAAAA";
+                Statement st = con.createStatement();
+                result = "Database connection success\n";
+                ResultSet rs = st.executeQuery("SELECT * FROM `test`.`leki` limit 10;");
+                ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+                while (rs.next()) {
+                    result +=  rs.getString(2);
+                    Medication medtest = new Medication(rs.getString(2), "test", "test");
+                    medicationArrayList.add(medtest);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
         }
+        Log.i("guwno", result);
         return "Complete";
     }
 
-    protected void onPostExecute(String result) {
-        if (result.equals("Complete")) {
-            Toast.makeText(context, "Koniec ładowania", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    protected void onPostExecute(String s) {
+        Toast.makeText(context, twoj_stary, Toast.LENGTH_SHORT).show();
     }
+
+
 }

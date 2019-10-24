@@ -32,9 +32,9 @@ import pl.milosz.medbase.R;
 public class AlertsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, NotificationTextFragment.NotificationTextListener {
     LinearLayout linearLayout;
     SwitchCompat sw, sw1, sw2, sw3, sw4, sw5;
-    int index = switchArray.size();
+    int index = switchArray.size()+1;
     private Calendar c;
-    AlarmManager alarmManager, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
+    AlarmManager alarmManager0, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
     public static ArrayList<SwitchCompat> switchArray = new ArrayList<>();
     public static String notificationStringText;
     @Override
@@ -95,12 +95,13 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
 
     public void dodajSwitch(SwitchCompat sw, AlarmManager insideManager) {
         String notificationFullText = notificationStringText+"\n" + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " + DateFormat.getDateInstance().format(c.getTime());
+        Log.i("guwno index",String.valueOf(index));
         insideManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, NotificationReceiver.class);
         intent.putExtra("text",notificationFullText);
-        intent.putExtra("channel",1);
-        final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, index, intent, 0);
-        insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        intent.putExtra("channel","one");
+        final PendingIntent pendingIntent1 = PendingIntent.getBroadcast(this, index, intent, 0);
+        insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent1);
 
         sw = new SwitchCompat(this);
         sw.setId(index);
@@ -121,10 +122,10 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    finalInsideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+                    finalInsideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent1);
                     Toast.makeText(AlertsActivity.this, "Włączony", Toast.LENGTH_SHORT).show();
                 } else {
-                    finalInsideManager.cancel(pendingIntent);
+                    finalInsideManager.cancel(pendingIntent1);
                     Toast.makeText(AlertsActivity.this, "Wyłączony", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -148,7 +149,7 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
         Log.i("guwno", notificationText);
         switch (index) {
             case 0:
-                dodajSwitch(sw, alarmManager);
+                //dodajSwitch(sw, alarmManager0);
                 break;
             case 1:
                 dodajSwitch(sw1, alarmManager1);
