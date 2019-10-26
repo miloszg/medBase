@@ -1,6 +1,7 @@
 package pl.milosz.medbase;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import pl.milosz.medbase.DB.InsertScanAsync;
 
 public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
@@ -60,6 +62,12 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result rawResult) {
+
         resultTextView.setText(rawResult.getText());
+        if(rawResult.getText().equals("dodaj")){
+            new InsertScanAsync(getApplicationContext()).execute();
+        }
+        Intent mainIntent=new Intent(this,MainActivity.class);
+        startActivity(mainIntent);
     }
 }

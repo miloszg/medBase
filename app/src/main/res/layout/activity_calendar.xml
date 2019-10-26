@@ -16,7 +16,11 @@
 
     <com.squareup.timessquare.CalendarPickerView
         android:paddingTop="50dp"
+        android:background="#05ca7e"
         android:id="@+id/calendar"
+        app:tsquare_titleTextColor="@android:color/white"
+        app:tsquare_dividerColor="#05ca7e"
+        android:defaultFocusHighlightEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

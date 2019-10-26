@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import pl.milosz.medbase.DB.GetAccountsInfo;
+
 public class LoginActivity extends AppCompatActivity {
     Boolean loginMode = true;
     TextView loginText;
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new GetAccountsInfo(getApplicationContext()).execute();
         setContentView(R.layout.activity_login);
         loginText = findViewById(R.id.loginText);
         loginText.setOnClickListener(new View.OnClickListener() {
