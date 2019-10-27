@@ -19,7 +19,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import pl.milosz.medbase.Alerts.AlertsActivity;
 import pl.milosz.medbase.CalendarView.CalendarActivity;
-import pl.milosz.medbase.DB.DB;
 import pl.milosz.medbase.Meds.MedsActivity;
 import pl.milosz.medbase.NotesView.NotesActivity;
 
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.nav_meds:
                 Log.d(TAG, "onNavigationItemSelected: clicked on meds");
-                Intent intent_med = new Intent(this, DB.class);
+                Intent intent_med = new Intent(this, MedsActivity.class);
                 startActivity(intent_med);
                 break;
             case R.id.nav_calendar:

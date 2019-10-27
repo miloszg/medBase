@@ -12,8 +12,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -29,19 +27,17 @@ public class NotificationReceiver extends BroadcastReceiver {
     Context contextGlobal;
     String notText;
     String channel;
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        contextGlobal=context;
-        Toast.makeText(context, "alert", Toast.LENGTH_SHORT).show();
-        notText=intent.getExtras().getString("text"," powiadomienie");
-        channel=intent.getExtras().getString("channel","null");
-        Log.i("guwno intent",String.valueOf(channel));
-        if(channel.equals("one")) {
-            channel="";
+        contextGlobal = context;
+        notText = intent.getExtras().getString("text", " powiadomienie");
+        channel = intent.getExtras().getString("channel", "null");
+        if (channel.equals("one")) {
+            channel = "";
             sendNotification1(context);
-        }
-        else if(channel.equals("two")){
-            channel="";
+        } else if (channel.equals("two")) {
+            channel = "";
             sendNotification2(context);
         }
     }
@@ -109,8 +105,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setGroup("example")
                 .setSubText("MedBase")
                 .setStyle(new NotificationCompat.InboxStyle()
-                       .addLine("Wydarzenie")
-                       .addLine("dodatkowa linia na rzeczy"))
+                        .addLine("Wydarzenie")
+                        .addLine("dodatkowa linia na rzeczy"))
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -119,6 +115,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         notificationManager.notify(2, notification);
     }
+
     private void openNotificationsSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);

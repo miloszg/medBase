@@ -1,7 +1,10 @@
 package pl.milosz.medbase;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +68,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
         resultTextView.setText(rawResult.getText());
         if(rawResult.getText().equals("dodaj")){
-            new InsertScanAsync(getApplicationContext()).execute();
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                new InsertScanAsync(getApplicationContext()).execute();
+                Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show();
+            }
+
         }
         Intent mainIntent=new Intent(this,MainActivity.class);
         startActivity(mainIntent);

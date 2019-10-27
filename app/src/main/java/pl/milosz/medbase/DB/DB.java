@@ -1,5 +1,8 @@
 package pl.milosz.medbase.DB;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +21,21 @@ public class DB extends AppCompatActivity {
     //public static List<objClass> objList;
     static ArrayList<Object> lista = new ArrayList<Object>();
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_db);
-            new Download(this).execute(); //async task for getting data from db
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_db);
+        new Download(this).execute(); //async task for getting data from db
+    }
+
+    public boolean checkConnection() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
 }

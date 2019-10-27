@@ -12,18 +12,18 @@
     <ImageView
         android:layout_width="96dp"
         android:layout_height="80dp"
-        app:srcCompat="@drawable/chadson" />
+        app:srcCompat="@drawable/ic_profile" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Tak przyjmuje leki"
+        android:text="Imie nazwisko użytkownika"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="skąd wiedziałeś?" />
+        android:text="random@random.com" />
 
 </LinearLayout>

@@ -9,20 +9,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 public class CodeActivity extends AppCompatActivity {
-    int fourDigit=1000;
+    int fourDigit = 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code);
         Random r = new Random();
-        fourDigit= 1000 + r.nextInt(10000);
+        fourDigit = 1000 + r.nextInt(9000);
         System.out.println(fourDigit);
-        TextView textView=findViewById(R.id.codeTextView);
+        TextView textView = findViewById(R.id.codeTextView);
         textView.setText(String.valueOf(fourDigit));
 
         Button button = findViewById(R.id.generateCodeButton);
         button.setOnClickListener(v -> {
-            fourDigit = 1000 + r.nextInt(10000);
+            fourDigit = 1000 + r.nextInt(9000);
             textView.setText(String.valueOf(fourDigit));
         });
     }

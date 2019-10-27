@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,20 +30,17 @@ public class EventActivity extends AppCompatActivity {
 
         alarmManagerCalendar=(AlarmManager) getSystemService(ALARM_SERVICE);
         SwitchCompat switchCompat=findViewById(R.id.eventSwitch);
-        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-                    intent.putExtra("text",events.get(index).getDesription());
-                    intent.putExtra("channel","two");
-                    pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), index, intent, 0);
-                    Toast.makeText(EventActivity.this, "Alarm włączono", Toast.LENGTH_SHORT).show();
-                    alarmManagerCalendar.setExact(AlarmManager.RTC_WAKEUP, events.get(index).getTimeInMillis(), pendingIntent);
-                } else {
-                    Toast.makeText(EventActivity.this, "Alarm wyłączono", Toast.LENGTH_SHORT).show();
-                    alarmManagerCalendar.cancel(pendingIntent);
-                }
+        switchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+                intent.putExtra("text",events.get(index).getDesription());
+                intent.putExtra("channel","two");
+                pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), index, intent, 0);
+                Toast.makeText(EventActivity.this, "Alarm włączono", Toast.LENGTH_SHORT).show();
+                alarmManagerCalendar.setExact(AlarmManager.RTC_WAKEUP, events.get(index).getTimeInMillis(), pendingIntent);
+            } else {
+                Toast.makeText(EventActivity.this, "Alarm wyłączono", Toast.LENGTH_SHORT).show();
+                alarmManagerCalendar.cancel(pendingIntent);
             }
         });
 

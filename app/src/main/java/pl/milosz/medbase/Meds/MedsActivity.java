@@ -1,8 +1,10 @@
 package pl.milosz.medbase.Meds;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,7 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 import pl.milosz.medbase.DB.Download;
-import pl.milosz.medbase.DB.InsertAsync;
 import pl.milosz.medbase.R;
 
 public class MedsActivity extends AppCompatActivity {
@@ -23,18 +24,19 @@ public class MedsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            new Download(getApplicationContext()).execute();
+        }
         setContentView(R.layout.activity_meds);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Download(getApplicationContext()).execute();
-                new InsertAsync(getApplicationContext()).execute();
-
-            }
+        fab.setOnClickListener(view -> {
+            Intent customMedIntent = new Intent(getApplicationContext(),CustomMedActivity.class);
+            startActivity(customMedIntent);
         });
 
         ListView mlistView = findViewById(R.id.medListview);
@@ -43,7 +45,7 @@ public class MedsActivity extends AppCompatActivity {
         Medication ranigastMax = new Medication("Ranigast Max", "150mg", "Polpharma");
         Medication acodin = new Medication("Acodin", "15mg", "Sanofi-Aventis");
         Medication rutinacea = new Medication("Rutinacea", "240mg", "Aflofarm");
-        //ArrayList<Medication> medicationArrayList=new ArrayList<>();
+
         medicationArrayList.add(ranigastMax);
         medicationArrayList.add(acodin);
         medicationArrayList.add(rutinacea);

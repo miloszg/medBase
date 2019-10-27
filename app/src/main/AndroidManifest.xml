@@ -7,6 +7,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -18,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Meds.MedDetailsActivity"></activity>
+        <activity android:name=".Meds.CustomMedActivity"></activity>
+        <activity android:name=".Meds.MedDetailsActivity" />
         <activity android:name=".CodeActivity" />
         <activity android:name=".CalendarView.EventActivity" />
         <activity android:name=".LoginActivity">

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:background="#05ca7e"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_pill" />
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Dodaj własny lek"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_below="@id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="Nazwa leku"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_below="@id/nameText"
+        android:background="@drawable/customshape"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/customMedNameEditText"
+            android:hint="Wpisz nazwę leku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/intakeText"
+        android:layout_below="@id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:text="Dawkowanie leku"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:layout_below="@id/intakeText"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/customshape"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/customMedIntakeEditText"
+            android:hint="Podaj dawkowanie leku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_below="@id/topText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:text="Informacje o leku"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:layout_below="@id/descriptionText"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/customshape"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/customMedDescriptionEditText"
+            android:hint="Podaj informacje o leku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/addCustomMedButton"
+        android:textSize="20sp"
+        android:text="DODAJ LEK"
+        android:layout_below="@id/descriptionText"
+        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
