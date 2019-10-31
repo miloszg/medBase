@@ -12,6 +12,7 @@ import java.sql.Statement;
 
 import pl.milosz.medbase.Meds.Medication;
 
+import static pl.milosz.medbase.LoginActivity.offlineMode;
 import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
 
 public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
@@ -29,7 +30,8 @@ public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
     }
 
     protected String doInBackground(Void... params) {
-        String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
+        String url = "jdbc:mysql://192.168.0.129:3306/leki?useSSL=false&allowPublicKeyRetrieval=true";
+        //String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "admin";
         String pass = "admin";
 
@@ -40,19 +42,23 @@ public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         try {
-            Connection con = DriverManager.getConnection(url, user, pass);
-            if (con != null) {
-                twoj_stary = "Dodawanie udane";
-                Statement st = con.createStatement();
-                result = "Database connection success\n";
-                st.executeUpdate("INSERT INTO `test`.`leki` VALUES (1006,'CUSTOM MED','test CUSTOM','test CUSTOM');");
-                Medication medtest = new Medication("CUSTOM MED", "test CUSTOM", "test CUSTOM");
-                medicationArrayList.add(medtest);
+            if(offlineMode==false) {
+                Connection con = DriverManager.getConnection(url, user, pass);
+                if (con != null) {
+                    twoj_stary = "Dodawanie udane";
+                    Statement st = con.createStatement();
+                    result = "Database connection success\n";
+                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ('Rutinacea','custom','custom');");
+                    Medication medtest = new Medication("CUSTOM MED", "test CUSTOM", "test CUSTOM");
+                    medicationArrayList.add(medtest);
+                }
+                Log.i("guwno", result);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Log.i("guwno", result);
+
         return "Complete";
     }
 

@@ -3,7 +3,6 @@ package pl.milosz.medbase.Alerts;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,26 +25,19 @@ public class NotificationTextFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.TextDialogTheme);
         LayoutInflater inflater= getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog,null);
-       // view.getBackground().setColorFilter(Color.parseColor("#05ca7e"), PorterDuff.Mode.DARKEN);
 
         builder.setView(view)
 //                .setTitle(" \n \n \n \n")
 //                .setIcon(R.drawable.ic_text)
-                .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setNegativeButton("Anuluj", (dialog, which) -> {
 
-                    }
                 })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String notificationText = notificationEditText.getText().toString();
-                        if(notificationText.equals("")){
-                            Toast.makeText(getContext(), "Prosze podać tekst powiadomienia", Toast.LENGTH_SHORT).show();
-                        } else {
-                            notificationTextListener.getText(notificationText);
-                        }
+                .setPositiveButton("OK", (dialog, which) -> {
+                    String notificationText = notificationEditText.getText().toString();
+                    if(notificationText.equals("")){
+                        Toast.makeText(getContext(), "Prosze podać tekst powiadomienia", Toast.LENGTH_SHORT).show();
+                    } else {
+                        notificationTextListener.getText(notificationText);
                     }
                 });
         notificationEditText=view.findViewById(R.id.notificationEditText);

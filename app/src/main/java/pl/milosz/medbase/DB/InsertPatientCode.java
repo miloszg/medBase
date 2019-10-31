@@ -12,16 +12,17 @@ import java.sql.Statement;
 
 import pl.milosz.medbase.Meds.Medication;
 
+import static pl.milosz.medbase.CodeActivity.fourDigit;
 import static pl.milosz.medbase.LoginActivity.offlineMode;
 import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
 
-public class InsertAsync extends AsyncTask<Void, Void, String> {
+public class InsertPatientCode extends AsyncTask<Void, Void, String> {
     Context context;
     String result;
     public static String twoj_stary = " ";
     public static Connection con;
 
-    public InsertAsync(Context context) {
+    public InsertPatientCode(Context context) {
         this.context = context;
 
     }
@@ -48,7 +49,8 @@ public class InsertAsync extends AsyncTask<Void, Void, String> {
                     twoj_stary = "Dodawanie udane";
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
-                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ('Rutinacea','test4','test4');");
+                    String code = String.valueOf(fourDigit);
+                    st.executeUpdate("INSERT INTO `leki`.`pacjent_kod` (patient_id,patient_code) VALUES ('5'," + code + ");");
                     Medication medtest = new Medication("Rutinacea", "test4", "test4");
                     medicationArrayList.add(medtest);
                 }

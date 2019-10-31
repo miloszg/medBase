@@ -13,9 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import pl.milosz.medbase.Meds.Medication;
-
-import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
+import static pl.milosz.medbase.LoginActivity.offlineMode;
 
 public class Download extends AsyncTask<Void, Void, String> {
     Context context;
@@ -34,10 +32,11 @@ public class Download extends AsyncTask<Void, Void, String> {
 
 
     protected String doInBackground(Void... params) {
-        String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
+        String url = "jdbc:mysql://192.168.0.129:3306/leki?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "admin";
         String pass = "admin";
-
+        //"jdbc:mysql://192.168.0.129:3306/leki?useSSL=false&allowPublicKeyRetrieval=true";
+        //"jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (Exception e) {
@@ -45,24 +44,48 @@ public class Download extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         try {
-            Connection con = DriverManager.getConnection(url, user, pass);
-            if (con != null) {
-                twoj_stary = "AAAAAA";
-                Statement st = con.createStatement();
-                result = "Database connection success\n";
-                ResultSet rs = st.executeQuery("SELECT * FROM `test`.`leki` limit 10;");
-                ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
-                while (rs.next()) {
-                    result +=  rs.getString(2);
-                    Medication medtest = new Medication(rs.getString(2), "test", "test");
-                    medicationArrayList.add(medtest);
+            if(offlineMode==false) {
+                Connection con = DriverManager.getConnection(url, user, pass);
+                if (con != null) {
+                    twoj_stary = "Pawel rzadzi";
+                    Statement st = con.createStatement();
+                    result = "Database connection success\n";
+                    //ResultSet rs = st.executeQuery("SELECT * FROM `test`.`leki` limit 10;");
+                    ResultSet rs = st.executeQuery("Select \n" +
+                            "l.nazwa,s.nazwa, k.nazwa,sp.nazwa,e.nazwa\n" +
+                            "From leki.leki l\n" +
+                            "INNER JOIN leki.leki_skladniki ls \n" +
+                            "ON l.id = ls.leki_id\n" +
+                            "INNER JOIN leki.skladniki s\n" +
+                            "ON s.id = ls.skladniki_id\n" +
+                            "INNER JOIN leki.leki_kategoria lk\n" +
+                            "ON l.id = lk.leki_id\n" +
+                            "INNER JOIN leki.kategoria k\n" +
+                            "ON k.id = lk.kategoria_id\n" +
+                            "INNER JOIN leki.leki_specjalnosc lsp\n" +
+                            "ON l.id = lsp.leki_id\n" +
+                            "INNER JOIN leki.specjalnosc sp\n" +
+                            "ON sp.id = lsp.specjalnosc_id\n" +
+                            "INNER JOIN leki.leki_efekt le\n" +
+                            "ON l.id = le.leki_id\n" +
+                            "INNER JOIN leki.efekt e\n" +
+                            "ON e.id = le.efekt_id\n" +
+                            " LIMIT 10;");
+                    ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+                    while (rs.next()) {
+//                    result +=  rs.getString(2);
+//                    Medication medtest = new Medication(rs.getString(2), "test", "test");
+//                    medicationArrayList.add(medtest);
+                        Log.i("guwnp", rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(3) + " " + rs.getString(4));
+                    }
                 }
+                Log.i("guwno", result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
 
         }
-        Log.i("guwno", result);
+
         return "Complete";
     }
 
