@@ -15,34 +15,30 @@ namespace DesktopApplication
     {
         public ICommand medsCommand { get; set; }
         public ICommand patientCommand { get; set; }
-        public ICommand goBackCommand { get; set; }
-        public ICommand generateQRCommand { get; set; }
         public ApplicationPage currentPage { get; set; }
+
+        public User Doctor { get; private set; }
+        public User Patient { get; private set; }
 
         public MedsViewModel medsViewModel;
 
-        private DatabaseManager databaseManager;
+        public DatabaseManager databaseManager { get; private set; }
 
-        private User user = null;
         public ApplicationWindowViewModel()
         {
             currentPage = ApplicationPage.MainMenu;
-            Messenger.Default.Register<User>(this, (user) => this.user = user);
+            this.databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
             this.medsCommand = new RelayCommand(() => MedsCommand());
             this.patientCommand = new RelayCommand(() => PatientCommand());
-            this.generateQRCommand = new RelayCommand(() => GenerateQRCommand());
-            this.goBackCommand = new RelayCommand(() => GoBackCommand());
         }
 
-        private void GoBackCommand()
+        public void SetDoctor(User user)
         {
-            this.currentPage = ApplicationPage.MainMenu;
-            databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
+            this.Doctor = user;
         }
-
-        public void SetUser(User user)
+        public void SetPatient(User user)
         {
-            this.user = user;
+            this.Patient = user;
         }
 
         public void MedsCommand()

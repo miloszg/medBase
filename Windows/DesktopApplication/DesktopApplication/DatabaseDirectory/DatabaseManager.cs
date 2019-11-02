@@ -123,7 +123,7 @@ namespace DesktopApplication
                     case SqlCommandsEnum.ColumnsOrTables:
                         parametersString.Append($"{parameters[i]}");
                         break;
-                    case SqlCommandsEnum.ColunsWithTables:
+                    case SqlCommandsEnum.ColumnsWithTables:
                         parametersString.Append($"leki.{parameters[i]}");
                         break;
                     default:
@@ -134,6 +134,43 @@ namespace DesktopApplication
                     parametersString.Append(",");
                 }
             }
+            return parametersString.ToString();
+        }
+
+        public string MySqlListToStringConverter(List<string> parameters,List<int> parameters_numerical, SqlCommandsEnum listType = SqlCommandsEnum.NormalValues)
+        {
+            StringBuilder parametersString = new StringBuilder();
+
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                switch (listType)
+                {
+                    case SqlCommandsEnum.NormalValues:
+                        parametersString.Append($"\"{parameters[i]}\"");
+                        break;
+                    case SqlCommandsEnum.ColumnsOrTables:
+                        parametersString.Append($"{parameters[i]}");
+                        break;
+                    case SqlCommandsEnum.ColumnsWithTables:
+                        parametersString.Append($"leki.{parameters[i]}");
+                        break;
+                    default:
+                        break;
+                }
+                parametersString.Append(",");
+            }
+
+            for (int i = 0; i < parameters_numerical.Count; i++)
+            {
+                parametersString.Append($"{parameters_numerical[i]}");
+
+                if (i < parameters_numerical.Count - 1)
+                {
+                    parametersString.Append(",");
+                }
+            }
+            
+
             return parametersString.ToString();
         }
     }

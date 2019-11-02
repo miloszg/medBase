@@ -23,7 +23,7 @@
             
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <Label  Content="Podaj kod pacjenta:" FontSize="15" FontWeight="Bold"/>
-                <TextBox  FontSize="15" BorderThickness="5" Text="{Binding patientCode, Mode=OneWay}"/>
+                <TextBox Text="{Binding PatientCode, Mode=TwoWay}" FontSize="15" BorderThickness="5"/>
             <Button Padding="10 10 10 10"  
                 HorizontalAlignment="Center" Content="Zatwierdz" FontSize="15" FontWeight="Bold" 
                     Command="{Binding submitCommand}"/>

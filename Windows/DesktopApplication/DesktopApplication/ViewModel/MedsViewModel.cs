@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DesktopApplication
 {
     public class MedsViewModel : BaseViewModel
     {
-
-        private DatabaseManager databaseManager;
+        public MedicationWindow medicationWindow { get; set; }
         private DatabaseRetriever databaseRetriever;
 
         public ICommand goBackCommand { get; set; }
         public ICommand searchCommand { get; set; }
+        public ICommand showMedCommand { get; set; }
 
         public List<string> categoryItems { get; set; }
         public List<string> formItems { get; set; }
         public List<string> specialityItems { get; set; }
-        public List<Medicament> foundMedsList { get; set; }
+        public List<Medicament> patientMedsList { get; set; }
+        public Medicament SelectedMed { get; private set; }
 
         public string selectedCategory { get; set; }
         public string selectedSpeciality { get; set; }
@@ -26,8 +27,9 @@ namespace DesktopApplication
         {
             this.goBackCommand = new RelayCommand(() => GoBackCommand());
             this.searchCommand = new RelayCommand(() => SearchCommand());
-            databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
-            databaseRetriever = new DatabaseRetriever(databaseManager);
+            this.showMedCommand = new RelayCommandWithParameters((parameter) => ShowMedCommand(parameter));
+
+            databaseRetriever = new DatabaseRetriever(IoC.Get<ApplicationWindowViewModel>().databaseManager);
             categoryItems = databaseRetriever.GetFromDatabase("kategoria", new List<string>
             {
                 "nazwa"
@@ -44,6 +46,15 @@ namespace DesktopApplication
             formItems.Insert(0, "<pusty>");
             specialityItems.Insert(0, "<pusty>");
         }
+        private void ShowMedCommand(object parameter)
+        {
+            Medicament openedMed = parameter as Medicament;
+            this.SelectedMed = openedMed;
+            this.SelectedMed.GetRestOfMedsData();
+            this.medicationWindow?.Close();
+            this.medicationWindow = new MedicationWindow(this);
+            this.medicationWindow?.Show();
+        }
         public void GoBackCommand()
         {
             IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.MainMenu;
@@ -55,16 +66,21 @@ namespace DesktopApplication
 
             string whereCommand = PrepareWhereCommand(selectedFilters);
 
-            var foundedMeds = databaseRetriever.GetFromDatabaseManyToMany("leki",
-                new List<string> { "DISTINCT leki.nazwa" },
-                new List<string> { "kategoria", "postac", "specjalnosc" },
-                whereCommand
+            var foundedMeds = databaseRetriever.GetFromDatabaseManyToMany(
+                tableName:"leki",
+                columns: new List<string> { "DISTINCT leki.nazwa" },
+                joinTable: new List<string> { "kategoria", "postac", "specjalnosc" },
+                where:whereCommand
             );
 
-            foundMedsList = CreateFoundMedsList(foundedMeds);
-            if(foundMedsList.Count == 0)
+            if(foundedMeds.Count == 0)
             {
-                foundMedsList.Add(new Medicament("Nie znaleziono wynikow"));
+                patientMedsList = new List<Medicament>();
+                MessageBox.Show("Nie znaleziono wynikow!");
+            }
+            else
+            {
+                patientMedsList = CreateFoundMedsList(foundedMeds);
             }
         }
 

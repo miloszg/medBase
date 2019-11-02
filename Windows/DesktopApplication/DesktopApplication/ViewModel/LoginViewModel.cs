@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Windows;
@@ -31,27 +32,27 @@ namespace DesktopApplication
                 SecureString securePassword = passwordContainer.Passsword;
                 password = PasswordHelper.ConvertToUnsecureString(securePassword);
             }
-            DatabaseManager databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
-            DatabaseRetriever databaseRetriever = new DatabaseRetriever(databaseManager);
+            DatabaseRetriever databaseRetriever = new DatabaseRetriever(IoC.Get<ApplicationWindowViewModel>().databaseManager);
 
-            if(databaseRetriever.GetFromDatabase("pacjent",
+            var doctor = databaseRetriever.GetFromDatabase("lekarz",
                 new List<string>()
                 {
-                    "id",
-                }, 
-                $"WHERE first_name=\"{this.username}\" AND password=\"{password}\"").Count != 0)
-            {
+                    "id","username_number", "first_name","last_name","email"
+                },
+                $"WHERE username_number=\"{this.username}\" AND password=\"{password}\"");
 
+            if (doctor != null && doctor.Count == 5)
+            {
                 /* TODO: Send log of this user */
                 var currentWindow = (Application.Current.MainWindow as MainWindow);
                 if (currentWindow != null)
                 {
                     currentWindow.Hide();
                 }
-                User user = new User(username);
+                User user = new User(Int32.Parse(doctor[0]), doctor[1], doctor[2], doctor[3],doctor[4]);
                 Application.Current.MainWindow = new ApplicationWindow();
                 Application.Current.MainWindow.Show();
-                IoC.Get<ApplicationWindowViewModel>().SetUser(user);
+                IoC.Get<ApplicationWindowViewModel>().SetDoctor(user);
             }
             else
             {

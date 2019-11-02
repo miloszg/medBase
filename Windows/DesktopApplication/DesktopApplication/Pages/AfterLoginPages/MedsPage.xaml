@@ -66,8 +66,8 @@
             <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" 
                     Background="Azure" Margin="20 0 20 20" BorderBrush="Gray" BorderThickness="1">
                 <ScrollViewer>
-                    <ItemsControl x:Name="NotesItemsControl" ItemsSource="{Binding foundMedsList}"
-                                  ScrollViewer.CanContentScroll="True" >
+                    <ItemsControl ItemsSource="{Binding patientMedsList}"
+                                      ScrollViewer.CanContentScroll="True" >
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />
@@ -76,17 +76,18 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" 
-                                            Height="30" Background="Beige" IsHitTestVisible="True">
-                                    </Border>
-                                    <Label Grid.Column="0" Content="{Binding Name}" FontSize="15" FontWeight="Bold"/>
-                                </Grid>
+                                <Button BorderBrush="MediumSpringGreen" BorderThickness="5" Grid.ColumnSpan="3" 
+                                            Background="White" 
+                                            Command="{
+                                            Binding RelativeSource={
+                                            RelativeSource FindAncestor, 
+                                            AncestorType={x:Type Page}},
+                                            Path=DataContext.showMedCommand}" CommandParameter="{Binding}" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label HorizontalAlignment="Left" Grid.Column="0" Content="{Binding Name}"
+                                                   FontSize="10" FontWeight="Bold" Foreground="Black"/>
+                                    </StackPanel>
+                                </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

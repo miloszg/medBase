@@ -118,9 +118,17 @@
     <Compile Include="DatabaseDirectory\DatabaseRetriever.cs" />
     <Compile Include="DatabaseDirectory\SqlCommandsEnum.cs" />
     <Compile Include="DataModels\ApplicationPage.cs" />
+    <Compile Include="MedicationWindow.xaml.cs">
+      <DependentUpon>MedicationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AfterLoginPages\GenerateReceiptPage.xaml.cs">
       <DependentUpon>GenerateReceiptPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowNoteWindow.xaml.cs">
+      <DependentUpon>ShowNoteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserFolder\Note.cs" />
+    <Compile Include="ValueConverters\MedicationDataListConverter.cs" />
     <Compile Include="ViewModel\GenerateReceiptViewModel.cs" />
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="Pages\AfterLoginPages\MainMenuPage.xaml.cs">
@@ -154,7 +162,6 @@
     <Compile Include="ViewModel\MedsViewModel.cs" />
     <Compile Include="ViewModel\SignUpViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="UserFolder\IUser.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="UserFolder\User.cs" />
@@ -163,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MedicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AfterLoginPages\PatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowNoteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +259,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\NoImageAvailable.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.0\build\Fody.targets')" />

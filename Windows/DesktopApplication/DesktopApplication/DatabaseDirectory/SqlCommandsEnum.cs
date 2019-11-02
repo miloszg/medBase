@@ -10,6 +10,6 @@ namespace DesktopApplication
     {
         NormalValues=0,
         ColumnsOrTables=1,
-        ColunsWithTables=2,
+        ColumnsWithTables=2,
     }
 }
