@@ -10,16 +10,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import pl.milosz.medbase.Meds.Medication;
+import pl.milosz.medbase.Meds.CustomMedActivity;
 
 import static pl.milosz.medbase.LoginActivity.offlineMode;
-import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
 
 public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
     Context context;
     String result;
     public static String twoj_stary = " ";
     public static Connection con;
+    String nameMed;
+    String instakeMed;
+    String descriptionMed;
 
     public InsertCustomMedAsync(Context context) {
         this.context = context;
@@ -34,7 +36,9 @@ public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
         //String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "admin";
         String pass = "admin";
-
+        nameMed= CustomMedActivity.name;
+        instakeMed= CustomMedActivity.intake;
+        descriptionMed= CustomMedActivity.description;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (Exception e) {
@@ -48,9 +52,7 @@ public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
                     twoj_stary = "Dodawanie udane";
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
-                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ('Rutinacea','custom','custom');");
-                    Medication medtest = new Medication("CUSTOM MED", "test CUSTOM", "test CUSTOM");
-                    medicationArrayList.add(medtest);
+                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ("+nameMed+", "+descriptionMed+", " +instakeMed+");");
                 }
                 Log.i("guwno", result);
             }

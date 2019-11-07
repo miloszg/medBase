@@ -15,10 +15,15 @@ import pl.milosz.medbase.DB.InsertCustomMedAsync;
 import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
 
+import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
+
 public class CustomMedActivity extends AppCompatActivity {
-    EditText nameEditText;
-    EditText intakeEditText;
-    EditText descriptionEditText;
+    private EditText nameEditText;
+    private EditText intakeEditText;
+    private EditText descriptionEditText;
+    public static String name="";
+    public static String intake="";
+    public static String description="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +33,14 @@ public class CustomMedActivity extends AppCompatActivity {
         descriptionEditText=findViewById(R.id.customMedDescriptionEditText);
         Button customMedButton = findViewById(R.id.addCustomMedButton);
         customMedButton.setOnClickListener(v -> {
-            String name=nameEditText.getText().toString();
-            String intake=intakeEditText.getText().toString();
-            String description=descriptionEditText.getText().toString();
+            name=nameEditText.getText().toString();
+            intake=intakeEditText.getText().toString();
+            description=descriptionEditText.getText().toString();
             Log.i("guwnoo: ",name+" : "+intake+" : " + description);
+
+            Medication customMed = new Medication(name, intake, description);
+            medicationArrayList.add(customMed);
+
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {

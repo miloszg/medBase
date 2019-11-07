@@ -67,6 +67,14 @@
         android:layout_marginTop="50dp"
         android:text="Zaloguj się"
         android:textSize="20dp" />
+    <Button
+        android:id="@+id/offlineModeButton"
+        android:layout_width="164dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="600dp"
+        android:text="tryb offline"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/loginText"

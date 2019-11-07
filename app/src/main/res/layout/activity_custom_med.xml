@@ -132,12 +132,65 @@
             android:padding="5dp" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@id/descriptionText"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="430dp"
+        android:background="@android:color/darker_gray"
+        android:padding="16dp">
+        <!--        android:background="@drawable/customshape"-->
+
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:text="Kliknij, by wybrać zakres czasu"
+            android:background="@android:color/transparent"
+            android:padding="5dp" />
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:text="Kliknij, by wybrać date czasu"
+            android:background="@android:color/transparent"
+            android:padding="5dp" />
+        <TextView
+            android:id="@+id/frequencyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:text="Kliknij, by wybrac jak czesto?"
+            android:background="@android:color/transparent"
+            android:padding="5dp" />
+        <Button
+            android:id="@+id/customMedAlarmButton"
+            android:text="Ustaw alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/addCustomMedButton"
         android:textSize="20sp"
         android:text="DODAJ LEK"
         android:layout_below="@id/descriptionText"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="320dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

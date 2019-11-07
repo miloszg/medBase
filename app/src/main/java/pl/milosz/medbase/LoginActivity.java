@@ -26,28 +26,17 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordEditText;
     Button buttonSignUp;
     public static boolean offlineMode = false;
-
+    ConnectivityManager cm;
+    NetworkInfo netInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean connected = false;
 
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        netInfo= cm.getActiveNetworkInfo();
         if (netInfo == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("W trybie offline nie będziesz mógł skorzystać ze wszystkich funkcji aplikacji.")
-                    .setTitle("Czy chcesz kontynuować w trybie offline?")
-                    .setPositiveButton("Tak", (dialog, id) -> {
-                        offlineMode=true;
-                        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(mainIntent);
-                    })
-                    .setNegativeButton("Nie", (dialog, id) -> {
-
-                    });
-            builder.create();
-            builder.show();
+            offlineMode();
         }
         if (netInfo != null && netInfo.isConnectedOrConnecting() && offlineMode==false) {
             connected = true;
@@ -87,5 +76,25 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Prosze podać prawidłowo dane użytkownika!", Toast.LENGTH_SHORT).show();
 
         });
+        Button offlineButton=findViewById(R.id.offlineModeButton);
+        offlineButton.setOnClickListener(v ->
+            offlineMode()
+        );
+
     }
-}
+    public void offlineMode(){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("W trybie offline nie będziesz mógł skorzystać ze wszystkich funkcji aplikacji.")
+                    .setTitle("Czy chcesz kontynuować w trybie offline?")
+                    .setPositiveButton("Tak", (dialog, id) -> {
+                        offlineMode=true;
+                        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(mainIntent);
+                    })
+                    .setNegativeButton("Nie", (dialog, id) -> {
+                    });
+            builder.create();
+            builder.show();
+        }
+    }
+
