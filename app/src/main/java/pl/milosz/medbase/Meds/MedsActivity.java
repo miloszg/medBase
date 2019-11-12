@@ -42,16 +42,21 @@ public class MedsActivity extends AppCompatActivity {
         ListView mlistView = findViewById(R.id.medListview);
 
         //przykladowe dane do lekow
-        Medication ranigastMax = new Medication("Ranigast Max", "150mg", "Polpharma");
-        Medication acodin = new Medication("Acodin", "15mg", "Sanofi-Aventis");
-        Medication rutinacea = new Medication("Rutinacea", "240mg", "Aflofarm");
+        Medication ranigastMax = new Medication("Ranigast Max", "150mg", "Polpharma",R.drawable.pill);
+        Medication acodin = new Medication("Acodin", "15mg", "Sanofi-Aventis",R.drawable.syringe);
+        Medication rutinacea = new Medication("Rutinacea", "240mg", "Aflofarm",R.drawable.round);
+        Medication herbapol = new Medication("Herbapol syrop", "240mg", "syropol",R.drawable.syrop);
 
         medicationArrayList.add(ranigastMax);
         medicationArrayList.add(acodin);
         medicationArrayList.add(rutinacea);
+        medicationArrayList.add(herbapol);
 
-        MedicationListAdapter adapter= new MedicationListAdapter(this, R.layout.adapter_view, medicationArrayList);
-        mlistView.setAdapter(adapter);
+//        MedicationListAdapter adapter= new MedicationListAdapter(this, R.layout.adapter_view, medicationArrayList);
+//        mlistView.setAdapter(adapter);
+
+            MedsListAdapter adapter=new MedsListAdapter(this, R.layout.meds_adapter_view, medicationArrayList);
+            mlistView.setAdapter(adapter);
 
         mlistView.setOnItemClickListener((parent, view, position, id) -> {
             Toast.makeText(MedsActivity.this, "clicked: "+medicationArrayList.get(position).getName(), Toast.LENGTH_SHORT).show();

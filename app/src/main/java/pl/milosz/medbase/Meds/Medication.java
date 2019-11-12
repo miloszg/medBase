@@ -4,11 +4,13 @@ public class Medication {
     private String name;
     private String dose;
     private String manufacturer;
+    private int drawable;
 
-    public Medication(String name, String dose, String manufacturer) {
+    public Medication(String name, String dose, String manufacturer, int drawable) {
         this.name = name;
         this.dose = dose;
         this.manufacturer = manufacturer;
+        this.drawable=drawable;
     }
 
     public String getName() {
@@ -33,5 +35,13 @@ public class Medication {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public int getDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(int drawable) {
+        this.drawable = drawable;
     }
 }

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import pl.milosz.medbase.Meds.Medication;
+import pl.milosz.medbase.R;
 
 import static pl.milosz.medbase.LoginActivity.offlineMode;
 import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
@@ -49,7 +50,7 @@ public class InsertScanAsync extends AsyncTask<Void, Void, String> {
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
                     st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ('SCAN MED','test SCAN','test SCAN');");
-                    Medication medtest = new Medication("SCAN MED", "test SCAN", "test SCAN");
+                    Medication medtest = new Medication("SCAN MED", "test SCAN", "test SCAN", R.drawable.ic_meds);
                     medicationArrayList.add(medtest);
                 }
                 Log.i("guwno", result);

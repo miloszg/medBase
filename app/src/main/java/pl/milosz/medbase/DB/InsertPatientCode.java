@@ -10,11 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import pl.milosz.medbase.Meds.Medication;
-
 import static pl.milosz.medbase.CodeActivity.fourDigit;
 import static pl.milosz.medbase.LoginActivity.offlineMode;
-import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
 
 public class InsertPatientCode extends AsyncTask<Void, Void, String> {
     Context context;
@@ -51,8 +48,6 @@ public class InsertPatientCode extends AsyncTask<Void, Void, String> {
                     result = "Database connection success\n";
                     String code = String.valueOf(fourDigit);
                     st.executeUpdate("INSERT INTO `leki`.`pacjent_kod` (patient_id,patient_code) VALUES ('5'," + code + ");");
-                    Medication medtest = new Medication("Rutinacea", "test4", "test4");
-                    medicationArrayList.add(medtest);
                 }
                 Log.i("guwno", result);
             }
