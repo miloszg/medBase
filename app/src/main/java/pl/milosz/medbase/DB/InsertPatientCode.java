@@ -47,7 +47,7 @@ public class InsertPatientCode extends AsyncTask<Void, Void, String> {
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
                     String code = String.valueOf(fourDigit);
-                    st.executeUpdate("INSERT INTO `leki`.`pacjent_kod` (patient_id,patient_code) VALUES ('5'," + code + ");");
+                    st.executeUpdate("INSERT INTO `leki`.`pacjent_kod` (pacjent_id,pacjent_kod) VALUES ('3'," + code + ");");
                 }
                 Log.i("guwno", result);
             }

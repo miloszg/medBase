@@ -15,11 +15,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import pl.milosz.medbase.DB.Download;
 import pl.milosz.medbase.DB.InsertCustomMedAsync;
 import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
-
-import static pl.milosz.medbase.Meds.MedsActivity.medicationArrayList;
 
 public class CustomMedActivity extends AppCompatActivity {
     private EditText nameEditText;
@@ -53,7 +52,7 @@ public class CustomMedActivity extends AppCompatActivity {
             Log.i("guwnoo: ", name + " : " + intake + " : " + description);
 
             Medication customMed = new Medication(name, intake, description, drawable);
-            medicationArrayList.add(customMed);
+            Download.dbMeds.add(customMed);
 
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -85,13 +84,10 @@ public class CustomMedActivity extends AppCompatActivity {
             drawable=R.drawable.round;
         } else if(tag.equals("syringe")) {
             drawable=R.drawable.syringe;
-            this.onBackPressed();
         } else if(tag.equals("syrop")) {
             drawable=R.drawable.syrop;
-            this.onBackPressed();
         } else {
             drawable = R.drawable.pill;
-            this.onBackPressed();
         }
         close=true;
     }

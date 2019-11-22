@@ -7,38 +7,54 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
 
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_1_ID;
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_2_ID;
+import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_3_ID;
 
 public class NotificationReceiver extends BroadcastReceiver {
     Context contextGlobal;
     String notText;
     String channel;
-
+    int iconExtra;
+    Long timeInMilis;
     @Override
     public void onReceive(Context context, Intent intent) {
         contextGlobal = context;
         notText = intent.getExtras().getString("text", " powiadomienie");
         channel = intent.getExtras().getString("channel", "null");
+        Log.i("guwno",channel);
         if (channel.equals("one")) {
+            timeInMilis=intent.getLongExtra("timeInMilis",0);
             channel = "";
             sendNotification1(context);
         } else if (channel.equals("two")) {
+            timeInMilis=intent.getLongExtra("timeInMillis",0);
             channel = "";
             sendNotification2(context);
+        } else if (channel.equals("three")) {
+            iconExtra=intent.getIntExtra("icon",-1);
+            channel = "";
+            sendNotification3(context);
         }
     }
 
@@ -58,18 +74,19 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent activityIntent = new Intent(context, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, activityIntent, 0);
-
+        Date date=new Date(timeInMilis);
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String alarmTime=df.format(date);
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_meds)
-                .setContentTitle("Twoje Powiadomienie - Przpomnienie")
-                .setContentText(notText)
+                .setSmallIcon(R.drawable.ic_alarm)
+                .setContentTitle("Twoje Powiadomienie - Przypomnienie")
+                .setContentText("Nadszedł czas ustawionego przypomnienia!")
                 .setColor(Color.GREEN)
                 .setSound(defaultSound)
                 .setGroup("example")
-                .setSubText("MedBase")
                 .setStyle(new NotificationCompat.InboxStyle()
-                        .addLine("Przypomnienie polega na: ")
-                        .addLine("dodatkowa linia na rzeczy"))
+                        .addLine("Przypomnienie polega na: "+notText)
+                        .addLine("Dokładny czas ustawionego alarmu: "+alarmTime))
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -78,6 +95,8 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         notificationManager.notify(1, notification);
     }
+
+
 
     private void sendNotification2(Context context) {
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -96,17 +115,19 @@ public class NotificationReceiver extends BroadcastReceiver {
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, activityIntent, 0);
 
+        Date date=new Date(timeInMilis);
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String eventTime=df.format(date);
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_2_ID)
                 .setSmallIcon(R.drawable.ic_calendar)
                 .setContentTitle("Twoje Powiadomienie - Kalendarz")
-                .setContentText(notText)
+                .setContentText("Masz nadchodzące wydarzenie za 1 godzinę!")
                 .setColor(Color.GREEN)
                 .setSound(defaultSound)
                 .setGroup("example")
-                .setSubText("MedBase")
                 .setStyle(new NotificationCompat.InboxStyle()
-                        .addLine("Wydarzenie")
-                        .addLine("dodatkowa linia na rzeczy"))
+                        .addLine("Tekst wydarzenia: "+notText)
+                        .addLine("Dokładny czas wydarzenia: "+eventTime))
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -114,6 +135,51 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .build();
 
         notificationManager.notify(2, notification);
+    }
+
+    private void sendNotification3(Context context) {
+        Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        if (!notificationManager.areNotificationsEnabled()) {
+            openNotificationsSettings();
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && isChannelBlocked(CHANNEL_3_ID)) {
+            openChannelSettings(CHANNEL_3_ID);
+            return;
+        }
+        Intent activityIntent = new Intent(context, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context,
+                0, activityIntent, 0);
+        Bitmap iconLarge;
+        if(iconExtra>0){
+            iconLarge = BitmapFactory.decodeResource(contextGlobal.getResources(), iconExtra);
+        } else {
+            iconLarge = BitmapFactory.decodeResource(contextGlobal.getResources(), R.drawable.round);
+        }
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_3_ID)
+                .setSmallIcon(R.drawable.round)
+                .setLargeIcon(iconLarge)
+                .setContentTitle("Pamiętaj o przyjęciu Leku!")
+                .setContentText("Nadszedł czas przyjęcia leku: "+notText)
+                .setColor(Color.GREEN)
+                .setSound(defaultSound)
+                .setGroup("example")
+                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND )
+                .setLights(0xff00ff00, 300, 100)
+//                .setStyle(new NotificationCompat.InboxStyle()
+//                        .addLine("Przypomnienie polega na: ")
+//                        .addLine("dodatkowa linia na rzeczy"))
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        notificationManager.notify(3, notification);
     }
 
     private void openNotificationsSettings() {

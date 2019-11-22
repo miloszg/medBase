@@ -2,7 +2,7 @@
     <string name="app_name">MedBase</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_meds">MedsActivity</string>
+    <string name="title_activity_meds">Leki</string>
     <string name="title_activity_scan">Skanuj</string>
     <string name="title_activity_alerts">Powiadomienia</string>
     <string name="calendar_label">Kalendarz</string>

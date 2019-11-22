@@ -67,14 +67,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void handleResult(Result rawResult) {
 
         resultTextView.setText(rawResult.getText());
-        if(rawResult.getText().equals("dodaj")){
+        if(rawResult.getText().equals("scorbolamid")){
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {
                 new InsertScanAsync(getApplicationContext()).execute();
                 Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show();
             }
-
         }
         Intent mainIntent=new Intent(this,MainActivity.class);
         startActivity(mainIntent);

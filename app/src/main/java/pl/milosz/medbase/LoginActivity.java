@@ -28,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     public static boolean offlineMode = false;
     ConnectivityManager cm;
     NetworkInfo netInfo;
+    static String username;
+    static String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,24 +46,24 @@ public class LoginActivity extends AppCompatActivity {
         }
         Log.i("guwno połączenie: ", String.valueOf(connected));
         setContentView(R.layout.activity_login);
-        loginText = findViewById(R.id.loginText);
-        loginText.setOnClickListener(v -> {
-            if (loginMode) {
-                loginMode = false;
-                buttonSignUp.setText("Zarejestruj się");
-                loginText.setText(" lub zaloguj się");
-            } else {
-                loginMode = true;
-                buttonSignUp.setText("Zaloguj się");
-                loginText.setText(" lub zarejestruj się");
-            }
-        });
+//        loginText = findViewById(R.id.loginText);
+//        loginText.setOnClickListener(v -> {
+//            if (loginMode) {
+//                loginMode = false;
+//                buttonSignUp.setText("Zarejestruj się");
+//                loginText.setText(" lub zaloguj się");
+//            } else {
+//                loginMode = true;
+//                buttonSignUp.setText("Zaloguj się");
+//                loginText.setText(" lub zarejestruj się");
+//            }
+//        });
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         buttonSignUp = findViewById(R.id.signUpButton);
         buttonSignUp.setOnClickListener(v -> {
-            String username = usernameEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
+            username = usernameEditText.getText().toString();
+            password = passwordEditText.getText().toString();
             int index = 0;
             if (username == "" || password == "") {
                 Toast.makeText(LoginActivity.this, "Prosze podać nazwę użytkownika i hasło!", Toast.LENGTH_SHORT).show();

@@ -1,132 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
-    android:layout_width="match_parent"
-    android:background="#05ca7e"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_pill" />
-
-    <TextView
-        android:id="@+id/topText"
+<ScrollView android:id="@+id/scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Szczegóły leku"
-        android:gravity="right"
-        android:textAlignment="gravity"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:background="#05ca7e"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nameText"
-        android:layout_below="@id/topText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:text="Nazwa leku"
-        android:textAlignment="gravity"
-        android:textColor="@android:color/white"
-        android:textSize="22sp" />
-
-    <RelativeLayout
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:layout_below="@id/nameText"
-        android:background="@drawable/customshape"
-        android:padding="16dp">
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_pill" />
 
         <TextView
-            android:id="@+id/nameTextView"
+            android:id="@+id/topText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="1dp"
-            android:background="@android:color/transparent"
-            android:padding="5dp" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/intakeText"
-        android:layout_below="@id/topText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
-        android:text="Dawkowanie leku"
-        android:textAlignment="gravity"
-        android:textColor="@android:color/white"
-        android:textSize="22sp" />
-
-    <RelativeLayout
-        android:layout_below="@id/intakeText"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp"
-        android:background="@drawable/customshape"
-        android:padding="16dp">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Szczegóły leku"
+            android:gravity="right"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/intakeTextView"
+            android:id="@+id/nameText"
+            android:layout_below="@id/topText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="1dp"
-            android:background="@android:color/transparent"
-            android:padding="5dp" />
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/descriptionText"
-        android:layout_below="@id/topText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:text="Informacje o leku"
-        android:textAlignment="gravity"
-        android:textColor="@android:color/white"
-        android:textSize="22sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:text="Nazwa leku"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
-    <RelativeLayout
-        android:layout_below="@id/descriptionText"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="340dp"
-        android:background="@drawable/customshape"
-        android:padding="16dp">
+        <RelativeLayout
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:layout_below="@id/nameText"
+            android:background="@drawable/customshape"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="1dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp" />
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/descriptionTextView"
+            android:id="@+id/intakeText"
+            android:layout_below="@id/topText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="1dp"
-            android:background="@android:color/transparent"
-            android:padding="5dp" />
-    </RelativeLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp"
+            android:text="Dawkowanie leku"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@id/intakeText"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/customshape"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/intakeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="1dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/descriptionText"
+            android:layout_below="@id/topText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="300dp"
+            android:text="Informacje o leku"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <RelativeLayout
+            android:layout_below="@id/descriptionText"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="340dp"
+            android:background="@drawable/customshape"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="1dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/alarmText"
+            android:layout_below="@id/descriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="440dp"
+            android:text="Ustawienie powiadomień"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_below="@id/alarmText"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="480dp"
+            android:background="#05ca7e"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/startDateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                 android:layout_marginEnd="1dp"
+                android:text="Kliknij, by wybrać datę początkową"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/white"
+                android:padding="5dp" />
+            <TextView
+                android:id="@+id/endDateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="1dp"
+                android:text="Kliknij, by wybrać datę końcową"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/white"
+                android:padding="5dp" />
+            <TextView
+                android:id="@+id/frequencyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="1dp"
+                android:text="Kliknij, by ustawić częstotliwość powiadomień"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/white"
+                android:padding="5dp" />
+            <Button
+                android:padding="5dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/medDetailsAlarm"
+                android:text="Ustaw alarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:padding="5dp"
+                android:id="@+id/deleteButton"
+                android:text="Usun lek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

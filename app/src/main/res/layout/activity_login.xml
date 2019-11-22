@@ -31,7 +31,7 @@
         android:shadowDy="4"
         android:shadowRadius="10"
         android:layout_marginStart="5dp"
-        android:text="admin"
+        android:text="guest123"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +53,7 @@
         android:shadowDx="4"
         android:shadowDy="4"
         android:shadowRadius="10"
-        android:text="admin"
+        android:text="guest123"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -76,14 +76,14 @@
         android:text="tryb offline"
         android:textSize="10dp" />
 
-    <TextView
-        android:id="@+id/loginText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signUpButton"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true"
-        android:text=" lub zarerejstruj się" />
+<!--    <TextView-->
+<!--        android:id="@+id/loginText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/signUpButton"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text=" lub zarerejstruj się" />-->
 </RelativeLayout>

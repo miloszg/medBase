@@ -1,16 +1,15 @@
 package pl.milosz.medbase.Alerts;
 
+import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
 
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
-
-public class CreateChannel extends MultiDexApplication {
+public class CreateChannel extends Application {
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_2_ID = "channel2";
+    public static final String CHANNEL_3_ID = "channel3";
 
     @Override
     public void onCreate() {
@@ -20,7 +19,6 @@ public class CreateChannel extends MultiDexApplication {
     }
     protected void attachBaseContext(Context context) {
         super.attachBaseContext(context);
-        MultiDex.install(this);
     }
 
 
@@ -40,10 +38,22 @@ public class CreateChannel extends MultiDexApplication {
             );
             channel1.setDescription("This is Channel 2");
 
+            NotificationChannel channel3 = new NotificationChannel(
+                    CHANNEL_3_ID,
+                    "Channel 3",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel3.enableLights(true);
+            channel3.enableVibration(true);
+            channel1.setDescription("This is Channel 3");
+
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);
             manager.createNotificationChannel(channel2);
+            manager.createNotificationChannel(channel3);
 
         }
     }
+
+
 }

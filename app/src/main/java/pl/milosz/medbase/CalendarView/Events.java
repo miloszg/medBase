@@ -3,14 +3,14 @@ package pl.milosz.medbase.CalendarView;
 public class Events {
     String date;
     String time;
-    String desription;
+    String description;
     Long timeInMillis;
     int index;
-    public Events(int index, String date, String time, String desription, Long timeInMillis) {
+    public Events(int index, String date, String time, String description, Long timeInMillis) {
         this.index = index;
         this.date = date;
         this.time = time;
-        this.desription = desription;
+        this.description = description;
         this.timeInMillis = timeInMillis;
     }
 
@@ -46,11 +46,11 @@ public class Events {
         this.time = time;
     }
 
-    public String getDesription() {
-        return desription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesription(String desription) {
-        this.desription = desription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

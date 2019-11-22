@@ -12,6 +12,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import pl.milosz.medbase.Meds.Medication;
+import pl.milosz.medbase.R;
 
 import static pl.milosz.medbase.LoginActivity.offlineMode;
 
@@ -20,7 +24,7 @@ public class Download extends AsyncTask<Void, Void, String> {
     String result;
     public static String twoj_stary = " ";
     public static Connection con;
-
+    public static ArrayList<Medication> dbMeds=new ArrayList<>();
     public Download(Context context) {
         this.context = context;
 
@@ -47,39 +51,30 @@ public class Download extends AsyncTask<Void, Void, String> {
             if(offlineMode==false) {
                 Connection con = DriverManager.getConnection(url, user, pass);
                 if (con != null) {
-                    twoj_stary = "Pawel rzadzi";
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
-                    //ResultSet rs = st.executeQuery("SELECT * FROM `test`.`leki` limit 10;");
-                    ResultSet rs = st.executeQuery("Select \n" +
-                            "l.nazwa,s.nazwa, k.nazwa,sp.nazwa,e.nazwa\n" +
-                            "From leki.leki l\n" +
-                            "INNER JOIN leki.leki_skladniki ls \n" +
-                            "ON l.id = ls.leki_id\n" +
-                            "INNER JOIN leki.skladniki s\n" +
-                            "ON s.id = ls.skladniki_id\n" +
-                            "INNER JOIN leki.leki_kategoria lk\n" +
-                            "ON l.id = lk.leki_id\n" +
-                            "INNER JOIN leki.kategoria k\n" +
-                            "ON k.id = lk.kategoria_id\n" +
-                            "INNER JOIN leki.leki_specjalnosc lsp\n" +
-                            "ON l.id = lsp.leki_id\n" +
-                            "INNER JOIN leki.specjalnosc sp\n" +
-                            "ON sp.id = lsp.specjalnosc_id\n" +
-                            "INNER JOIN leki.leki_efekt le\n" +
-                            "ON l.id = le.leki_id\n" +
-                            "INNER JOIN leki.efekt e\n" +
-                            "ON e.id = le.efekt_id\n" +
-                            " LIMIT 10;");
+
+                    ResultSet rs = st.executeQuery("SELECT * FROM leki.leki l\n" +
+                            "INNER JOIN leki.pacjent_leki pl \n" +
+                            "ON pl.leki_id = l.id\n" +
+                            "INNER JOIN leki.pacjent p \n" +
+                            "ON pl.pacjent_id = p.id\n" +
+                            "WHERE p.id = 3;");
+
                     ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+                    String test="tabletka";
                     while (rs.next()) {
-//                    result +=  rs.getString(2);
-//                    Medication medtest = new Medication(rs.getString(2), "test", "test");
-//                    medicationArrayList.add(medtest);
-                        Log.i("guwnp", rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(3) + " " + rs.getString(4));
+                        result +=  rs.getString(2);
+                        Medication medtest = new Medication(rs.getString(2), "2mg", test, R.drawable.round);
+                        dbMeds.add(medtest);
+                        Log.i("guwnp", rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) );
+                        if(test.equals("tabletka")){
+                            test="lek";
+                        } else{
+                            test="tabletka";
+                        }
                     }
                 }
-                Log.i("guwno", result);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -7,6 +7,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -37,6 +38,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+
+        TextView navNameTextView = header.findViewById(R.id.navName);
+        TextView navMailTextView = header.findViewById(R.id.navMail);
+        navNameTextView.setText(LoginActivity.username);
+        navMailTextView.setText(LoginActivity.password);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -71,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.nav_meds:
                 Log.d(TAG, "onNavigationItemSelected: clicked on meds");
-                Intent intent_med = new Intent(this, MedsActivity.class);
-                startActivity(intent_med);
+                Intent intent_browse = new Intent(this, BrowseMedsActivity.class);
+                startActivity(intent_browse);
                 break;
             case R.id.nav_calendar:
                 Log.d(TAG, "onNavigationItemSelected: clicked on calendar");
@@ -105,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
         }
     }
 }

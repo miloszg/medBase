@@ -21,7 +21,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Meds.CustomMedActivity"></activity>
         <activity android:name=".Meds.MedDetailsActivity" />
-        <activity android:name=".CodeActivity" />
+        <activity
+            android:label="Wygeneruj kod"
+            android:name=".CodeActivity" />
         <activity android:name=".CalendarView.EventActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -36,7 +38,9 @@
         <activity
             android:name=".ScanActivity"
             android:label="@string/title_activity_scan" />
-        <activity android:name=".BrowseMedsActivity" />
+        <activity
+            android:label="Zakończone leki"
+            android:name=".BrowseMedsActivity" />
         <activity
             android:name=".Alerts.AlertsActivity"
             android:label="@string/title_activity_alerts"

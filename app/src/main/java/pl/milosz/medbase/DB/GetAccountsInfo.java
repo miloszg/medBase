@@ -22,6 +22,7 @@ public class GetAccountsInfo extends AsyncTask<Void, Void, String> {
     public static String twoj_stary = " ";
     public static Connection con;
     public static ArrayList<User> users=new ArrayList<>();
+
     public GetAccountsInfo(Context context) {
         this.context = context;
 
@@ -54,7 +55,7 @@ public class GetAccountsInfo extends AsyncTask<Void, Void, String> {
                     ResultSet rs = st.executeQuery("SELECT * FROM `leki`.`pacjent` limit 10;");
                     ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
                     while (rs.next()) {
-                        User userTest = new User(rs.getString(2), rs.getString(6));
+                        User userTest = new User(rs.getInt(1),rs.getString(2), rs.getString(6));
                         Log.i("guwnoo", rs.getString(2) + " : " + rs.getString(6));
                         users.add(userTest);
                         //result += rs.getString(2) + " - " + rs.getString(4);

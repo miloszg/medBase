@@ -52,7 +52,9 @@ public class InsertCustomMedAsync extends AsyncTask<Void, Void, String> {
                     twoj_stary = "Dodawanie udane";
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
-                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ("+nameMed+", "+descriptionMed+", " +instakeMed+");");
+                    String statement="INSERT INTO `leki`.`leki` (nazwa,informacje,dawkowanie) VALUES ('Stoperan' , 'kapsulka twarda' , '2 tabletki na dobe');";
+                    //st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ("+nameMed+", "+descriptionMed+", " +instakeMed+");");
+                    st.executeUpdate(statement);
                 }
                 Log.i("guwno", result);
             }

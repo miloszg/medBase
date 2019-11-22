@@ -2,7 +2,6 @@ package pl.milosz.medbase.Alerts;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 
@@ -22,12 +21,9 @@ public class PickDateActivity extends AppCompatActivity implements DatePickerDia
         setContentView(R.layout.activity_pick_date);
 
         Button button = findViewById(R.id.dateButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment datePicker=new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
-            }
+        button.setOnClickListener(v -> {
+            DialogFragment datePicker = new DatePickerFragment();
+            datePicker.show(getSupportFragmentManager(), "date picker");
         });
     }
 
@@ -37,6 +33,6 @@ public class PickDateActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDate= DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
     }
 }

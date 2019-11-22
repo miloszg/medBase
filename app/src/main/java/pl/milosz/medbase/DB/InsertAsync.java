@@ -42,10 +42,11 @@ public class InsertAsync extends AsyncTask<Void, Void, String> {
             if(offlineMode==false) {
                 Connection con = DriverManager.getConnection(url, user, pass);
                 if (con != null) {
-                    twoj_stary = "Dodawanie udane";
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
-                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,info,dawkowanie) VALUES ('Rutinacea','test4','test4');");
+                    String statement="INSERT INTO `leki`.`leki` (nazwa,infomacje,dawkowanie) VALUES (\"Stoperan\" , \"kapsułka twarda\" , \"2 tabletki na dobe\");";
+                    Log.i("kupa",statement);
+                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,infomacje,dawkowanie) VALUES (\"Stoperan\" , \"kapsułka twarda\" , \"2 tabletki na dobe\");");
                 }
                 Log.i("guwno", result);
             }

@@ -27,8 +27,6 @@ public class NotificationTextFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.layout_dialog,null);
 
         builder.setView(view)
-//                .setTitle(" \n \n \n \n")
-//                .setIcon(R.drawable.ic_text)
                 .setNegativeButton("Anuluj", (dialog, which) -> {
 
                 })
