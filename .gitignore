@@ -11,3 +11,9 @@
 /build
 /captures
 .externalNativeBuild
+**/bin/*
+**/obj/*
+**/packages/*
+**/.vs/*
+**/.vscode/*
+*/.vs/*
