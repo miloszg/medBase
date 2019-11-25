@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DesktopApplication</RootNamespace>
     <AssemblyName>DesktopApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -17,6 +17,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,12 @@
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.17.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.17\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -71,6 +78,9 @@
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SautinSoft.Document, Version=4.0.11.12, Culture=neutral, PublicKeyToken=e759c76c7515592a, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.document.4.0.11.12\lib\net47\SautinSoft.Document.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -98,13 +108,23 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.3.1.10729.1\lib\Zen.Barcode.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddNoteWindow.xaml.cs">
+    <Compile Include="PDF\ReceiptPDFCreator.cs" />
+    <Compile Include="Windows\AddMedWindow.xaml.cs">
+      <DependentUpon>AddMedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SearchMedsWindow.xaml.cs">
+      <DependentUpon>SearchMedsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddNoteWindow.xaml.cs">
       <DependentUpon>AddNoteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationWindow.xaml.cs">
@@ -118,13 +138,13 @@
     <Compile Include="DatabaseDirectory\DatabaseRetriever.cs" />
     <Compile Include="DatabaseDirectory\SqlCommandsEnum.cs" />
     <Compile Include="DataModels\ApplicationPage.cs" />
-    <Compile Include="MedicationWindow.xaml.cs">
+    <Compile Include="Windows\MedicationWindow.xaml.cs">
       <DependentUpon>MedicationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AfterLoginPages\GenerateReceiptPage.xaml.cs">
       <DependentUpon>GenerateReceiptPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShowNoteWindow.xaml.cs">
+    <Compile Include="Windows\ShowNoteWindow.xaml.cs">
       <DependentUpon>ShowNoteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserFolder\Note.cs" />
@@ -165,7 +185,15 @@
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="UserFolder\User.cs" />
-    <Page Include="AddNoteWindow.xaml">
+    <Page Include="Windows\AddMedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SearchMedsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddNoteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,7 +201,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MedicationWindow.xaml">
+    <Page Include="Windows\MedicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,7 +241,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ShowNoteWindow.xaml">
+    <Page Include="Windows\ShowNoteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,9 +285,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\Images\NoImageAvailable.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -4,11 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DesktopApplication"
+     
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      
+      
       Title="MainMenu">
-
-    <Grid Background ="{StaticResource MedGrayBrush}">
+    
+    <Grid Background ="#aaaaaa">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -20,22 +23,23 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Background="White" Margin="0 0 0 0" Grid.Column="0" 
-                Grid.ColumnSpan="2" Grid.Row="1" Foreground="MediumSpringGreen"
-                FontSize="20" FontWeight="ExtraBold" Content="Leki"
-                Command="{Binding medsCommand}">
+        <Button Background="White" Margin="60 0 20 0" Grid.Column="0" Height="70"
+                Grid.ColumnSpan="2" Grid.Row="1" Foreground="Green"
+                FontSize="20" FontWeight="DemiBold" Content="Leki"
+                Command="{Binding goToMedsPageCommand}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="100"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Background="White" Margin="0 0 0 0" Grid.Column="2" 
-                Grid.ColumnSpan="2" Grid.Row="1" Foreground="MediumSpringGreen"
-                FontSize="20" FontWeight="ExtraBold" Content="Pacjent"
-                Command="{Binding patientCommand}">
+        <Button Background="White" Grid.Column="2" Margin="20 0 60 0"
+                Height="70"
+                Grid.ColumnSpan="2" Grid.Row="1" Foreground="Green"
+                FontSize="20" FontWeight="DemiBold" Content="Pacjent"
+                Command="{Binding goToPatientPageCommand}">
             <Button.Resources>
-                <Style TargetType="Border">
+                <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="100"/>
                 </Style>
             </Button.Resources>

@@ -43,17 +43,15 @@ namespace DesktopApplication
                 MySqlCommand sqlCommand = new MySqlCommand(command, this.databaseManager.GetConnection());
                 dataReader = sqlCommand.ExecuteReader();
             }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
+            catch (MySqlException)
             {
-                MessageBox.Show(ex.ToString(), "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wystąpił błąd w połączeniu z bazą danych.", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return dataFromDatabase;
             }
-
-            
             dataFromDatabase = databaseManager.GetRowsFromTable(dataReader,rowsToGet);
-
             return dataFromDatabase;
         }
+
         public List<string> GetFromDatabaseManyToMany(string tableName, List<string> columns, List<string> joinTable, string where = "", int rowsToGet = 1000)
         {
             List<string> dataFromDatabase = new List<string>();

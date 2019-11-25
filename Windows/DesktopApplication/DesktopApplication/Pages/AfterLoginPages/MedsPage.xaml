@@ -10,57 +10,61 @@
 
     <Grid Background="{StaticResource MedGrayBrush}">
         <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
+                        VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" Height="40" 
                         FontSize="30" Command="{Binding goBackCommand}"
                         BorderThickness="0"/>
 
-        <Grid Margin=" 0 30 0 0" Background="White">
+        <Grid Margin=" 0 40 0 0" Background="White">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="0" 
-                      Grid.ColumnSpan="1" Margin="20 0">
-                <Label Content="Kategoria" FontWeight="Bold"
+                      Grid.ColumnSpan="1" Margin="4,0,20,0" Grid.RowSpan="2">
+                <Label Content="Nazwa" FontWeight="Bold"
                        FontSize="15"/>
-                <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
-                          ItemsSource="{Binding categoryItems}" 
-                          SelectedItem="{Binding selectedCategory, Mode=TwoWay}"/>
+                <TextBox Margin="20 0 0 0" VerticalAlignment="Top"
+                          Text="{Binding medicamentName, Mode=TwoWay}" />
                 <Label Content="Specjalnosc" FontWeight="Bold"
                        FontSize="15"/>
-                <ComboBox Margin="0 0 0 0" 
+                <ComboBox Margin="20 0 0 0" 
                           ItemsSource="{Binding specialityItems}" 
                           SelectedItem="{Binding selectedSpeciality, Mode=TwoWay}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="2" 
-                      Grid.ColumnSpan="1" Margin="20 0">
+            <StackPanel Grid.Column="1" 
+                      Grid.ColumnSpan="1" Margin="20 0" Grid.RowSpan="2">
                 <Label Content="Postac" FontWeight="Bold"
                        FontSize="15"/>
                 <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
                           ItemsSource="{Binding formItems}" 
                           SelectedItem="{Binding selectedForm, Mode=TwoWay}" />
-                    
+                <Label Content="Kategoria" FontWeight="Bold"
+                       FontSize="15"/>
+                <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
+                          ItemsSource="{Binding categoryItems}" 
+                          SelectedItem="{Binding selectedCategory, Mode=TwoWay}"/>
+
+                <Button Height="40" Width="150" VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right" Margin="10 10" FontSize="20"
+                        FontWeight="ExtraBold" Content="Szukaj"
+                        Background="White" Foreground="Green"
+                        Command="{Binding searchCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
-            
-            <Button Background="Beige" BorderThickness="2" Height="30" Width="150" 
-                    Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right" Margin="0 0 20 0"
-                    FontSize="20" FontWeight="ExtraBold" Content="Szukaj"
-                    Command="{Binding searchCommand}">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+
 
 
             <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" 
@@ -76,7 +80,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button BorderBrush="MediumSpringGreen" BorderThickness="5" Grid.ColumnSpan="3" 
+                                <Button     Grid.ColumnSpan="3" 
                                             Background="White" 
                                             Command="{
                                             Binding RelativeSource={
@@ -85,7 +89,7 @@
                                             Path=DataContext.showMedCommand}" CommandParameter="{Binding}" >
                                     <StackPanel Orientation="Horizontal">
                                         <Label HorizontalAlignment="Left" Grid.Column="0" Content="{Binding Name}"
-                                                   FontSize="10" FontWeight="Bold" Foreground="Black"/>
+                                                   FontSize="10" FontWeight="Bold" Foreground="Green"/>
                                     </StackPanel>
                                 </Button>
                             </DataTemplate>

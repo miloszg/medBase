@@ -21,7 +21,8 @@
                 <Label FontSize="15" FontWeight="DemiBold" Content="Tresc:" DockPanel.Dock="Top"/>
                 <Button Margin="5 10 5 0" Content="Zapisz Notatke" FontSize="15" FontWeight="DemiBold"
                         VerticalAlignment="Bottom" DockPanel.Dock="Bottom" HorizontalAlignment="Center"
-                        Padding="10" Command="{Binding saveNoteCommand}"/>
+                        Padding="10" Command="{Binding saveNoteCommand}" Height="40"
+                        Background="White" Foreground="Green"/>
                 <TextBox Margin="5 0 5 0" TextWrapping="Wrap" Text="{Binding notesContentTextBox, Mode=TwoWay}"/>
             </DockPanel>
         </Border>

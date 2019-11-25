@@ -18,15 +18,16 @@
         
         <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
                         VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
-                        FontSize="30" Command="{Binding goBackCommand}"
+                        FontSize="30" Command="{Binding goBackCommand}" Height="40"
                         BorderThickness="0"/>
             
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <Label  Content="Podaj kod pacjenta:" FontSize="15" FontWeight="Bold"/>
-                <TextBox Text="{Binding PatientCode, Mode=TwoWay}" FontSize="15" BorderThickness="5"/>
-            <Button Padding="10 10 10 10"  
+                <TextBox Text="{Binding PatientCode, Mode=TwoWay}" FontSize="15"/>
+            <Button  
                 HorizontalAlignment="Center" Content="Zatwierdz" FontSize="15" FontWeight="Bold" 
-                    Command="{Binding submitCommand}"/>
+                    Command="{Binding submitCommand}" Background="White" Foreground="Green"
+                Margin="10 10"/>
         </StackPanel>
     </Grid>
     

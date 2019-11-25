@@ -20,13 +20,13 @@ namespace DesktopApplication
 
         private void SubmitCommand()
         {
-            if (true)
-            {
-                DatabaseRetriever databaseRetrieverTest = new DatabaseRetriever(IoC.Get<ApplicationWindowViewModel>().databaseManager);
-                this.SetPatient("5", databaseRetrieverTest);
-                IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.SubmitPatient;
-                return;
-            }
+            //if (true)
+            //{
+            //    DatabaseRetriever databaseRetrieverTest = new DatabaseRetriever(IoC.Get<ApplicationWindowViewModel>().databaseManager);
+            //    this.SetPatient("3", databaseRetrieverTest);
+            //    IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.SubmitPatient;
+            //    return;
+            //}
 
             if (!Int32.TryParse(this.PatientCode, out int result))
             {
@@ -47,9 +47,9 @@ namespace DesktopApplication
             var codeData = databaseRetriever.GetFromDatabase("pacjent_kod",
                             new List<string>()
                             {
-                    "patient_id",
+                            "pacjent_id",
                             },
-                            $"WHERE patient_code = {this.PatientCode}",
+                            $"WHERE pacjent_kod = {this.PatientCode}",
                             rowsToGet: 1);
 
             if (codeData.Count != 1)
@@ -72,7 +72,7 @@ namespace DesktopApplication
             var patientData = databaseRetriever.GetFromDatabase("pacjent",
                 new List<string>()
                 {
-                    "id","username", "first_name","last_name","email","sex","wiek"
+                    "id","nazwa_uzytkownika", "imie","nazwisko","email","data_urodzenia","plec"
                 },
                 $"WHERE id={patientID}");
 
@@ -83,7 +83,7 @@ namespace DesktopApplication
             }
             else if (patientData.Count == 7)
             {
-                patient = new User(Int32.Parse(patientData[0]), patientData[1], patientData[2], patientData[3], patientData[4], patientData[5], Int32.Parse(patientData[6]));
+                patient = new User(Int32.Parse(patientData[0]), patientData[1], patientData[2], patientData[3], patientData[4], Convert.ToDateTime(patientData[5]), patientData[6]);
             }
             else
             {

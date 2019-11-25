@@ -24,20 +24,24 @@
         
         
                 <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
-                        FontSize="30" Command="{Binding goBackCommand}"
+                        VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" Height="40" 
+                        FontSize="30" Command="{Binding goBackCommand}" Foreground="White"
                         BorderThickness="0"/>
                 <StackPanel Margin="0 5 0 0" VerticalAlignment="Top" Background="AntiqueWhite" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
 
-                <Label Padding="5" FontWeight="Black">Username:</Label>
-                <TextBox x:Name="UsernameTextBox" Text="{Binding username}" BorderThickness="3" Margin="5 0 5 0" BorderBrush="Black"/>
-                <Label Padding="5" FontWeight="Black">Mail:</Label>
-                <TextBox x:Name="MailTextBox" Text="{Binding mail}" BorderThickness="3" Margin="5 0 5 0" BorderBrush="Black"/>
-                <Label Padding="5" FontWeight="Black" >Password:</Label>
-                <PasswordBox x:Name="PasswordTextBox" BorderThickness="3" Margin="5 0 5 0" BorderBrush="Black"/>
-                <Label Padding="5" FontWeight="Black" >Repeat Password:</Label>
-                <PasswordBox x:Name="RepeatPasswordTextBox"  BorderThickness="3" Margin="5 0 5 0" BorderBrush="Black"/>
-                <Button  Height="50"  Width="100" Margin="0 10 0 10" Command="{Binding registerCommand}" CommandParameter="{Binding ElementName=RegisterPage}" Content="Register" Grid.ColumnSpan="2"/>
+            <Label FontWeight="Black" Content="Nazwa uzytkownika"/>
+            <TextBox x:Name="UsernameTextBox" Text="{Binding username}"  Margin="5 0 5 0" BorderBrush="Black"/>
+                <Label  FontWeight="Black">Mail:</Label>
+                <TextBox x:Name="MailTextBox" Text="{Binding mail}"  Margin="5 0 5 0" BorderBrush="Black"/>
+            <Label  FontWeight="Black" Content="Haslo"/>
+            <PasswordBox x:Name="PasswordTextBox"  Margin="5 0 5 0" BorderBrush="Black"/>
+            <Label  FontWeight="Black" Content="Powtorz haslo"/>
+            <PasswordBox x:Name="RepeatPasswordTextBox"   Margin="5 0 5 0" BorderBrush="Black"/>
+                <Button  Height="50"  Width="100" Margin="0 10 0 10" 
+                         Command="{Binding registerCommand}" 
+                         Background="White"  Foreground="Green"
+                         CommandParameter="{Binding ElementName=RegisterPage}" 
+                         Content="Zarejestruj" Grid.ColumnSpan="2"/>
         </StackPanel>
 
     </Grid>

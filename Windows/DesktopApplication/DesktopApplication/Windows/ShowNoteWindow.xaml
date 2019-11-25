@@ -30,7 +30,7 @@
                 <Label FontSize="15" FontWeight="DemiBold" Content="Tytul:" DockPanel.Dock="Top"/>
                 <TextBox DataContext="{Binding SelectedNote}" IsEnabled="False"  Margin="5 0" Text="{Binding Title}" DockPanel.Dock="Top"/>
                 <Label FontSize="15" FontWeight="DemiBold" Content="Tresc:" DockPanel.Dock="Top"/>
-                <TextBox DataContext="{Binding SelectedNote}" IsEnabled="False" Margin="5 0 5 0" TextWrapping="Wrap" Text="{Binding Content}"/>
+                <TextBlock DataContext="{Binding SelectedNote}" IsEnabled="False" Margin="5 0 5 0" TextWrapping="Wrap" Text="{Binding Content}"/>
             </DockPanel>
         </Border>
     </Grid>

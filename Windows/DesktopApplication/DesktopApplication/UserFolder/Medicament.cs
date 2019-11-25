@@ -11,7 +11,9 @@ namespace DesktopApplication
         public List<string> Speciality { get; private set; }
         public List<string> Ingredients { get; private set; }
         public string Description { get; private set; }
-        
+        public string howMany { get; set; }
+        public string howToTake { get; set; }
+        public string howLongToTake { get; set; }
         public bool IsThisAllData { get; private set; }
         public string ImagePath { get; private set; }
 

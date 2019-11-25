@@ -35,6 +35,10 @@ namespace DesktopApplication
             this.showMedCommand = new RelayCommandWithParameters((parameter) => ShowMedCommand(parameter));
             this.saveNoteCommand = new RelayCommand(() => SaveNoteCommand());
             var patient = IoC.Get<ApplicationWindowViewModel>().Patient;
+            if(patient == null)
+            {
+                return;
+            }
             this.patientName = $"{patient.first_name} {patient.last_name}";
             this.patientAgeLabel = patient.age.ToString();
             this.patientMail = patient.mail;
@@ -57,7 +61,7 @@ namespace DesktopApplication
                 $"ON leki.pacjent_leki.leki_id = leki.leki.id " +
                 $"JOIN leki.pacjent " +
                 $"ON leki.pacjent.id = leki.pacjent_leki.pacjent_id " +
-                $"WHERE leki.pacjent.id = 5"
+                $"WHERE leki.pacjent.id = {IoC.Get<ApplicationWindowViewModel>().Patient.id}"
                 );
 
 
@@ -71,6 +75,7 @@ namespace DesktopApplication
         private void ShowMedCommand(object parameter)
         {
             Medicament openedMed = parameter as Medicament;
+            openedMed.GetRestOfMedsData();
             this.SelectedMed = openedMed;
             this.medicationWindow?.Close();
             this.medicationWindow = new MedicationWindow(this);
@@ -92,16 +97,16 @@ namespace DesktopApplication
             DatabaseRetriever databaseRetriever = new DatabaseRetriever(IoC.Get<ApplicationWindowViewModel>().databaseManager);
             var patientStoryData = databaseRetriever.GetFromDatabase(
                 tableName:"notatki",
-                columns:new List<string> { "title", "content","first_name","last_name", "creation_date" },
-                where: $"JOIN leki.lekarz ON leki.notatki.patient_id={IoC.Get<ApplicationWindowViewModel>().Patient.id}",
-                rowsToGet:10
+                columns:new List<string> { "tytul", "zawartosc","imie","nazwisko", "data_stworzenia" },
+                where: $"JOIN leki.lekarz ON leki.lekarz.id=leki.notatki.autor_id WHERE leki.notatki.pacjent_id={IoC.Get<ApplicationWindowViewModel>().Patient.id}",
+                rowsToGet:100
                 );
             int howManyNotes = patientStoryData.Count / 5;
             for (int i = 0; i < howManyNotes; i++)
             {
-                var title = patientStoryData[0];
-                var content = patientStoryData[1];
-                var author = $"{patientStoryData[2]} {patientStoryData[3]}";
+                var title = patientStoryData[0] ?? "<Not found>";
+                var content = patientStoryData[1] ?? "<Not found>";
+                var author = $"{patientStoryData[2]} {patientStoryData[3]}" ?? "<Not found>";
                 var date = DateTime.Parse(patientStoryData[4]);
                 storyList.Add(new Note(title, content, author, date));
                 patientStoryData.RemoveRange(0, 5);
@@ -119,7 +124,7 @@ namespace DesktopApplication
             int doctor_id = IoC.Get<ApplicationWindowViewModel>().Doctor.id;
             databaseEditor.InsertIntoDatabase(
                 "notatki",
-                new List<string> { "title", "content", "patient_id", "author_id" },
+                new List<string> { "tytul", "zawartosc", "pacjent_id", "autor_id" },
                 new List<string> { title, content},
                 new List<int> { patient_id, doctor_id}
                 );

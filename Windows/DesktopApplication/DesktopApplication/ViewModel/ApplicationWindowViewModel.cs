@@ -13,8 +13,8 @@ namespace DesktopApplication
 {
     public class ApplicationWindowViewModel : BaseViewModel
     {
-        public ICommand medsCommand { get; set; }
-        public ICommand patientCommand { get; set; }
+        public ICommand goToMedsPageCommand { get; set; }
+        public ICommand goToPatientPageCommand { get; set; }
         public ApplicationPage currentPage { get; set; }
 
         public User Doctor { get; private set; }
@@ -28,8 +28,8 @@ namespace DesktopApplication
         {
             currentPage = ApplicationPage.MainMenu;
             this.databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
-            this.medsCommand = new RelayCommand(() => MedsCommand());
-            this.patientCommand = new RelayCommand(() => PatientCommand());
+            this.goToMedsPageCommand = new RelayCommand(() => GoToMedsPageCommand());
+            this.goToPatientPageCommand = new RelayCommand(() => GoToPatientPageCommand());
         }
 
         public void SetDoctor(User user)
@@ -41,20 +41,14 @@ namespace DesktopApplication
             this.Patient = user;
         }
 
-        public void MedsCommand()
+        public void GoToMedsPageCommand()
         {
             this.currentPage = ApplicationPage.Meds;
         }
 
-        public void PatientCommand()
+        public void GoToPatientPageCommand()
         {
             this.currentPage = ApplicationPage.Patient;
         }
-
-        public void GenerateQRCommand()
-        {
-            this.currentPage = ApplicationPage.GenerateReceipt;
-        }
-
     }
 }

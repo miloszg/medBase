@@ -25,6 +25,9 @@ namespace DesktopApplication
         }
         public void Login(object parameter)
         {
+            //ReceiptPDFCreator pdfCreator = new ReceiptPDFCreator();
+            //pdfCreator.GeneratePDF();
+            //Application.Current.Shutdown();
             string password = "";
             var passwordContainer = parameter as IPassword;
             if (passwordContainer != null)
@@ -37,9 +40,9 @@ namespace DesktopApplication
             var doctor = databaseRetriever.GetFromDatabase("lekarz",
                 new List<string>()
                 {
-                    "id","username_number", "first_name","last_name","email"
+                    "id","nazwa_uzytkownika", "imie","nazwisko","email"
                 },
-                $"WHERE username_number=\"{this.username}\" AND password=\"{password}\"");
+                $"WHERE nazwa_uzytkownika=\"{this.username}\" AND haslo=\"{password}\"");
 
             if (doctor != null && doctor.Count == 5)
             {
@@ -49,7 +52,7 @@ namespace DesktopApplication
                 {
                     currentWindow.Hide();
                 }
-                User user = new User(Int32.Parse(doctor[0]), doctor[1], doctor[2], doctor[3],doctor[4]);
+                User user = new User(Int32.Parse(doctor[0]), doctor[1], doctor[2], doctor[3], doctor[4]);
                 Application.Current.MainWindow = new ApplicationWindow();
                 Application.Current.MainWindow.Show();
                 IoC.Get<ApplicationWindowViewModel>().SetDoctor(user);

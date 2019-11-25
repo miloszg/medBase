@@ -13,7 +13,14 @@ namespace DesktopApplication
             this.Title = title;
             this.Content = content;
             this.Author = author;
-            this.Date = date.ToString("dd-MM-yyyy");
+            if (date.ToString("dd-MM-yyyy") == "01.01.0001")
+            {
+                this.Date = "<Not Found>";
+            }
+            else
+            {
+                this.Date = date.ToString("dd-MM-yyyy");
+            }
         }
 
     } 

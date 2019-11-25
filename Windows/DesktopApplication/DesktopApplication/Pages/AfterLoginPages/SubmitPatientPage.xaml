@@ -13,9 +13,9 @@
         <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
                 VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
                 FontSize="30" Command="{Binding goBackCommand}"
-                BorderThickness="0"/>
+                BorderThickness="0" Foreground="Black" Height="40"/>
         
-        <Grid Margin="20 30 20 20">
+        <Grid Margin="20 40 20 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -27,8 +27,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
+            
+
             <Border Background="Azure" Grid.Column="0" Grid.Row="0"
-                    Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkCyan">
+                    Grid.RowSpan="3" BorderBrush="DarkCyan">
                 <DockPanel>
                     <Label BorderBrush="DarkCyan" BorderThickness="2" DockPanel.Dock="Top">
                         <TextBlock Text="Leki zazywane przez pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
@@ -45,7 +47,7 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button BorderBrush="MediumSpringGreen" BorderThickness="5" Grid.ColumnSpan="3" 
+                                    <Button Grid.ColumnSpan="3" 
                                             Background="White" 
                                             Command="{
                                             Binding RelativeSource={
@@ -71,9 +73,17 @@
                         <TextBlock Text="Historia pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
                                    Foreground="DarkCyan" />
                     </Label>
-                    <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" DockPanel.Dock="Bottom"
-                    Content="Dodaj notatke" FontSize="15" FontWeight="DemiBold" Padding="30"
-                    Command="{Binding openNoteWindowCommand}"/>
+                    <Button Margin="5 0" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" 
+                            DockPanel.Dock="Bottom"
+                            Content="Dodaj notatke" FontSize="20" FontWeight="DemiBold" Height="40"
+                            Background="White" Foreground="Green"
+                    Command="{Binding openNoteWindowCommand}">
+                                <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="100"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                     <ScrollViewer>
                         <ItemsControl ItemsSource="{Binding patientStoryList}"
                                       ScrollViewer.CanContentScroll="True" >
@@ -85,7 +95,7 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button BorderBrush="MediumSpringGreen" BorderThickness="5" Grid.ColumnSpan="3" 
+                                    <Button Grid.ColumnSpan="3" 
                                             Background="White" 
                                             Command="{
                                             Binding RelativeSource={
@@ -107,11 +117,11 @@
 
             
 
-            <Border Grid.Column="2" Grid.RowSpan="3" Background="Wheat" BorderThickness="1" BorderBrush="Black">
+            <Border Grid.Column="2" Grid.RowSpan="3"  BorderBrush="Black">
                 <StackPanel>
-                    <Label BorderBrush="Black" BorderThickness="2" HorizontalContentAlignment="Center">
+                    <Label BorderBrush="DarkCyan" BorderThickness="2">
                         <TextBlock Text="Pacjent" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
-                                   Foreground="Black" HorizontalAlignment="Center"/>
+                                   Foreground="DarkCyan" />
                     </Label>
                     <StackPanel Orientation="Horizontal">
                         <Label HorizontalAlignment="Left" Content="Imie:"/>
@@ -128,9 +138,11 @@
                 </StackPanel>
             </Border>
 
-            <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom"
-                    Content="Wygeneruj Recepte" FontSize="15" FontWeight="DemiBold" Padding="30"
-                    Command="{Binding generateReceiptCommand}"/>
+            <Button Margin="5 0" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom"
+                    Content="Wygeneruj Recepte" FontSize="20" FontWeight="DemiBold" Height="40"
+                    Command="{Binding goToGenerateReceipt}"
+                    Background="White"  Foreground="Green"
+                    />
         </Grid>
     </Grid>
 </Page>
