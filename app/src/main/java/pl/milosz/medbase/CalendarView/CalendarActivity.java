@@ -2,7 +2,6 @@ package pl.milosz.medbase.CalendarView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -21,13 +20,20 @@ import pl.milosz.medbase.Alerts.NotificationTextFragment;
 import pl.milosz.medbase.Alerts.TimePickerFragment;
 import pl.milosz.medbase.R;
 
+/**
+ * Aktywność, w której znajduje się widok kalendarza.
+ * Użytkownik może wybrać daną datę, by dodać do niej wydarzenie
+ * Jeśli do daty jest już przepisane wydarzenie to przejdzie do informacji o tym wydarzeniu
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class CalendarActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener, NotificationTextFragment.NotificationTextListener {
     public static ArrayList<Date> dates = new ArrayList<>();
     View view;
     Calendar c;
     String selectedDate;
     Date eventTargetDate;
-    int index = 0;
     CalendarPickerView datePicker;
     public static ArrayList<Events> events = new ArrayList<>();
 
@@ -63,11 +69,10 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
                     Intent calIntent = new Intent(getApplicationContext(), EventActivity.class);
                     for (Events e : events) {
                         if (e.date.equals(selectedDate)) {
-                            calIntent.putExtra("index", e.getIndex());
+                            calIntent.putExtra("index", events.indexOf(e));
                             startActivity(calIntent);
                         }
                     }
-
                 } else {
                     Calendar calSelected = Calendar.getInstance();
                     calSelected.setTime(targetDate);
@@ -91,7 +96,6 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
         textFragment.show(getSupportFragmentManager(), "notification text");
     }
 
-
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -100,21 +104,16 @@ public class CalendarActivity extends AppCompatActivity implements android.app.T
         sendOnText();
     }
 
-
     @Override
     public void getText(String eventDescription) {
-
         dates.add(eventTargetDate);
         datePicker.clearHighlightedDates();
         datePicker.highlightDates(dates);
-        String eventTime = +c.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d",c.get(Calendar.MINUTE));
-        Events event = new Events(index, selectedDate, eventTime, eventDescription, c.getTimeInMillis());
-        Log.i("guwno",String.valueOf(event));
+        String eventTime = +c.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", c.get(Calendar.MINUTE));
+        Events event = new Events(selectedDate, eventTime, eventDescription, c.getTimeInMillis());
         events.add(event);
         Intent calIntent = new Intent(this, EventActivity.class);
-        calIntent.putExtra("index", index);
-        index++;
-
+        calIntent.putExtra("index", events.indexOf(event));
         startActivity(calIntent);
     }
 

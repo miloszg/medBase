@@ -3,35 +3,44 @@ package pl.milosz.medbase.DB;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-import pl.milosz.medbase.Meds.Medication;
-import pl.milosz.medbase.R;
+import pl.milosz.medbase.ScanActivity;
 
 import static pl.milosz.medbase.LoginActivity.offlineMode;
+import static pl.milosz.medbase.LoginActivity.patient_id;
 
+/**
+ * Asynchroniczna akcja odpowiadająca za dodanie zeskanowanego leku z kodu QR do bazy danych jako
+ * lek przyjmowany przez użytkownika
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class InsertScanAsync extends AsyncTask<Void, Void, String> {
     Context context;
     String result;
-    public static String twoj_stary = " ";
+
     public static Connection con;
+    private static final String TAG = "InsertScanAsync";
 
     public InsertScanAsync(Context context) {
         this.context = context;
 
     }
+
     protected void onPreExecute() {
-        Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "pre execute");
     }
 
     protected String doInBackground(Void... params) {
         String url = "jdbc:mysql://192.168.0.129:3306/leki?useSSL=false&allowPublicKeyRetrieval=true";
-        //String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "admin";
         String pass = "admin";
 
@@ -42,17 +51,23 @@ public class InsertScanAsync extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         try {
-            if(offlineMode==false) {
+            if (offlineMode == false) {
                 Connection con = DriverManager.getConnection(url, user, pass);
                 if (con != null) {
-                    twoj_stary = "Dodawanie udane";
+                    int id = 0;
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
-                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,informacje,dawkowanie) VALUES ('Scorbolamid','tabletki drazowane','2 tabletki 3 razy na dobe');");
-                    Medication medtest = new Medication("SCAN MED", "test SCAN", "test SCAN", R.drawable.ic_meds);
-                    Download.dbMeds.add(medtest);
+                    ArrayList<Integer> id_lekow = new ArrayList<>();
+                    for (int i = 0; i < ScanActivity.values.length; i++) {
+                        ResultSet rs = st.executeQuery("SELECT id from leki.leki where nazwa ='" + ScanActivity.values[i] + "'");
+                        while (rs.next()) {
+                            id_lekow.add(rs.getInt(1));
+                        }
+                    }
+                    for (Integer id_lek : id_lekow) {
+                        st.executeUpdate("INSERT INTO `leki`.`pacjent_leki` (leki_id,pacjent_id) VALUES (" + id_lek + "," + patient_id + ");");
+                    }
                 }
-                Log.i("guwno", result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +78,7 @@ public class InsertScanAsync extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        Toast.makeText(context, twoj_stary, Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "post execute");
     }
 
 

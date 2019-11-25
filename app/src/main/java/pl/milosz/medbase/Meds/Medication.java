@@ -1,5 +1,10 @@
 package pl.milosz.medbase.Meds;
-
+/**
+ * Obiekt reprezentujący lek pobierany przez użytkownika
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class Medication {
     private String name;
     private String dose;

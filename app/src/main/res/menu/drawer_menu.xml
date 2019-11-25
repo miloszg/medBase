@@ -4,10 +4,6 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_meds"
-            android:icon="@drawable/ic_meds"
-            android:title="Zakończone leki" />
-        <item
             android:id="@+id/nav_calendar"
             android:icon="@drawable/ic_calendar"
             android:title="Kalendarz" />
@@ -15,6 +11,10 @@
             android:id="@+id/nav_notes"
             android:icon="@drawable/ic_notes"
             android:title="Notatki" />
+        <item
+            android:id="@+id/nav_meds"
+            android:icon="@drawable/round"
+            android:title="Zakończone leki" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"

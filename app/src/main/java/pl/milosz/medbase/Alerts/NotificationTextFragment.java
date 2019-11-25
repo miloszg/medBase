@@ -14,7 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import pl.milosz.medbase.R;
-
+/**
+ * Klasa odpowiadająca za wyświetlenie okienka dialogu, w którym użytkownik wpisuje tekst powiadomienia
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class NotificationTextFragment extends DialogFragment {
     private EditText notificationEditText;
     private NotificationTextListener notificationTextListener;

@@ -1,33 +1,30 @@
 package pl.milosz.medbase.CalendarView;
 
+/**
+ * Obiekt okeślający kontretne wydarzenie z kalendarza
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class Events {
     String date;
     String time;
     String description;
     Long timeInMillis;
-    int index;
-    public Events(int index, String date, String time, String description, Long timeInMillis) {
-        this.index = index;
+
+    Events(String date, String time, String description, Long timeInMillis) {
         this.date = date;
         this.time = time;
         this.description = description;
         this.timeInMillis = timeInMillis;
     }
 
-    public Long getTimeInMillis() {
+    Long getTimeInMillis() {
         return timeInMillis;
     }
 
     public void setTimeInMillis(Long timeInMillis) {
         this.timeInMillis = timeInMillis;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     public String getDate() {
@@ -46,7 +43,7 @@ public class Events {
         this.time = time;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 

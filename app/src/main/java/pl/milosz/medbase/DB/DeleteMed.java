@@ -3,32 +3,39 @@ package pl.milosz.medbase.DB;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pl.milosz.medbase.Meds.CustomMedActivity;
+
 import static pl.milosz.medbase.LoginActivity.offlineMode;
-
-public class InsertAsync extends AsyncTask<Void, Void, String> {
+import static pl.milosz.medbase.LoginActivity.patient_id;
+/**
+ * Asynchroniczna akcja odpowiadająca za usunięcie leku z bazy danych przyjmowanych leków przez pacjenta
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
+public class DeleteMed extends AsyncTask<Void, Void, String> {
     Context context;
-    String result;
-    public static String twoj_stary = " ";
     public static Connection con;
+    private static final String TAG = "DeleteMed";
 
-    public InsertAsync(Context context) {
+    public DeleteMed(Context context) {
         this.context = context;
 
     }
+
     protected void onPreExecute() {
-        Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Pre execute");
     }
 
     protected String doInBackground(Void... params) {
         String url = "jdbc:mysql://192.168.0.129:3306/leki?useSSL=false&allowPublicKeyRetrieval=true";
-        //String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "admin";
         String pass = "admin";
 
@@ -39,16 +46,17 @@ public class InsertAsync extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         try {
-            if(offlineMode==false) {
+            if (offlineMode == false) {
                 Connection con = DriverManager.getConnection(url, user, pass);
                 if (con != null) {
                     Statement st = con.createStatement();
-                    result = "Database connection success\n";
-                    String statement="INSERT INTO `leki`.`leki` (nazwa,infomacje,dawkowanie) VALUES (\"Stoperan\" , \"kapsułka twarda\" , \"2 tabletki na dobe\");";
-                    Log.i("kupa",statement);
-                    st.executeUpdate("INSERT INTO `leki`.`leki` (nazwa,infomacje,dawkowanie) VALUES (\"Stoperan\" , \"kapsułka twarda\" , \"2 tabletki na dobe\");");
+                    int id = 0;
+                    ResultSet rs = st.executeQuery("SELECT id from leki.leki where nazwa ='" + CustomMedActivity.name + "'");
+                    while (rs.next()) {
+                        id = (rs.getInt(1));
+                    }
+                    st.executeUpdate("DELETE FROM `leki`.`pacjent_leki` WHERE pacjent_id=" + patient_id + " AND leki_id=" + id + ");");
                 }
-                Log.i("guwno", result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,7 +67,7 @@ public class InsertAsync extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        Toast.makeText(context, twoj_stary, Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "post execute");
     }
 
 

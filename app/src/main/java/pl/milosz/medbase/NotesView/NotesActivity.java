@@ -17,7 +17,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import pl.milosz.medbase.R;
-
+/**
+ * Aktywność za wyświetlenie notatek wprowadzonych przez użytkownika w liście
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class NotesActivity extends AppCompatActivity {
 
     static ArrayList<String> notes = new ArrayList<>();

@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +27,21 @@ import java.util.Calendar;
 
 import pl.milosz.medbase.R;
 
+/**
+ * Aktywność, w której wyświetlone zostają utworzone i wyświetlone alarmy
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class AlertsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, NotificationTextFragment.NotificationTextListener {
     LinearLayout linearLayout;
     SwitchCompat sw, sw1, sw2, sw3, sw4, sw5;
     int index = switchArray.size() + 1;
     private Calendar c;
     AlarmManager alarmManager0, alarmManager1, alarmManager2, alarmManager3, alarmManager4, alarmManager5;
-    public static ArrayList<SwitchCompat> switchArray=new ArrayList<>();
+    public static ArrayList<SwitchCompat> switchArray = new ArrayList<>();
     public static String notificationStringText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,12 +94,11 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
 
     public void addSwitch(SwitchCompat sw, AlarmManager insideManager) {
         String notificationFullText = notificationStringText + "\n" + c.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", c.get(Calendar.MINUTE)) + ", " + DateFormat.getDateInstance().format(c.getTime());
-        Log.i("guwno index", String.valueOf(index));
         insideManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, NotificationReceiver.class);
         intent.putExtra("text", notificationStringText);
         intent.putExtra("channel", "one");
-        intent.putExtra("timeInMilis",c.getTimeInMillis());
+        intent.putExtra("timeInMilis", c.getTimeInMillis());
         final PendingIntent pendingIntent1 = PendingIntent.getBroadcast(this, 1, intent, 0);
         insideManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent1);
 
@@ -127,7 +132,6 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
     }
 
 
-
     public void renderList() {
         linearLayout.removeAllViews();
         if (linearLayout != null) {
@@ -140,7 +144,6 @@ public class AlertsActivity extends AppCompatActivity implements android.app.Tim
     @Override
     public void getText(String notificationText) {
         notificationStringText = notificationText;
-        Log.i("guwno", notificationText);
         switch (index) {
             case 0:
                 addSwitch(sw, alarmManager0);

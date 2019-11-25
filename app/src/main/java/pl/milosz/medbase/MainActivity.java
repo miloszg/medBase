@@ -1,12 +1,14 @@
 package pl.milosz.medbase;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,9 +22,20 @@ import com.google.android.material.navigation.NavigationView;
 
 import pl.milosz.medbase.Alerts.AlertsActivity;
 import pl.milosz.medbase.CalendarView.CalendarActivity;
+import pl.milosz.medbase.Meds.BrowseMedsActivity;
 import pl.milosz.medbase.Meds.MedsActivity;
 import pl.milosz.medbase.NotesView.NotesActivity;
 
+import static pl.milosz.medbase.LoginActivity.offlineMode;
+
+/**
+ * Aktywność odpowiadająca za wyświetlenie funkcjonalności aplikacji
+ * W samej aktywności znajdują się przyciski, które przekierują do opisanych części projektu
+ * W pasku bocznym menu umiejscowione są pozostałe opcje wyboru
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
@@ -42,8 +55,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         TextView navNameTextView = header.findViewById(R.id.navName);
         TextView navMailTextView = header.findViewById(R.id.navMail);
-        navNameTextView.setText(LoginActivity.username);
-        navMailTextView.setText(LoginActivity.password);
+        if (!offlineMode) {
+            navNameTextView.setText(LoginActivity.username);
+            navMailTextView.setText("mail@mail.com");
+        } else {
+            navNameTextView.setText("Tryb Offline");
+            navMailTextView.setText(" ");
+            View viewQR = findViewById(R.id.cardQR);
+            viewQR.setEnabled(false);
+
+            View viewCode = findViewById(R.id.cardCode);
+            viewCode.setEnabled(false);
+            ImageView codeImg = findViewById(R.id.codeImage);
+            TextView codeTxt = findViewById(R.id.codeText);
+            codeImg.setColorFilter(Color.LTGRAY);
+            codeTxt.setTextColor(Color.LTGRAY);
+            ImageView qrImg = findViewById(R.id.qrImage);
+            TextView qrTxt = findViewById(R.id.qrText);
+            qrImg.setColorFilter(Color.LTGRAY);
+            qrTxt.setTextColor(Color.LTGRAY);
+        }
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -51,13 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.cardMeds:
                 Intent intent_med = new Intent(this, MedsActivity.class);
                 startActivity(intent_med);
                 break;
-            case R.id.cardBrowse:
+            case R.id.cardCode:
                 Intent intent_browse = new Intent(this, CodeActivity.class);
                 startActivity(intent_browse);
                 break;
@@ -76,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.nav_meds:
                 Log.d(TAG, "onNavigationItemSelected: clicked on meds");
                 Intent intent_browse = new Intent(this, BrowseMedsActivity.class);

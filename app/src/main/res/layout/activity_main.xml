@@ -83,7 +83,7 @@
 
             <androidx.cardview.widget.CardView
                 android:onClick="onClick"
-                android:id="@+id/cardBrowse"
+                android:id="@+id/cardCode"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_rowWeight="1"
@@ -95,17 +95,20 @@
                 android:layout_columnWeight="1" >
 
                 <LinearLayout
+                    android:id="@+id/codeLinearLayout"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:id="@+id/codeImage"
                         android:src="@drawable/ic_code"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
+                        android:id="@+id/codeText"
                         android:text="Wygeneruj kod"
                         android:textAlignment="center"
                         android:textColor="#05ca7e"
@@ -136,11 +139,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:id="@+id/qrImage"
                         android:src="@drawable/ic_qr"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
+                        android:id="@+id/qrText"
                         android:text="Skanuj kod QR"
                         android:textAlignment="center"
                         android:textColor="#05ca7e"

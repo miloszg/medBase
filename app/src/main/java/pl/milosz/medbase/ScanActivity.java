@@ -22,10 +22,18 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import pl.milosz.medbase.DB.InsertScanAsync;
 
+/**
+ * Aktywność odpowiadająca za rozpoznanie kodu QR
+ * Jeśli kod będzie przechowywał informacje o lekach, to zostaną one dodane do leków przyjmowanych przez użytkownika
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView scannerView;
     private TextView resultTextView;
+    public static String[] values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +42,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
         scannerView = findViewById(R.id.ZXscan);
         resultTextView = findViewById(R.id.resultTextView);
-
+        resultTextView.setText("Zeskanuj kod QR");
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.CAMERA)
                 .withListener(new PermissionListener() {
@@ -60,22 +68,22 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     protected void onDestroy() {
         scannerView.stopCamera();
         super.onDestroy();
-
     }
 
     @Override
     public void handleResult(Result rawResult) {
 
-        resultTextView.setText(rawResult.getText());
-        if(rawResult.getText().equals("scorbolamid")){
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                new InsertScanAsync(getApplicationContext()).execute();
-                Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show();
-            }
+        resultTextView.setText("Rozpoznano kod QR");
+
+        values = rawResult.getText().split(",");
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            new InsertScanAsync(getApplicationContext()).execute();
+            Toast.makeText(this, "Dodano lek!", Toast.LENGTH_SHORT).show();
         }
-        Intent mainIntent=new Intent(this,MainActivity.class);
+
+        Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
     }
 }

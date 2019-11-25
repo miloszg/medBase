@@ -12,7 +12,12 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 import pl.milosz.medbase.R;
-
+/**
+ * Klasa odpowiadająca za wyświetlenie okienka dialogu, w którym użytkownik ustala datę powiadomienia
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class PickDateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     @Override

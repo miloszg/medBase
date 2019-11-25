@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DB.DB" />
         <activity android:name=".Alerts.PickDateActivity" />
         <activity android:name=".NotesView.NoteEditorActivity" />
         <activity
@@ -40,7 +39,7 @@
             android:label="@string/title_activity_scan" />
         <activity
             android:label="Zakończone leki"
-            android:name=".BrowseMedsActivity" />
+            android:name=".Meds.BrowseMedsActivity" />
         <activity
             android:name=".Alerts.AlertsActivity"
             android:label="@string/title_activity_alerts"
@@ -52,7 +51,6 @@
         <activity
             android:name=".NotesView.NotesActivity"
             android:label="@string/notes_label" />
-        <activity android:name=".SettingsActivity" />
         <activity
             android:name=".CalendarView.CalendarActivity"
             android:label="@string/calendar_label" />

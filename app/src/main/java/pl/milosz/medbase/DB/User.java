@@ -1,11 +1,18 @@
 package pl.milosz.medbase.DB;
 
+/**
+ * Obiekt reprezentujący użytwkonika systemu
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class User {
-    String username;
-    String password;
-    int id;
-    public User(int id, String username, String password) {
-        this.id=id;
+    private String username;
+    private String password;
+    private int id;
+
+    User(int id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }

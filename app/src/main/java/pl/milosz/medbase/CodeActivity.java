@@ -16,7 +16,13 @@ import java.util.Random;
 import pl.milosz.medbase.DB.InsertPatientCode;
 
 import static pl.milosz.medbase.LoginActivity.offlineMode;
-
+/**
+ * Aktywność odpowiadająca za wygenerowanie kodu dostępu, który lekarz wpisuje do systemu w celu odczytania informacji o pacjencie
+ * Kod, wygenerowany w tej aktwyności, wysyłany jest do bazy danych
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class CodeActivity extends AppCompatActivity {
     public static int fourDigit = 1000;
 

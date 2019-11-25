@@ -3,7 +3,6 @@ package pl.milosz.medbase.DB;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,24 +11,31 @@ import java.sql.Statement;
 
 import static pl.milosz.medbase.CodeActivity.fourDigit;
 import static pl.milosz.medbase.LoginActivity.offlineMode;
+import static pl.milosz.medbase.LoginActivity.patient_id;
 
+/**
+ * Asynchroniczna akcja odpowiadająca za dodanie kodu dostępu do bazy danych
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class InsertPatientCode extends AsyncTask<Void, Void, String> {
-    Context context;
-    String result;
-    public static String twoj_stary = " ";
+    private Context context;
+    private String result;
     public static Connection con;
+    private static final String TAG = "InsertPatientCode";
 
     public InsertPatientCode(Context context) {
         this.context = context;
 
     }
+
     protected void onPreExecute() {
-        Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, " pre execute");
     }
 
     protected String doInBackground(Void... params) {
         String url = "jdbc:mysql://192.168.0.129:3306/leki?useSSL=false&allowPublicKeyRetrieval=true";
-        //String url = "jdbc:mysql://192.168.0.52:3306/test?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "admin";
         String pass = "admin";
 
@@ -40,16 +46,14 @@ public class InsertPatientCode extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
         try {
-            if(offlineMode==false) {
+            if (!offlineMode) {
                 Connection con = DriverManager.getConnection(url, user, pass);
                 if (con != null) {
-                    twoj_stary = "Dodawanie udane";
                     Statement st = con.createStatement();
                     result = "Database connection success\n";
                     String code = String.valueOf(fourDigit);
-                    st.executeUpdate("INSERT INTO `leki`.`pacjent_kod` (pacjent_id,pacjent_kod) VALUES ('3'," + code + ");");
+                    st.executeUpdate("INSERT INTO `leki`.`pacjent_kod` (pacjent_id,pacjent_kod) VALUES ('" + patient_id + "'," + code + ");");
                 }
-                Log.i("guwno", result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,7 +64,7 @@ public class InsertPatientCode extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        Toast.makeText(context, twoj_stary, Toast.LENGTH_SHORT).show();
+        Log.i(TAG, " post execute");
     }
 
 

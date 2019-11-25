@@ -5,7 +5,15 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
-
+/**
+ * Klasa, w której tworzone są kanały komunikacyjne
+ * Kanał 1 przypisany jest do powiadomień z alarmem
+ * Kanał 2 przypisany jest do powiadomień o nadchodzącycm wydarzeniu
+ * Kanał 3 przypisany jest do powiadomień odnośnie poboru leku
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class CreateChannel extends Application {
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_2_ID = "channel2";

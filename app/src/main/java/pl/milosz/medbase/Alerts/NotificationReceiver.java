@@ -14,7 +14,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -30,7 +29,12 @@ import pl.milosz.medbase.R;
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_1_ID;
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_2_ID;
 import static pl.milosz.medbase.Alerts.CreateChannel.CHANNEL_3_ID;
-
+/**
+ * Klasa odpowiadająca za obsługę przychodzących zapytań o utworzenie powiadomień
+ *
+ * @author Miłosz Gustawski
+ * @version 1.0
+ */
 public class NotificationReceiver extends BroadcastReceiver {
     Context contextGlobal;
     String notText;
@@ -42,7 +46,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         contextGlobal = context;
         notText = intent.getExtras().getString("text", " powiadomienie");
         channel = intent.getExtras().getString("channel", "null");
-        Log.i("guwno",channel);
         if (channel.equals("one")) {
             timeInMilis=intent.getLongExtra("timeInMilis",0);
             channel = "";
