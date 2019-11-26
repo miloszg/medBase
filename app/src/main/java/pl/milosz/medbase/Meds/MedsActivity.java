@@ -12,11 +12,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
 import pl.milosz.medbase.DB.DownloadMeds;
 import pl.milosz.medbase.MainActivity;
 import pl.milosz.medbase.R;
+
+import static pl.milosz.medbase.DB.DownloadMeds.dbMeds;
 
 /**
  * Aktywność, w której wyświetlana jest lista zawierająca leki przyjmowane przez użytkownika
@@ -31,22 +31,15 @@ public class MedsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (DownloadMeds.dbMeds == null) {
-            DownloadMeds.dbMeds = new ArrayList<>();
-        } else {
-            DownloadMeds.dbMeds.clear();
-        }
+        setContentView(R.layout.activity_meds);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             new DownloadMeds(getApplicationContext()).execute();
         }
-        setContentView(R.layout.activity_meds);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -54,10 +47,19 @@ public class MedsActivity extends AppCompatActivity {
             startActivity(customMedIntent);
         });
 
-        ListView mlistView = findViewById(R.id.medListview);
-        adapter = new MedsListAdapter(this, R.layout.meds_adapter_view, DownloadMeds.dbMeds);
 
+        ListView mlistView = findViewById(R.id.medListview);
+        adapter = new MedsListAdapter(this, R.layout.meds_adapter_view, dbMeds);
         mlistView.setAdapter(adapter);
+
+        if(adapter!=null){
+            try {
+                Thread.sleep(500);
+                this.runOnUiThread(() -> adapter.notifyDataSetChanged());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         mlistView.setOnItemClickListener((parent, view, position, id) -> {
             Intent medsIntent = new Intent(getApplicationContext(), MedDetailsActivity.class);

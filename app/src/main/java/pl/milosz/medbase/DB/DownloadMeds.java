@@ -15,7 +15,7 @@ import pl.milosz.medbase.Meds.Medication;
 import pl.milosz.medbase.R;
 
 import static pl.milosz.medbase.LoginActivity.offlineMode;
-import static pl.milosz.medbase.Meds.MedsActivity.adapter;
+import static pl.milosz.medbase.LoginActivity.patient_id;
 
 /**
  * Asynchroniczna akcja odpowiadająca za ściągnięcie danych o przyjmowanych lekach z bazy danych
@@ -63,7 +63,8 @@ public class DownloadMeds extends AsyncTask<Void, Void, String> {
                             "ON pl.leki_id = l.id\n" +
                             "INNER JOIN leki.pacjent p \n" +
                             "ON pl.pacjent_id = p.id\n" +
-                            "WHERE p.id = 3;");
+                            "WHERE p.id = "+patient_id+";");
+
                     String test = "tabletka";
                     dbMeds.clear();
                     while (rs.next()) {
@@ -78,31 +79,20 @@ public class DownloadMeds extends AsyncTask<Void, Void, String> {
                         } else {
                             test = "tabletka";
                         }
-
                     }
-                    adapter.notifyDataSetChanged();
 
                 }
-            } else {
-                Medication medication1=new Medication("Stoperan1","2 razy na dobe","Sanofi",R.drawable.round);
-                Medication medication2=new Medication("Stoperan2","2 razy na dobe","Sanofi",R.drawable.round);
-                Medication medication3=new Medication("Stoperan3","2 razy na dobe","Sanofi",R.drawable.round);
-                DownloadMeds.dbMeds.add(medication1);
-                DownloadMeds.dbMeds.add(medication2);
-                DownloadMeds.dbMeds.add(medication3);
             }
         } catch (SQLException e) {
             e.printStackTrace();
 
         }
-
         return "Complete";
     }
 
     @Override
     protected void onPostExecute(String s) {
         Log.i(TAG, " post execute");
-        adapter.notifyDataSetChanged();
     }
 
 
