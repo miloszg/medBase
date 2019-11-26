@@ -1,0 +1,94 @@
+﻿<Window x:Class="DesktopApplication.SearchMedsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopApplication"
+        mc:Ignorable="d"
+        Title="SearchMedsWindow" Height="450" Width="600">
+    <Grid Background="White">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" 
+                      Grid.ColumnSpan="1" Margin="4,0,20,0" Grid.RowSpan="2">
+            <Label Content="Nazwa" FontWeight="Bold"
+                       FontSize="15"/>
+            <TextBox Margin="20 0 0 0" VerticalAlignment="Top"
+                          Text="{Binding medicamentName, Mode=TwoWay}" />
+            <Label Content="Specjalnosc" FontWeight="Bold"
+                       FontSize="15"/>
+            <ComboBox Margin="20 0 0 0" 
+                          ItemsSource="{Binding specialityItems}" 
+                          SelectedItem="{Binding selectedSpeciality, Mode=TwoWay}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" 
+                      Grid.ColumnSpan="1" Margin="20 0" Grid.RowSpan="2">
+            <Label Content="Postac" FontWeight="Bold"
+                       FontSize="15"/>
+            <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
+                          ItemsSource="{Binding formItems}" 
+                          SelectedItem="{Binding selectedForm, Mode=TwoWay}" />
+            <Label Content="Kategoria" FontWeight="Bold"
+                       FontSize="15"/>
+            <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
+                          ItemsSource="{Binding categoryItems}" 
+                          SelectedItem="{Binding selectedCategory, Mode=TwoWay}"/>
+
+        <Button     Height="40" Width="150" VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right" Margin="5 5" FontSize="20"
+                    FontWeight="ExtraBold" Content="Szukaj"
+                    Background="White" Foreground="Green"
+                    Command="{Binding searchCommand}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        </StackPanel>
+
+
+
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" 
+                    Background="Azure" Margin="20,0,20,20" BorderBrush="Gray" BorderThickness="1">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding patientMedsList}"
+                                      ScrollViewer.CanContentScroll="True" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button         Grid.ColumnSpan="3" 
+                                            Background="White" 
+                                            Command="{
+                                            Binding RelativeSource={
+                                            RelativeSource FindAncestor, 
+                                            AncestorType={x:Type Window}},
+                                            Path=DataContext.showMedCommand}" CommandParameter="{Binding}" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Label HorizontalAlignment="Left" Grid.Column="0" Content="{Binding Name}"
+                                                   FontSize="10" FontWeight="Bold" Foreground="Green"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+
+    </Grid>
+</Window>
