@@ -39,6 +39,7 @@ def insert_data_from_file_to_database(pathfile: str,mydb: mysql.connector.CMySQL
     speciality = []
     Effect = []
     meds = []
+    all_commands = ""
 
     mycursor = mydb.cursor()
 
@@ -85,26 +86,32 @@ def insert_data_from_file_to_database(pathfile: str,mydb: mysql.connector.CMySQL
 
         for index, element in enumerate(composition):
             command = "INSERT INTO leki.skladniki (id,nazwa) VALUES ({0},\"{1}\");".format(index+1, element)
-            mycursor.execute(command)
+            all_commands += "{0}\n".format(command)
+            # mycursor.execute(command)
         for index, element in enumerate(form):
             command = "INSERT INTO leki.postac (id,nazwa) VALUES ({0},\"{1}\");".format(index+1, element)
-            mycursor.execute(command)
+            # mycursor.execute(command)
+            all_commands += "{0}\n".format(command)
         for index, element in enumerate(category):
             command = "INSERT INTO leki.kategoria (id, nazwa) VALUES ({0},\"{1}\");".format(index+1, element)
-            mycursor.execute(command)
+            # mycursor.execute(command)
+            all_commands += "{0}\n".format(command)
         for index, element in enumerate(speciality):
             command = "INSERT INTO leki.specjalnosc (id, nazwa) VALUES ({0},\"{1}\");".format(index+1, element)
-            mycursor.execute(command)
+            # mycursor.execute(command)
+            all_commands += "{0}\n".format(command)
         for index, element in enumerate(Effect):
             command = "INSERT INTO leki.efekt (id, nazwa) VALUES ({0},\"{1}\");".format(index+1, element)
-            mycursor.execute(command)
+            # mycursor.execute(command)
+            all_commands += "{0}\n".format(command)
         mydb.commit()
 
         for index, element in enumerate(meds):
             command = "INSERT INTO leki.leki (id,nazwa) VALUES ({0},\"{1}\");".format(index+1, element)
-            mycursor.execute(command)
+            all_commands += "{0}\n".format(command)
+            # mycursor.execute(command)
 
-        mydb.commit()
+        # mydb.commit()
         print("Zcommitowano obiekty")
 
     meds_comp = []
@@ -145,24 +152,33 @@ def insert_data_from_file_to_database(pathfile: str,mydb: mysql.connector.CMySQL
 
     for element in meds_comp:
         command = "INSERT INTO leki.leki_skladniki (leki_id,skladniki_id) VALUES ({0},{1});".format(element[0],element[1])
-        mycursor.execute(command)
+        all_commands += "{0}\n".format(command)
+        # mycursor.execute(command)
     for element in meds_form:
         command = "INSERT INTO leki.leki_postac (leki_id,postac_id) VALUES ({0},{1});".format(element[0],element[1])
-        mycursor.execute(command)
+        all_commands += "{0}\n".format(command)
+        # mycursor.execute(command)
     for element in meds_category:
         command = "INSERT INTO leki.leki_kategoria (leki_id,kategoria_id) VALUES ({0},{1});".format(element[0],element[1])
-        mycursor.execute(command)
+        all_commands += "{0}\n".format(command)
+        # mycursor.execute(command)
+
     for element in meds_specs:
         command = "INSERT INTO leki.leki_specjalnosc (leki_id,specjalnosc_id) VALUES ({0},{1});".format(element[0],element[1])
-        mycursor.execute(command)
+        all_commands += "{0}\n".format(command)
+        # mycursor.execute(command)
     for element in meds_effect:
         command = "INSERT INTO leki.leki_efekt (leki_id,efekt_id) VALUES ({0},{1});".format(element[0],element[1])
-        mycursor.execute(command)
+        all_commands += "{0}\n".format(command)
+        # mycursor.execute(command)
 
+    with open("databaseCommands.txt", "w") as file:
+        file.write(all_commands)
+        file.close()
 
-    mydb.commit()
+    # mydb.commit()
     print("Zcommitowane zaleznosci")
-    mydb.close()
+    # mydb.close()
 
 if __name__ == '__main__':
     main()

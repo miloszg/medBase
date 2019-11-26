@@ -36,14 +36,21 @@ namespace DesktopApplication
             
             DatabaseRetriever databaseRetriever = new DatabaseRetriever(IoC.Get<ApplicationWindowViewModel>().databaseManager);
             string patientID = this.GetPatientID(databaseRetriever);
-            this.SetPatient(patientID, databaseRetriever);
+            if(patientID == null)
+            {
+                return;
+            }
+            bool Status = this.SetPatient(patientID, databaseRetriever);
 
-            IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.SubmitPatient;
+            if(Status)
+            {
+                IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.SubmitPatient;
+            }
         }
 
         private string GetPatientID(DatabaseRetriever databaseRetriever)
         {
-            string patientID = "";
+            string patientID = null;
             var codeData = databaseRetriever.GetFromDatabase("pacjent_kod",
                             new List<string>()
                             {
@@ -67,8 +74,9 @@ namespace DesktopApplication
             IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.MainMenu;
         }
 
-        public void SetPatient(string patientID, DatabaseRetriever databaseRetriever)
+        public bool SetPatient(string patientID, DatabaseRetriever databaseRetriever)
         {
+            bool Status = true;
             var patientData = databaseRetriever.GetFromDatabase("pacjent",
                 new List<string>()
                 {
@@ -88,9 +96,10 @@ namespace DesktopApplication
             else
             {
                 MessageBox.Show("Error with patient data from MySQL!");
-                return;
+                return false;
             }
             IoC.Get<ApplicationWindowViewModel>().SetPatient(patient);
+            return Status;
         }
 
     }
