@@ -13,7 +13,6 @@ namespace DesktopApplication
     public class GenerateReceiptViewModel : BaseViewModel
     {
         public ICommand goBackCommand { get; set; }
-        public ICommand submitCommand { get; set; }
         public ICommand addMedicamentCommand { get; set; }
         public ICommand removeMedFromListCommand { get; set; }
         public ICommand generateReceiptCommand { get; set; }
@@ -38,7 +37,6 @@ namespace DesktopApplication
         public GenerateReceiptViewModel()
         {
             this.goBackCommand = new RelayCommand(() => GoBackCommand());
-            this.submitCommand = new RelayCommand(() => SubmitCommand());
             this.generateReceiptCommand = new RelayCommand(() => GenerateReceiptCommand());
             this.addMedicamentCommand = new RelayCommand(() => AddMedicamentCommand());
             this.removeMedFromListCommand = new RelayCommandWithParameters((parameter) => RemoveMedFromListCommand(parameter));
@@ -51,6 +49,11 @@ namespace DesktopApplication
 
         private void GenerateReceiptCommand()
         {
+            if(!IsDataMedsValidated(this.patientReceiptMedsList))
+            {
+                MessageBox.Show("Podano złe dane dotyczące wypisywanych leków.");
+                return;
+            }
             string filePath = null;
             if(isGenerateQrCode)
             {
@@ -67,8 +70,30 @@ namespace DesktopApplication
                 MessageBox.Show("Brak podanej sciezki zapisu pliku.");
                 return;
             }
-            ReceiptPDFCreator pdfCreator = new ReceiptPDFCreator(this.patientReceiptMedsList, commentTextBox ,QrImage);
+            ReceiptPDFCreator pdfCreator = new ReceiptPDFCreator(this.patientReceiptMedsList, commentTextBox, QrImage);
             pdfCreator.GeneratePDF(filePath);
+        }
+
+        private bool IsDataMedsValidated(List<Medicament> patientReceiptMedsList)
+        {
+            bool validated = false;
+            foreach (var meds in patientReceiptMedsList)
+            {
+                int result = 0;
+                if (!Int32.TryParse(meds.howManyPacks, out result))
+                {
+                    return validated;
+                }
+                if (!Int32.TryParse(meds.howManyPills, out result))
+                {
+                    return validated;
+                }
+                if (!Double.TryParse(meds.dosageWeight, out double dResult))
+                {
+                    return validated;
+                }
+            }
+            return true;
         }
 
         private void GenerateQrCode()
@@ -89,7 +114,10 @@ namespace DesktopApplication
             {
                 medsNames += $"{medication.Name},";
             }
-            medsNames.Remove(medsNames.Length - 1);
+            if (medsNames.Length >= 1);
+            {
+                medsNames.Remove(medsNames.Length - 1);
+            }
             return medsNames;
         }
 
@@ -133,13 +161,6 @@ namespace DesktopApplication
             }
             return foundMedsList;
         }
-
-        public void SubmitCommand()
-        {
-            MessageBox.Show("Recepta zostala wygenerowana!");
-            IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.SubmitPatient;
-        }
-
         private void GoBackCommand()
         {
             IoC.Get<ApplicationWindowViewModel>().currentPage = ApplicationPage.SubmitPatient;

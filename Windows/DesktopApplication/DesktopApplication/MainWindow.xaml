@@ -8,7 +8,7 @@
         WindowStyle="SingleBorderWindow"
         WindowState="Normal"
         ResizeMode="CanMinimize"
-        Title="MainWindow" Height="600" Width="800" Background="CadetBlue">
+        Title="MedBase" Height="600" Width="800" Background="{StaticResource MedGrayBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,15 +17,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Padding="5" VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Center" Background="MediumSpringGreen">
-            <Label.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="360"/>
-                </Style>
-            </Label.Resources>
-            <Label FontFamily="Arial" FontSize="50" Foreground="Cornsilk" FontWeight="Bold" Grid.ColumnSpan="2">MedApp</Label>
-        </Label>
+
+        <Border Grid.Row="0" BorderThickness="0">
+            <Border.Background>
+                <ImageBrush ImageSource="/Resources/Images/medBaseBaner.png"/>
+            </Border.Background>
+        </Border>
 
         <Frame x:Name="MainFrame" local:DisableNavigation.Disable="True"
                Grid.Row="1" Grid.RowSpan="3" KeyboardNavigation.IsTabStop="True"

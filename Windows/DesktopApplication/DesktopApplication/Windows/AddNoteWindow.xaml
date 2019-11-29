@@ -7,23 +7,27 @@
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         ResizeMode="CanMinimize"
-        Title="AddNoteWindow" Height="450" Width="400">
+        Title="MedBase" Height="450" Width="400">
     <Grid Background="Azure">
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" BorderThickness="1" BorderBrush="DarkCyan">
             <DockPanel>
                 <Label 
-                           BorderBrush="DarkCyan" BorderThickness="2" DockPanel.Dock="Top">
-                    <TextBlock Text="Dodaj notatke"  FontSize="15" FontWeight="DemiBold" 
-                                   Foreground="Blue" />
+                           BorderBrush="DarkCyan" BorderThickness="1 2 1 2" DockPanel.Dock="Top">
+                    <TextBlock Text="Dodaj notatkę"  FontSize="15" FontWeight="Bold" 
+                                   Foreground="DarkCyan" TextDecorations="Underline"/>
                 </Label>
-                <Label FontSize="15" FontWeight="DemiBold" Content="Tytul:" DockPanel.Dock="Top"/>
+                <Label FontSize="15" FontWeight="DemiBold" Content="Tytuł:" DockPanel.Dock="Top" 
+                       Foreground="Green"/>
                 <TextBox  Margin="5 0" Text="{Binding notesTitleTextBox, Mode=TwoWay}" DockPanel.Dock="Top"/>
-                <Label FontSize="15" FontWeight="DemiBold" Content="Tresc:" DockPanel.Dock="Top"/>
-                <Button Margin="5 10 5 0" Content="Zapisz Notatke" FontSize="15" FontWeight="DemiBold"
+                <Label FontSize="15" FontWeight="DemiBold" Content="Treść:" DockPanel.Dock="Top"
+                       Foreground="Green"/>
+                <Button Margin="5 10 5 5" Content="Zapisz notatkę" FontSize="15" FontWeight="DemiBold"
                         VerticalAlignment="Bottom" DockPanel.Dock="Bottom" HorizontalAlignment="Center"
                         Padding="10" Command="{Binding saveNoteCommand}" Height="40"
-                        Background="White" Foreground="Green"/>
-                <TextBox Margin="5 0 5 0" TextWrapping="Wrap" Text="{Binding notesContentTextBox, Mode=TwoWay}"/>
+                       Background="Green"  Foreground="White"/>
+                <TextBox TextWrapping="Wrap" 
+                         Margin="5 0 5 0" 
+                         Text="{Binding notesContentTextBox, Mode=TwoWay}"/>
             </DockPanel>
         </Border>
     </Grid>

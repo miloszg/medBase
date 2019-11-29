@@ -5,26 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApplication"
         mc:Ignorable="d"
-        Title="SearchMedsWindow" Height="450" Width="600">
-    <Grid Background="White">
+        Title="MedBase" Height="450" Width="600">
+    <Grid Background="{StaticResource MedGrayBrush}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-
         <StackPanel Grid.Column="0" 
                       Grid.ColumnSpan="1" Margin="4,0,20,0" Grid.RowSpan="2">
-            <Label Content="Nazwa" FontWeight="Bold"
+            <Label Content="Nazwa:" FontWeight="Bold" Foreground="Green"
                        FontSize="15"/>
             <TextBox Margin="20 0 0 0" VerticalAlignment="Top"
                           Text="{Binding medicamentName, Mode=TwoWay}" />
-            <Label Content="Specjalnosc" FontWeight="Bold"
+            <Label Content="Specjalność:" FontWeight="Bold" Foreground="Green"
                        FontSize="15"/>
             <ComboBox Margin="20 0 0 0" 
                           ItemsSource="{Binding specialityItems}" 
@@ -33,34 +32,24 @@
 
         <StackPanel Grid.Column="1" 
                       Grid.ColumnSpan="1" Margin="20 0" Grid.RowSpan="2">
-            <Label Content="Postac" FontWeight="Bold"
+            <Label Content="Postać:" FontWeight="Bold" Foreground="Green"
                        FontSize="15"/>
             <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
                           ItemsSource="{Binding formItems}" 
                           SelectedItem="{Binding selectedForm, Mode=TwoWay}" />
-            <Label Content="Kategoria" FontWeight="Bold"
+            <Label Content="Kategoria:" FontWeight="Bold" Foreground="Green"
                        FontSize="15"/>
             <ComboBox Margin="0 0 0 0" VerticalAlignment="Top"
                           ItemsSource="{Binding categoryItems}" 
                           SelectedItem="{Binding selectedCategory, Mode=TwoWay}"/>
 
-        <Button     Height="40" Width="150" VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right" Margin="5 5" FontSize="20"
-                    FontWeight="ExtraBold" Content="Szukaj"
-                    Background="White" Foreground="Green"
-                    Command="{Binding searchCommand}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+            
         </StackPanel>
 
 
 
-        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" 
-                    Background="Azure" Margin="20,0,20,20" BorderBrush="Gray" BorderThickness="1">
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" 
+                    Background="White" Margin="20,0,20,20" BorderBrush="Gray" BorderThickness="1">
             <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding patientMedsList}"
                                       ScrollViewer.CanContentScroll="True" >
@@ -89,6 +78,13 @@
                 </ItemsControl>
             </ScrollViewer>
         </Border>
+
+        <Button     Height="40" Width="150" VerticalAlignment="Center" Grid.Row="1"
+                    HorizontalAlignment="Right"  Margin="20 0" FontSize="20"
+                    FontWeight="DemiBold" Content="Szukaj" Grid.Column="1"
+                    Background="Green" Foreground="White"
+                    Command="{Binding searchCommand}">
+        </Button>
 
     </Grid>
 </Window>

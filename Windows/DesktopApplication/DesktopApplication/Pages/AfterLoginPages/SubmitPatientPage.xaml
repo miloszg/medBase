@@ -6,9 +6,9 @@
       xmlns:local="clr-namespace:DesktopApplication"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SubmitPatientPage">
+      Title="MedBase">
 
-    <Grid Background="Azure">
+    <Grid Background="{StaticResource MedGrayBrush}">
 
         <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
                 VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
@@ -27,122 +27,146 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            
 
-            <Border Background="Azure" Grid.Column="0" Grid.Row="0"
-                    Grid.RowSpan="3" BorderBrush="DarkCyan">
-                <DockPanel>
-                    <Label BorderBrush="DarkCyan" BorderThickness="2" DockPanel.Dock="Top">
-                        <TextBlock Text="Leki zazywane przez pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
+
+            <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+                <Label BorderBrush="DarkCyan" BorderThickness="2 2 0 2" DockPanel.Dock="Top">
+                    <TextBlock Text="Leki zażywane przez pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="Bold" 
                                    Foreground="DarkCyan" />
-                    </Label>
-                    <ScrollViewer>
-                        <ItemsControl ItemsSource="{Binding patientMedsList}"
-                                      ScrollViewer.CanContentScroll="True" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+                </Label>
+                <Border BorderBrush="DarkCyan" BorderThickness="1 0 0 1">
+                    <DockPanel>
+                        
+                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding patientMedsList}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
 
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Grid.ColumnSpan="3" 
-                                            Background="White" 
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Grid.ColumnSpan="3"
+                                            Background="White" Height="35"
                                             Command="{
                                             Binding RelativeSource={
                                             RelativeSource FindAncestor, 
                                             AncestorType={x:Type Page}},
                                             Path=DataContext.showMedCommand}" CommandParameter="{Binding}" >
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label HorizontalAlignment="Left" Grid.Column="0" Content="{Binding Name}"
-                                                   FontSize="10" FontWeight="Bold" Foreground="Black"/>
-                                        </StackPanel>
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </DockPanel>
-            </Border>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label HorizontalAlignment="Left" Grid.Column="0" Content="{Binding Name}"
+                                                   FontSize="12" FontWeight="Bold" Foreground="Green"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </DockPanel>
 
-            <Border Background="Azure" Grid.Column="1" Grid.Row="0"
-                    Grid.RowSpan="3" BorderThickness="0" BorderBrush="DarkCyan">
-                <DockPanel>
-                    <Label BorderBrush="DarkCyan" BorderThickness="2" DockPanel.Dock="Top">
-                        <TextBlock Text="Historia pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
-                                   Foreground="DarkCyan" />
-                    </Label>
-                    <Button Margin="5 0" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" 
-                            DockPanel.Dock="Bottom"
-                            Content="Dodaj notatke" FontSize="20" FontWeight="DemiBold" Height="40"
-                            Background="White" Foreground="Green"
-                    Command="{Binding openNoteWindowCommand}">
-                                <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="100"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <ScrollViewer>
-                        <ItemsControl ItemsSource="{Binding patientStoryList}"
-                                      ScrollViewer.CanContentScroll="True" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+            <DockPanel Grid.Column="1" Grid.RowSpan="3">
+                <Label BorderBrush="DarkCyan" BorderThickness="2 2 0 2" DockPanel.Dock="Top">
+                    <TextBlock Text="Historia pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="Bold" 
+                                   Foreground="DarkCyan"/>
+                </Label>
+                
+                <Border BorderThickness="1 0 0 1 " BorderBrush="DarkCyan">
+                    <DockPanel>
+                        <DockPanel>
+                        <Border DockPanel.Dock="Top" Background="SteelBlue">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Margin="20 0 0 0" Grid.Column="0" Content="Lekarz:" FontSize="10" FontWeight="Bold" Foreground="DarkBlue"/>
+                                    <Label HorizontalAlignment="Center" Margin="0 0 0 0" Grid.Column="1" Content="Tytuł:" FontSize="10" FontWeight="Bold" Foreground="DarkBlue"/>
+                                    <Label HorizontalAlignment="Right" Margin="0 0 0 0" Grid.Column="2" Content="Data utworzenia:" FontSize="10" FontWeight="Bold" Foreground="DarkBlue"/>
+                                </Grid>
+                            </Border>
+                            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding patientStoryList}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
 
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Grid.ColumnSpan="3" 
-                                            Background="White" 
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Background="White" HorizontalContentAlignment="Stretch" Height="35"
                                             Command="{
                                             Binding RelativeSource={
                                             RelativeSource FindAncestor, 
                                             AncestorType={x:Type Page}},
                                             Path=DataContext.showNoteCommand}" CommandParameter="{Binding}" >
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label  Grid.Column="0" Content="{Binding Author}" FontSize="10" FontWeight="Bold" Foreground="DimGray"/>
-                                            <Label  Grid.Column="0" Content="{Binding Title}" FontSize="10" FontWeight="Bold" Foreground="Black"/>
-                                            <Label  Grid.Column="0" Content="{Binding Date}" FontSize="10" FontWeight="Bold" Foreground="DeepSkyBlue"/>
-                                        </StackPanel>
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                    <Label Grid.Column="0" HorizontalAlignment="Left"
+                                                           Content="{Binding Author}" FontSize="12" FontWeight="DemiBold" Foreground="Black"/>
+                                                <Label Grid.Column="1" HorizontalAlignment="Center"
+                                                       Content="{Binding Title}" FontSize="12" FontWeight="DemiBold" Foreground="Black"/>
+                                                <Label Grid.Column="2" HorizontalAlignment="Right"
+                                                       Content="{Binding Date}" FontSize="12" FontWeight="DemiBold" Foreground="Black"/>
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
                 </DockPanel>
             </Border>
-
+            </DockPanel>
             
 
-            <Border Grid.Column="2" Grid.RowSpan="3"  BorderBrush="Black">
-                <StackPanel>
-                    <Label BorderBrush="DarkCyan" BorderThickness="2">
-                        <TextBlock Text="Pacjent" TextDecorations="Underline" FontSize="15" FontWeight="DemiBold" 
+            <DockPanel Grid.Column="2" Grid.RowSpan="3" Background="Transparent">
+                <Label BorderBrush="DarkCyan" BorderThickness="2" DockPanel.Dock="Top">
+                    <TextBlock Text="Dane pacjenta" TextDecorations="Underline" FontSize="15" FontWeight="Bold" 
                                    Foreground="DarkCyan" />
-                    </Label>
-                    <StackPanel Orientation="Horizontal">
-                        <Label HorizontalAlignment="Left" Content="Imie:"/>
-                        <Label HorizontalAlignment="Left" Content="{Binding patientName}" Foreground="DarkCyan"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label HorizontalAlignment="Left" Content="Wiek"/>
-                        <Label HorizontalAlignment="Left" Content="{Binding patientAgeLabel}" Foreground="DarkCyan"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label HorizontalAlignment="Left" Content="Plec"/>
-                        <Label HorizontalAlignment="Left" Content="{Binding patientSexLabel}" Foreground="DarkCyan"/>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
+                </Label>
+                <Border BorderBrush="DarkCyan" BorderThickness="1 0 1 1">
+                    <StackPanel>
 
-            <Button Margin="5 0" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom"
-                    Content="Wygeneruj Recepte" FontSize="20" FontWeight="DemiBold" Height="40"
+                        <StackPanel Orientation="Horizontal">
+                            <Label HorizontalAlignment="Left" Content="Imie:" FontSize="15" FontWeight="DemiBold"
+                               Foreground="Green"/>
+                            <Label HorizontalAlignment="Left" Content="{Binding patientName}" 
+                                FontSize="15" FontWeight="DemiBold" Foreground="DarkCyan"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label HorizontalAlignment="Left" Content="Wiek:" FontSize="15" FontWeight="DemiBold"
+                               Foreground="Green"/>
+                            <Label HorizontalAlignment="Left" Content="{Binding patientAgeLabel}" 
+                               FontSize="15" FontWeight="DemiBold" Foreground="DarkCyan"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label HorizontalAlignment="Left" Content="Płeć:" FontSize="15" FontWeight="DemiBold" 
+                               Foreground="Green"/>
+                            <Label HorizontalAlignment="Left" Content="{Binding patientSexLabel}" 
+                               FontSize="15" FontWeight="DemiBold" Foreground="DarkCyan"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
+
+
+            <Button Margin="1 0 0 0" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" 
+                            Content="Dodaj notatkę" FontSize="20" FontWeight="DemiBold" Height="40"
+                            Background="Green"  Foreground="White"
+                            Command="{Binding openNoteWindowCommand}"/>
+            <Button Margin="1 0 0 0" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom"
+                    Content="Wygeneruj receptę" FontSize="20" FontWeight="DemiBold" Height="40"
                     Command="{Binding goToGenerateReceipt}"
-                    Background="White"  Foreground="Green"
-                    />
+                    Background="Green"  Foreground="White"/>
         </Grid>
     </Grid>
 </Page>

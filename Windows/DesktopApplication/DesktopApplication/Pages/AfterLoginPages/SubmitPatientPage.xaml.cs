@@ -25,5 +25,10 @@ namespace DesktopApplication
             InitializeComponent();
             this.DataContext = new SubmitPatientViewModel();
         }
+
+        private void ItemsControl_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 }

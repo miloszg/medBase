@@ -111,7 +111,7 @@ def insert_data_from_file_to_database(pathfile: str,mydb: mysql.connector.CMySQL
             all_commands += "{0}\n".format(command)
             # mycursor.execute(command)
 
-        # mydb.commit()
+        mydb.commit()
         print("Zcommitowano obiekty")
 
     meds_comp = []
@@ -170,15 +170,13 @@ def insert_data_from_file_to_database(pathfile: str,mydb: mysql.connector.CMySQL
     for element in meds_effect:
         command = "INSERT INTO leki.leki_efekt (leki_id,efekt_id) VALUES ({0},{1});".format(element[0],element[1])
         all_commands += "{0}\n".format(command)
-        # mycursor.execute(command)
+        mycursor.execute(command)
 
-    with open("databaseCommands.txt", "w") as file:
-        file.write(all_commands)
-        file.close()
 
-    # mydb.commit()
+
+    mydb.commit()
     print("Zcommitowane zaleznosci")
-    # mydb.close()
+    mydb.close()
 
 if __name__ == '__main__':
     main()

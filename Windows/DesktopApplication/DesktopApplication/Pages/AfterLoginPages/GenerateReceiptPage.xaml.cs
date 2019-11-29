@@ -25,5 +25,10 @@ namespace DesktopApplication
             InitializeComponent();
             this.DataContext = new GenerateReceiptViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

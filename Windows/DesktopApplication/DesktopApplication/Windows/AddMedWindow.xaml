@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApplication"
         mc:Ignorable="d"
-        Title="AddMedWindow" Height="550" Width="600">
+        Title="MedBase" Height="550" Width="600">
     <Grid Background="Azure">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,53 +19,55 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2"
-                BorderBrush="MediumSpringGreen">
+                BorderBrush="DarkCyan" BorderThickness="0 0 1 0">
 
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5">
-                    <Label Content="Nazwa: " FontSize="15" FontWeight="DemiBold" 
-                            />
-                    <Label DataContext="{Binding SelectedMed}" Content="{Binding Name}" 
-                              Foreground="Green"  FontSize="15" FontWeight="DemiBold"/>
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Label Content="Nazwa: " FontSize="15" FontWeight="DemiBold" Foreground="Green"
+                                />
+                        <Label DataContext="{Binding SelectedMed}" Content="{Binding Name}"
+                                  Foreground="DarkCyan"  FontSize="15" FontWeight="DemiBold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Label Content="Składniki: " FontSize="15" FontWeight="DemiBold" Foreground="Green"
+                                />
+                        <Label DataContext="{Binding SelectedMed}" Content="{Binding Ingredients ,Converter={local:MedicationDataListConverter}}" 
+                                Foreground="DarkCyan"    FontSize="15" FontWeight="DemiBold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Label Content="Specjalność: " FontSize="15" FontWeight="DemiBold" Foreground="Green"
+                                />
+                        <Label DataContext="{Binding SelectedMed}" Content="{Binding Speciality ,Converter={local:MedicationDataListConverter}}" 
+                                Foreground="DarkCyan"    FontSize="15" FontWeight="DemiBold" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Label Content="Kategoria: " FontSize="15" FontWeight="DemiBold" Foreground="Green"
+                                />
+                        <Label DataContext="{Binding SelectedMed}" Content="{Binding Category ,Converter={local:MedicationDataListConverter}}" 
+                                 Foreground="DarkCyan"   FontSize="15" FontWeight="DemiBold" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Label Content="Postać: " FontSize="15" FontWeight="DemiBold" Foreground="Green"
+                                />
+                        <Label DataContext="{Binding SelectedMed}" Content="{Binding Form ,Converter={local:MedicationDataListConverter}}" 
+                                 Foreground="DarkCyan" FontSize="15" FontWeight="DemiBold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <Label Content="Efekt: " FontSize="15" FontWeight="DemiBold" Foreground="Green"
+                                />
+                        <Label DataContext="{Binding SelectedMed}" Content="{Binding Effect ,Converter={local:MedicationDataListConverter}}" 
+                                  Foreground="DarkCyan"  FontSize="15" FontWeight="DemiBold"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5">
-                    <Label Content="Skladniki: " FontSize="15" FontWeight="DemiBold" 
-                            />
-                    <Label DataContext="{Binding SelectedMed}" Content="{Binding Ingredients ,Converter={local:MedicationDataListConverter}}" 
-                            Foreground="Green"    FontSize="15" FontWeight="DemiBold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5">
-                    <Label Content="Specjalnosc: " FontSize="15" FontWeight="DemiBold" 
-                            />
-                    <Label DataContext="{Binding SelectedMed}" Content="{Binding Speciality ,Converter={local:MedicationDataListConverter}}" 
-                            Foreground="Green"    FontSize="15" FontWeight="DemiBold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5">
-                    <Label Content="Kategoria: " FontSize="15" FontWeight="DemiBold" 
-                            />
-                    <Label DataContext="{Binding SelectedMed}" Content="{Binding Category ,Converter={local:MedicationDataListConverter}}" 
-                             Foreground="Green"   FontSize="15" FontWeight="DemiBold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5">
-                    <Label Content="Postac: " FontSize="15" FontWeight="DemiBold" 
-                            />
-                    <Label DataContext="{Binding SelectedMed}" Content="{Binding Form ,Converter={local:MedicationDataListConverter}}" 
-                             Foreground="Green" FontSize="15" FontWeight="DemiBold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5">
-                    <Label Content="Efekt: " FontSize="15" FontWeight="DemiBold" 
-                            />
-                    <Label DataContext="{Binding SelectedMed}" Content="{Binding Effect ,Converter={local:MedicationDataListConverter}}" 
-                              Foreground="Green"  FontSize="15" FontWeight="DemiBold"/>
-                </StackPanel>
-            </StackPanel>
+            </ScrollViewer>
         </Border>
         <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="2"
-                BorderThickness="1" BorderBrush="Black">
+                BorderThickness="0 1 0 0" BorderBrush="DarkCyan">
             <DockPanel>
-                <Label Content="Opis:" FontSize="15" FontWeight="DemiBold" DockPanel.Dock="Top"/>
+                <Label Content="Opis:" FontSize="15" FontWeight="DemiBold" DockPanel.Dock="Top" Foreground="Green"/>
                 <TextBlock DataContext="{Binding SelectedMed}" IsEnabled="False" Margin="10 10"
-                           Text="{Binding Description}"/>
+                           Text="{Binding Description}" />
             </DockPanel>
         </Border>
 
@@ -77,15 +79,10 @@
                 </Grid.RowDefinitions>
                 <Image DataContext="{Binding SelectedMed}" Grid.Row="0" Source="{Binding ImagePath}" 
                        Stretch="Fill" Margin="10 10"/>
-                <Button Grid.Row="1" Margin="20 20" Background="White" Content="Dodaj do recepty" 
-                        VerticalAlignment="Bottom"
-                        Foreground="Green" FontSize="15" FontWeight="DemiBold" Command="{Binding addToReceiptCommand}" 
+                <Button Grid.Row="1" Margin="20 5" Height="40" Background="Green" Content="Dodaj do recepty" 
+                        VerticalAlignment="Center"
+                        Foreground="White" FontSize="15" FontWeight="DemiBold" Command="{Binding addToReceiptCommand}" 
                         CommandParameter="{Binding SelectedMed}">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="100"/>
-                        </Style>
-                    </Button.Resources>
                 </Button>
             </Grid>
         </Border>

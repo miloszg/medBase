@@ -26,8 +26,9 @@ namespace DesktopApplication
         public void Login(object parameter)
         {
             //ReceiptPDFCreator pdfCreator = new ReceiptPDFCreator();
-            //pdfCreator.GeneratePDF();
+            //pdfCreator.GeneratePDF("EReceptaTest.pdf");
             //Application.Current.Shutdown();
+
             string password = "";
             var passwordContainer = parameter as IPassword;
             if (passwordContainer != null)

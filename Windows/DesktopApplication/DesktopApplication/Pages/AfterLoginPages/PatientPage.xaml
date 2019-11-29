@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DesktopApplication"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SearchForMedsPage">
+      Title="MedBase">
 
     <Grid Background="{StaticResource MedGrayBrush}">
 
@@ -19,14 +19,14 @@
         <Button FontFamily="Segoe MDL2 Assets" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" 
                         VerticalAlignment="Top" Background="Transparent" Content="&#xE830;" 
                         FontSize="30" Command="{Binding goBackCommand}" Height="40"
-                        BorderThickness="0"/>
+                        BorderThickness="0" Foreground="Black"/>
             
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                <Label  Content="Podaj kod pacjenta:" FontSize="15" FontWeight="Bold"/>
-                <TextBox Text="{Binding PatientCode, Mode=TwoWay}" FontSize="15"/>
+                <Label  Content="Podaj kod pacjenta:" FontFamily="Helvetica" Foreground="Green" FontSize="15" FontWeight="Bold"/>
+                <TextBox Text="{Binding PatientCode, Mode=TwoWay}" Margin="5 0 0 0" FontSize="15"/>
             <Button  
-                HorizontalAlignment="Center" Content="Zatwierdz" FontSize="15" FontWeight="Bold" 
-                    Command="{Binding submitCommand}" Background="White" Foreground="Green"
+                HorizontalAlignment="Center" Height="40" Width="150" Content="Zatwierdź" FontSize="20" FontWeight="Bold" 
+                    Command="{Binding submitCommand}" Background="Green" Foreground="White"
                 Margin="10 10"/>
         </StackPanel>
     </Grid>

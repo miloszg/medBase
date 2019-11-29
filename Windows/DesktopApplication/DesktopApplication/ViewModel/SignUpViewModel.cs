@@ -11,6 +11,8 @@ namespace DesktopApplication
     {
         public string username { get; set; }
         public string mail { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
         public ICommand registerCommand { get; set; }
         public ICommand goBackCommand { get; set; }
 
@@ -42,18 +44,22 @@ namespace DesktopApplication
             DatabaseManager databaseManager = new DatabaseManager("localhost", "leki", "admin", "admin");
             DatabaseEditor databaseEditor = new DatabaseEditor(databaseManager);
 
-            if (databaseEditor.InsertIntoDatabase("pacjent",
+            if (databaseEditor.InsertIntoDatabase("lekarz",
                 new List<string>()
                 {
-                    "first_name",
+                    "nazwa_uzytkownika",
+                    "imie",
+                    "nazwisko",
+                    "haslo",
                     "email",
-                    "password",
                 },
                 new List<string>()
                 {
                     username,
-                    mail,
+                    name,
+                    surname,
                     password,
+                    mail,
                 }))
             {
                 MessageBox.Show("Insert Succeded!");

@@ -11,9 +11,10 @@ namespace DesktopApplication
         public List<string> Speciality { get; private set; }
         public List<string> Ingredients { get; private set; }
         public string Description { get; private set; }
-        public string howMany { get; set; }
-        public string howToTake { get; set; }
-        public string howLongToTake { get; set; }
+        public string howManyPacks { get; set; }
+        public string howManyPills { get; set; }
+        public string dosageWeight { get; set; }
+        public string howManyPerDay { get; set; }
         public bool IsThisAllData { get; private set; }
         public string ImagePath { get; private set; }
 
@@ -26,7 +27,7 @@ namespace DesktopApplication
             this.Speciality = new List<string>();
             this.Ingredients = new List<string>();
             this.Description = "<pusty>";
-            this.ImagePath = @"Resources\Images\NoImageAvailable.jpg";
+            this.ImagePath = @"/Resources/Images/NoImageAvailable.jpg";
             this.IsThisAllData = false;
         }
 
